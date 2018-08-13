@@ -13,17 +13,6 @@
 
 #include "../../includes/shell.h"
 
-static int		return_i(char *str, int i, int *start)
-{
-	if (i == 0)
-	{
-		*start = 1;
-		while (str[i] && (str[i] != '|' || str[i] != '>'))
-			i++;
-	}
-	return (i);
-}
-
 int				what_is_op(char *str, int i)
 {
 	int		ret;
@@ -57,7 +46,6 @@ int				good_tab_cmd(t_struct *data, t_cmd **lst, char *str, int i)
 	start = 0;
 	if (str == NULL)
 		return (0);
-	i = return_i(str, i, &start);
 	if (i == ft_strlen(str) - 1)
 		tmp = ft_strdup(str);
 	else

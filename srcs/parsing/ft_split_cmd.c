@@ -78,7 +78,7 @@ static int			ft_split_cmd_suite(t_cmd **new, t_struct *data,
 	tmp[i] == '<' || i == ft_strlen(tmp) - 1)
 		{
 			i += good_op_next(new, tmp, i);
-			i += good_tab_cmd(data, new, tmp, i);
+			i = good_tab_cmd(data, new, tmp, i);
 			printf("(avant) tmp == |%s|\n", tmp);
 			i = resize_str(&tmp, i + 1) - 1;
 			printf("(apres) tmp == |%s|\n", tmp);
