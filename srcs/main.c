@@ -66,6 +66,11 @@ int				main(int argc, char **argv, char **env)
 
 	if (help_bash(argc, argv) == 1)
 		return (0);
+    if (ft_len_tab(env) < 5)
+    {
+        ft_putstr_fd("l'environnement ne permet pas de fonctionner correctement\n", 2);
+		return (0);
+    }
 	if (ft_test_system() == 1)
 		return (1);
 	print_ascii_art_start();

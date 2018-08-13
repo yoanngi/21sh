@@ -13,25 +13,6 @@
 
 #include "../../includes/shell.h"
 
-static char		**init_env_null(void)
-{
-	char	**env;
-	char	*pwd;
-
-	env = NULL;
-	pwd = NULL;
-	if (!((char **)malloc(sizeof(char *) * 2)))
-		return (NULL);
-	if (!(pwd = ft_return_pwd()))
-	{
-		env = ft_del_tab(env);
-		return (NULL);
-	}
-	env[0] = ft_strjoin("PWD=", pwd);
-	env[1] = NULL;
-	return (env);
-}
-
 static char		**init_env(char **env)
 {
 	char	**tab_env;
@@ -75,11 +56,15 @@ t_struct		*init_struct(char **env)
 {
 	t_struct	*data;
 
-	data = (t_struct *)malloc(sizeof(t_struct));
+	data = NULL;
 	if (env == NULL)
-		data->env = init_env_null();
-	else
-		data->env = init_env(env);
+    {
+        ft_putstr_fd("Environnement NULL\n", 2);
+		exit(EXIT_SUCCESS);
+    }
+	data = (t_struct *)malloc(sizeof(t_struct));
+	data = (t_struct *)malloc(sizeof(t_struct));
+	data->env = init_env(env);
 	init_base(&data);
 	data->builtins = ft_initialise_builtins();
 	data->commandes = NULL;
