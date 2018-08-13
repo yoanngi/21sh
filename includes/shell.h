@@ -141,6 +141,7 @@ typedef struct		s_path
 {
 	char			*name;
     int             s_or_d;
+    int             redir_fd;
     int             pid;
 	struct s_path	*next;
 }					t_path;
@@ -232,6 +233,7 @@ int					check_validity(t_cmd **lst, t_struct *data);
 int					check_link(t_cmd *lst);
 void				print_msg_error(char *str, int i);
 void				clear_string(char **str, int deleted, int opt);
+int 				search_fd(char *str, int i);
 /*
  **	BUILTINS
  */

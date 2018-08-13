@@ -33,7 +33,8 @@ void		print_debug(t_cmd **data, int code)
 		printf("PATH:\n");
 		while (path)
 		{
-			printf("\tpathname = |%s|\n", path->name);
+			printf("\tpathname = |%s|\t", path->name);
+			printf("fd = |%d|\n", path->redir_fd);
 			path = path->next;
 		}
 		printf("COMMANDES:\n");

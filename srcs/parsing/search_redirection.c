@@ -52,7 +52,8 @@ static int		return_name_suite(t_cmd **lst, char **new, char **tmp,
 	ft_strdel(new);
 	*new = ft_strdup(*tmp);
 	ft_strdel(tmp);
-	tmp2 = insert_option_cmd((*lst)->tab_cmd, tab_tmp, 0, 0);
+	if (!(tmp2 = insert_option_cmd((*lst)->tab_cmd, tab_tmp, 0, 0)))
+        return (1);
 	(*lst)->tab_cmd = ft_del_tab((*lst)->tab_cmd);
 	(*lst)->tab_cmd = ft_duplicate_tab(tmp2);
 	tmp2 = ft_del_tab(tmp2);
@@ -72,12 +73,14 @@ static char		*return_name(t_cmd **lst, char *str, int start, int end)
 		return (NULL);
 	if (ft_strlen(str) == end + 1)
 		new = ft_strsub(str, start, (end - start + 1));
-	else
+	else if (str[end] == '>' && ft_isdigit(str[end - 1]) == 1)
+		new = ft_strsub(str, start, (end - start - 2));
+    else
 		new = ft_strsub(str, start, (end - start));
 	clear_line(&new);
 	tab_tmp = ft_strsplit(new, ' ');
-	if (ft_len_tab(tab_tmp) > 1)
-		return_name_suite(lst, &new, &tmp, tab_tmp);
+    if (ft_len_tab(tab_tmp) > 1)
+	    return_name_suite(lst, &new, &tmp, tab_tmp);
 	tab_tmp = ft_del_tab(tab_tmp);
 	return (new);
 }
@@ -131,6 +134,7 @@ int				search_redirection(t_cmd **lst, char *str, int i, int j)
 			}
 			new->name = return_name(lst, str, j, i);
 			new->s_or_d = what_is_op(str, i);
+            new->redir_fd = search_fd(str, j - 1);
 			j = i + 1;
 		}
 		i++;

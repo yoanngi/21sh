@@ -109,6 +109,7 @@ N_SRCS = 	main.c\
 			parsing/insert_cmd_simple.c\
 			parsing/good_tab_cmd.c\
 			parsing/search_redirection.c\
+			parsing/search_redirection_fd.c\
 			parsing/check_validity.c\
 			parsing/print_msg_error.c\
 			debug.c\

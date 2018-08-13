@@ -48,8 +48,10 @@ int				good_tab_cmd(t_struct *data, t_cmd **lst, char *str, int i)
 		return (0);
 	if (i == ft_strlen(str) - 1)
 		tmp = ft_strdup(str);
-	else
-		tmp = ft_strsub(str, start, i - 1);
+	else if (str[i] == '>' && ft_isdigit(str[i - 1] == 0))
+		tmp = ft_strsub(str, start, i - 3);
+    else
+		tmp = ft_strsub(str, start, i - 2);
 	insert_cmd_simple(data, lst, tmp);
 	ret = ft_strlen(tmp);
 	ft_strdel(&tmp);

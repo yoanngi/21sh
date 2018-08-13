@@ -47,12 +47,20 @@ int			exec_redirection(t_cmd *lst, t_path *file, int *fd_in,
 	if (fd == -1)
 		exit(EXIT_FAILURE);
 	dup2(*fd_in, 0) == -1 ? basic_error("dup2", "failled") : 0;
-	dup2(fd, 1) == -1 ? basic_error("dup2", "failled") : 0;
+	dup2(fd, file->redir_fd) == -1 ? basic_error("dup2", "failled") : 0;
 	close(pipe_fd[0]) == -1 ? basic_error("close", "failled") : 0;
 	close(fd) == -1 ? basic_error("close", "failled") : 0;
 	execve(lst->rep, lst->tab_cmd, lst->env);
 	return (ret);
 }
+
+/*
+**  Encore une erreur:
+**  si on a la commande : ls -la /usr/sbin/authserver 2>err 1>ok
+**  creer les 2 fichiers, leur contenu est correcte mais comme on boucle 2 fois
+**  On a quand meme l'affichage sur la sortie standart.
+**  Il ne faut pas qu'on boucle en executant la commande a chaque fois
+*/
 
 int			fork_redirection(t_cmd *lst, int pipe_fd[2],
 		int *fd_in)
@@ -72,7 +80,9 @@ int			fork_redirection(t_cmd *lst, int pipe_fd[2],
 			return (-1);
 		}
 		if (pid == 0)
+        {
 			exec_redirection(lst, lst->pathname, fd_in, pipe_fd);
+        }
 		else
 		{
 			lst->pathname->pid = pid;
