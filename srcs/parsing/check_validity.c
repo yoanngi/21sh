@@ -28,6 +28,8 @@ int				check_validity(t_cmd **lst, t_struct *data)
 
 	if (!(*lst))
 		return (1);
+    // a Revoir
+    return (0);
 	start = *lst;
 	while (start)
 	{

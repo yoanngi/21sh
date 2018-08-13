@@ -82,17 +82,23 @@ static char		*return_name(t_cmd **lst, char *str, int start, int end)
 	return (new);
 }
 
-static int		check_search_null(t_path **new, t_cmd **lst, char *str, int i)
+static int		check_search_null(t_path **new, char *str, int i, int j)
 {
 	if (new == NULL)
 	{
 		*new = ft_init_path();
-		(*lst)->pathname = *new;
 		(*new)->name = ft_strdup(str);
-		(*new)->s_or_d = (*lst)->op_next;
+		(*new)->s_or_d = what_is_op(str, i);
 		clear_line(&(*new)->name);
 		return (ft_strlen(str));
 	}
+    else if (j < i)
+    {
+		(*new)->next = ft_init_path();
+        *new = (*new)->next;
+		(*new)->name = ft_strsub(str, j, i);
+		(*new)->s_or_d = 0;
+    }
 	return (i);
 }
 
@@ -129,6 +135,6 @@ int				search_redirection(t_cmd **lst, char *str, int i, int j)
 		}
 		i++;
 	}
-	i = check_search_null(&new, lst, str, i);
+	i = check_search_null(&new, str, i, j);
 	return (i);
 }
