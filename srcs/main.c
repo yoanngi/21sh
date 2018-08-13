@@ -64,8 +64,8 @@ int				main(int argc, char **argv, char **env)
 {
 	int			code_exit;
 
-	if (help_bash(argc, argv) == 1)
-		return (0);
+	if (help_bash(argc, argv) == 1 || !isatty(0))
+        return (0);
     if (ft_len_tab(env) < 5)
     {
         ft_putstr_fd("l'environnement ne permet pas de fonctionner correctement\n", 2);
