@@ -23,7 +23,7 @@ static int		exec_pipe_child(t_struct *mystruct, t_cmd *lst, int pipe_fd[2],
 	if (lst->pathname != NULL)
 	{
 		printf("Redirection:\n");
-		return (fork_redirection(lst, pipe_fd, fd_in));
+		return (fork_redirection(lst));
 	}
 	if (lst->op_next == 1)
 	{

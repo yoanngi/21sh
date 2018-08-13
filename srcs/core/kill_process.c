@@ -28,6 +28,7 @@ int				ft_kill_fork_path(t_path *start)
 	while (start)
 	{
 		kill(start->pid, 0);
+        close(start->fd);
 		start = start->next;
 	}
 	return (0);

@@ -13,29 +13,16 @@
 
 #include "../../includes/shell.h"
 
-static int	len_list_redirection(t_path *lst)
-{
-	int		i;
+/*
+**  Creer les differents fd et les retournes
+*/
 
-	i = 0;
-	if (lst == NULL)
-		return (0);
-	while (lst)
-	{
-		i++;
-		lst = lst->next;
-	}
-	return (i);
-}
-
-int			exec_redirection(t_cmd *lst, t_path *file, int *fd_in,
-		int pipe_fd[2])
+int			exec_redirection(t_cmd *lst, t_path *file)
 {
 	int		fd;
-	int		ret;
 
 	fd = 0;
-	ret = 0;
+    (void)lst;
 	if (file->name == NULL)
 		return (-1);
 	if (file->s_or_d == 2)
@@ -46,50 +33,29 @@ int			exec_redirection(t_cmd *lst, t_path *file, int *fd_in,
 				S_IRGRP | S_IROTH);
 	if (fd == -1)
 		exit(EXIT_FAILURE);
-	dup2(*fd_in, 0) == -1 ? basic_error("dup2", "failled") : 0;
 	dup2(fd, file->redir_fd) == -1 ? basic_error("dup2", "failled") : 0;
-	close(pipe_fd[0]) == -1 ? basic_error("close", "failled") : 0;
-	close(fd) == -1 ? basic_error("close", "failled") : 0;
-	execve(lst->rep, lst->tab_cmd, lst->env);
-	return (ret);
+    close(fd);
+	return (fd);
 }
 
 /*
-**  Encore une erreur:
-**  si on a la commande : ls -la /usr/sbin/authserver 2>err 1>ok
-**  creer les 2 fichiers, leur contenu est correcte mais comme on boucle 2 fois
-**  On a quand meme l'affichage sur la sortie standart.
-**  Il ne faut pas qu'on boucle en executant la commande a chaque fois
+**  execute la commande dans une redirection
 */
 
-int			fork_redirection(t_cmd *lst, int pipe_fd[2],
-		int *fd_in)
+int			fork_redirection(t_cmd *lst)
 {
 	int		status;
-	int		pid;
 	t_path	*lst_path;
 
+    status = -1;
 	lst_path = lst->pathname;
-	if (len_list_redirection(lst_path) == 1)
-		return (exec_redirection(lst, lst->pathname, fd_in, pipe_fd));
 	while (lst->pathname)
 	{
-		if ((pid = fork()) == -1)
-		{
-			ft_error_fork(pid);
-			return (-1);
-		}
-		if (pid == 0)
-        {
-			exec_redirection(lst, lst->pathname, fd_in, pipe_fd);
-        }
-		else
-		{
-			lst->pathname->pid = pid;
-			waitpid(pid, &status, 0);
-			lst->pathname = lst->pathname->next;
-		}
+        lst->pathname->fd = exec_redirection(lst, lst->pathname);
+        lst->pathname = lst->pathname->next;
 	}
+    lst->pathname = lst_path;
+	status = execve(lst->rep, lst->tab_cmd, lst->env);
 	ft_kill_fork_path(lst_path);
-	return (WEXITSTATUS(status));
+	return (status);
 }
