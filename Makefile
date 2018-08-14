@@ -101,7 +101,6 @@ N_SRCS = 	main.c\
 			parsing/ft_search_path.c\
 			parsing/replace_in_line.c\
 			parsing/ft_error_parsing.c\
-			parsing/redirections_avancees.c\
 			parsing/split_cmd.c\
 			parsing/split_cmd_suite.c\
 			parsing/check_error.c\
@@ -112,6 +111,7 @@ N_SRCS = 	main.c\
 			parsing/search_redirection_fd.c\
 			parsing/check_validity.c\
 			parsing/print_msg_error.c\
+			parsing/modifie_fd.c\
 			debug.c\
 
 all: $(NAME)

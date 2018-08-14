@@ -13,6 +13,10 @@
 
 #include "../../includes/shell.h"
 
+/*
+**  Search L'operateur (> ou >>)
+*/
+
 int				what_is_op(char *str, int i)
 {
 	int		ret;
@@ -28,11 +32,7 @@ int				what_is_op(char *str, int i)
 }
 
 /*
-**	A Modif:
-**	i = str[i] >> c'est la position de la redirection
-**	Il faut check avant si il y a un fd
-**	check apres tant qu'on a des redirections
-**	retourner la longueur a delete
+**	insert la commande a executer et search les redirections a faire
 */
 
 int				good_tab_cmd(t_struct *data, t_cmd **lst, char *str, int i)

@@ -69,6 +69,8 @@ static char		*return_name(t_cmd **lst, char *str, int start, int end)
 	new = NULL;
 	tmp = NULL;
 	tab_tmp = NULL;
+    if (str[start] == '&')
+        start += modifie_fd(lst, str, start);
 	if (start >= end)
 		return (NULL);
 	if (ft_strlen(str) == end + 1)

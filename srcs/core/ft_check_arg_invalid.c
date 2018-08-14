@@ -14,6 +14,19 @@
 #include "../../includes/shell.h"
 
 /*
+**  Dans le cs de redirection vers un mauvais fd, on retourne une erreur
+*/
+
+static int      check_bad_fd(t_cmd *lst)
+{
+    if (lst == NULL)
+        return (0);
+    if (lst->bad_fd == 1)
+        return (1);
+    return (0);
+}
+
+/*
 **	Compare la commande avec les builtins et renvoie vrai ou faux
 */
 
@@ -55,5 +68,10 @@ int				ft_check_arg_invalid(t_struct *data, t_cmd *cmd)
 		data->code_erreur = 126;
 		return (1);
 	}
+    if (check_bad_fd(cmd) == 1)
+    {
+		data->code_erreur = 1;
+        return (1);
+    }
 	return (0);
 }

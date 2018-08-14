@@ -13,13 +13,11 @@
 
 #include "../../includes/shell.h"
 
-static int			good_return(t_cmd **new, int ret)
+static int			good_return(t_cmd **new)
 {
 	if ((*new)->op_next == 1 || (*new)->op_next == 2 || (*new)->op_next == 4 ||
 	(*new)->op_next == 6)
 		return (1);
-	if ((*new)->op_next == 9)
-		return (ret);
 	return (2);
 }
 
@@ -46,9 +44,7 @@ static int			good_op_next(t_cmd **new, char *str, int i)
 		(*new)->op_next = 7;
 	else if (str[i] == '|' && str[i + 1] == '|')
 		(*new)->op_next = 8;
-	else if (str[i] == '>' && str[i + 1] == '&')
-		ret = ft_redirection_avancees(new, str, i);
-	ret = good_return(new, ret);
+	ret = good_return(new);
 	return (ret);
 }
 
@@ -79,9 +75,7 @@ static int			ft_split_cmd_suite(t_cmd **new, t_struct *data,
 		{
 			i += good_op_next(new, tmp, i);
 			i = good_tab_cmd(data, new, tmp, i);
-			printf("(avant) tmp == |%s|\n", tmp);
 			i = resize_str(&tmp, i + 1) - 1;
-			printf("(apres) tmp == |%s|\n", tmp);
 			if (tmp == NULL)
 				return (0);
 			(*new)->next = ft_init_cmd();

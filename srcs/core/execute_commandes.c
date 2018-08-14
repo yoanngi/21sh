@@ -22,19 +22,19 @@ static int		exec_pipe_child(t_struct *mystruct, t_cmd *lst, int pipe_fd[2],
 		return (builtins);
 	if (lst->pathname != NULL)
 	{
-		printf("Redirection:\n");
+		printf("Redirection\n");
 		return (fork_redirection(lst));
 	}
 	if (lst->op_next == 1)
 	{
 		printf("Pipe:\n");
-		dup2(*fd_in, 0) == -1 ? basic_error("dup2", "failled") : 0;
-		dup2(pipe_fd[1], 1) == -1 ? basic_error("dup2", "failled") : 0;
+		dup2(*fd_in, lst->stdin_cmd) == -1 ? basic_error("dup2", "failled") : 0;
+		dup2(pipe_fd[1], lst->stdout_cmd) == -1 ? basic_error("dup2", "failled") : 0;
 		close(pipe_fd[0]) == -1 ? basic_error("close", "failled") : 0;
 		return (execve(lst->rep, lst->tab_cmd, lst->env));
 	}
 	printf("Execution:\n");
-	dup2(*fd_in, 0) == -1 ? basic_error("dup2", "failled") : 0;
+	dup2(*fd_in, lst->stdin_cmd) == -1 ? basic_error("dup2", "failled") : 0;
 	close(pipe_fd[1]) == -1 ? basic_error("close", "failled") : 0;
 	close(pipe_fd[0]) == -1 ? basic_error("close", "failled") : 0;
 	return (execve(lst->rep, lst->tab_cmd, lst->env));
@@ -72,6 +72,16 @@ static int		exec_cmd_recur(t_struct *mystruct, t_cmd *data, int fd_in)
 	return (WEXITSTATUS(status));
 }
 
+static int      pipe_fd(t_cmd *start)
+{
+    printf("fonction pipe_fd\n");
+    if (start->stdout_cmd != 1)
+        dup2(start->stdout_cmd, 1);
+    if (start->stdout_cmd != 2)
+        dup2(start->stdout_cmd, 2);
+    return (0);
+}
+
 /*
 **	On envoie la liste chainee a exec_cmd_recur
 */
@@ -95,6 +105,8 @@ int				execute_commandes(t_struct *mystruct, t_cmd *data)
 			return (ret);
 	}
 	start = data;
+    // sa na marche pas
+    pipe_fd(data);
 	ret = exec_cmd_recur(mystruct, data, fd_in);
 	ft_kill_process(start);
 	return (ret);

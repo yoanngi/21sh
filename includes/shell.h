@@ -117,6 +117,7 @@ typedef struct		s_cmd
 	int				stdout_cmd;
 	int				stderr_cmd;
 	int				pid;
+    int             bad_fd;
 	struct s_path	*pathname;
 	struct s_cmd	*next;
 }					t_cmd;
@@ -221,7 +222,6 @@ char				*ft_search_path(char *str, t_struct *data);
 int					ft_nefaitrien(char **line);
 int					ft_search_opnext(char *str, int i);
 int					chose_rep(t_struct *data, t_cmd **new, int provisoire);
-int					ft_redirection_avancees(t_cmd **lst, char *str, int i);
 char				**split_cmd(char *str, int i);
 int					ft_verif_alphanum(char *str);
 int					check_error_inlinesplit(t_ins **lst);
@@ -235,6 +235,7 @@ int					check_link(t_cmd *lst);
 void				print_msg_error(char *str, int i);
 void				clear_string(char **str, int deleted, int opt);
 int 				search_fd(char *str, int i);
+int 				modifie_fd(t_cmd **lst, char *str, int start);
 /*
  **	BUILTINS
  */
