@@ -57,7 +57,9 @@ static int		exec_cmd_recur(t_struct *mystruct, t_cmd *data, int fd_in)
 		if ((pid = fork()) == -1)
 			exit(EXIT_FAILURE);
 		if (pid == 0)
+        {
 			exec_pipe_child(mystruct, data, pipe_fd, &fd_in);
+        }
 		else
 		{
 			data->pid = pid;
@@ -72,13 +74,38 @@ static int		exec_cmd_recur(t_struct *mystruct, t_cmd *data, int fd_in)
 	return (WEXITSTATUS(status));
 }
 
-static int      pipe_fd(t_cmd *start)
+/*
+**  >&
+*/
+
+int         check_agregateur(t_cmd *start)
 {
-    printf("fonction pipe_fd\n");
+    int     pipe_fd[2];
+
     if (start->stdout_cmd != 1)
-        dup2(start->stdout_cmd, 1);
-    if (start->stdout_cmd != 2)
-        dup2(start->stdout_cmd, 2);
+    {
+        printf("Here (close 1)\n");
+        if (pipe(pipe_fd) == -1)
+            return(EXIT_FAILURE);
+        dup2(1, pipe_fd[0]);
+        close(1);
+        dup2(pipe_fd[1], start->stdout_cmd);
+        close(pipe_fd[0]);
+    }
+    if (start->stderr_cmd != 2)
+    {
+        printf("Here (close 2)\n");
+        if (pipe(pipe_fd) == -1)
+        {
+            printf("exit\n");
+            return (EXIT_FAILURE);
+        }
+        printf("Here (close 2) 1\n");
+        dup2(pipe_fd[0], 2);
+        printf("Here (close 2) 2\n");
+        dup2(pipe_fd[0], start->stderr_cmd);
+    }
+    printf("end agregateur\n");
     return (0);
 }
 
@@ -97,6 +124,8 @@ int				execute_commandes(t_struct *mystruct, t_cmd *data)
 	start = NULL;
 	if (!data)
 		return (-1);
+    if (check_agregateur(data) == 1)
+        return (1);
 	if (len_list(data) == 1 && (data)->op_next == 0)
 	{
 		if ((ret = execute_builtins_light(mystruct, data)) == -2)
@@ -105,8 +134,6 @@ int				execute_commandes(t_struct *mystruct, t_cmd *data)
 			return (ret);
 	}
 	start = data;
-    // sa na marche pas
-    pipe_fd(data);
 	ret = exec_cmd_recur(mystruct, data, fd_in);
 	ft_kill_process(start);
 	return (ret);

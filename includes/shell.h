@@ -208,9 +208,10 @@ int                 exec_redirection(t_cmd *lst, t_path *file);
 int					ft_kill_process(t_cmd *start);
 int                 ft_kill_fork_path(t_path *start);
 int					cmd_suivante(t_ins *cpy, int code);
+int                 check_agregateur(t_cmd *start);
 /*
- **	PARSING
- */
+**	PARSING
+*/
 t_ins				*ft_split_commandes(char **line, t_struct *data);
 t_ins				*ft_split_pvirgule(char *line, t_ins *lst, int i);
 t_cmd				*ft_split_cmd(char *str, t_struct *data);

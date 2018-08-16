@@ -61,15 +61,17 @@ static int      ft_fd_next(char *str, int i)
 
     fd_next = 1;
     if (!(str))
-        return (-1);
+        return (-2);
     if (i > ft_strlen(str))
-        return (0);
+        return (-2);
+    if (str[i + 1] == '-')
+        return (-1);
     if (ft_isdigit(str[i + 1]) == 1)
     {
         fd_next = ft_atoi(str + (i + 1));
     }
     if (valid_fd(fd_next) == -1)
-        return (-1);
+        return (-2);
     return (fd_next);
 }
 
@@ -94,7 +96,7 @@ int				modifie_fd(t_cmd **lst, char *str, int start)
     fd_next = ft_fd_next(str, start);
     if (fd_before == fd_next)
         return (len_next);
-    if (fd_before == -1 || fd_next == -1)
+    if (fd_before == -1 || fd_next == -2)
         return (ft_strlen(str));
     else
     {
