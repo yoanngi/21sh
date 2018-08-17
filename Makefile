@@ -6,7 +6,7 @@
 #    By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/11/24 10:04:43 by yoginet      #+#   ##    ##    #+#        #
-#    Updated: 2018/08/11 14:08:43 by yoginet     ###    #+. /#+    ###.fr      #
+#    Updated: 2018/08/17 15:18:06 by yoginet     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -40,6 +40,7 @@ N_SRCS = 	main.c\
 			core/ft_check_arg_invalid.c\
 			core/kill_process.c\
 			core/cmd_suivante.c\
+			core/ft_close.c\
 			init/ft_check_infos.c\
 			init/ft_delete_struct.c\
 			init/ft_init_builtins.c\
@@ -101,6 +102,7 @@ N_SRCS = 	main.c\
 			parsing/ft_search_path.c\
 			parsing/replace_in_line.c\
 			parsing/ft_error_parsing.c\
+			parsing/split_echo.c\
 			parsing/split_cmd.c\
 			parsing/split_cmd_suite.c\
 			parsing/check_error.c\

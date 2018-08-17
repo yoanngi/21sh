@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/11 09:36:12 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/11 16:25:40 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/17 13:11:10 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -74,40 +74,6 @@ static int		exec_cmd_recur(t_struct *mystruct, t_cmd *data, int fd_in)
 	return (WEXITSTATUS(status));
 }
 
-/*
-**  >&
-*/
-
-int         check_agregateur(t_cmd *start)
-{
-    int     pipe_fd[2];
-
-    if (start->stdout_cmd != 1)
-    {
-        printf("Here (close 1)\n");
-        if (pipe(pipe_fd) == -1)
-            return(EXIT_FAILURE);
-        dup2(1, pipe_fd[0]);
-        close(1);
-        dup2(pipe_fd[1], start->stdout_cmd);
-        close(pipe_fd[0]);
-    }
-    if (start->stderr_cmd != 2)
-    {
-        printf("Here (close 2)\n");
-        if (pipe(pipe_fd) == -1)
-        {
-            printf("exit\n");
-            return (EXIT_FAILURE);
-        }
-        printf("Here (close 2) 1\n");
-        dup2(pipe_fd[0], 2);
-        printf("Here (close 2) 2\n");
-        dup2(pipe_fd[0], start->stderr_cmd);
-    }
-    printf("end agregateur\n");
-    return (0);
-}
 
 /*
 **	On envoie la liste chainee a exec_cmd_recur
@@ -124,8 +90,6 @@ int				execute_commandes(t_struct *mystruct, t_cmd *data)
 	start = NULL;
 	if (!data)
 		return (-1);
-    if (check_agregateur(data) == 1)
-        return (1);
 	if (len_list(data) == 1 && (data)->op_next == 0)
 	{
 		if ((ret = execute_builtins_light(mystruct, data)) == -2)

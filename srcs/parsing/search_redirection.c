@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/10 14:27:41 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/11 16:34:17 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/17 11:39:09 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,7 +14,7 @@
 #include "../../includes/shell.h"
 
 static char		**insert_option_cmd(char **tab_cmd, char **new_tab,
-	int len_1, int len_2)
+		int len_1, int len_2)
 {
 	char	**new;
 
@@ -43,7 +43,7 @@ static char		**insert_option_cmd(char **tab_cmd, char **new_tab,
 }
 
 static int		return_name_suite(t_cmd **lst, char **new, char **tmp,
-	char **tab_tmp)
+		char **tab_tmp)
 {
 	char **tmp2;
 
@@ -53,7 +53,7 @@ static int		return_name_suite(t_cmd **lst, char **new, char **tmp,
 	*new = ft_strdup(*tmp);
 	ft_strdel(tmp);
 	if (!(tmp2 = insert_option_cmd((*lst)->tab_cmd, tab_tmp, 0, 0)))
-        return (1);
+		return (1);
 	(*lst)->tab_cmd = ft_del_tab((*lst)->tab_cmd);
 	(*lst)->tab_cmd = ft_duplicate_tab(tmp2);
 	tmp2 = ft_del_tab(tmp2);
@@ -69,20 +69,20 @@ static char		*return_name(t_cmd **lst, char *str, int start, int end)
 	new = NULL;
 	tmp = NULL;
 	tab_tmp = NULL;
-    if (str[start] == '&')
-        start += modifie_fd(lst, str, start);
+	if (str[start] == '&')
+		start += modifie_fd(lst, str, start);
 	if (start >= end)
 		return (NULL);
 	if (ft_strlen(str) == end + 1)
 		new = ft_strsub(str, start, (end - start + 1));
 	else if (str[end] == '>' && ft_isdigit(str[end - 1]) == 1)
 		new = ft_strsub(str, start, (end - start - 2));
-    else
+	else
 		new = ft_strsub(str, start, (end - start));
 	clear_line(&new);
 	tab_tmp = ft_strsplit(new, ' ');
-    if (ft_len_tab(tab_tmp) > 1)
-	    return_name_suite(lst, &new, &tmp, tab_tmp);
+	if (ft_len_tab(tab_tmp) > 1)
+		return_name_suite(lst, &new, &tmp, tab_tmp);
 	tab_tmp = ft_del_tab(tab_tmp);
 	return (new);
 }
@@ -97,13 +97,13 @@ static int		check_search_null(t_path **new, char *str, int i, int j)
 		clear_line(&(*new)->name);
 		return (ft_strlen(str));
 	}
-    else if (j < i)
-    {
+	else if (j < i)
+	{
 		(*new)->next = ft_init_path();
-        *new = (*new)->next;
+		*new = (*new)->next;
 		(*new)->name = ft_strsub(str, j, i);
 		(*new)->s_or_d = 0;
-    }
+	}
 	return (i);
 }
 
@@ -136,11 +136,10 @@ int				search_redirection(t_cmd **lst, char *str, int i, int j)
 			}
 			new->name = return_name(lst, str, j, i);
 			new->s_or_d = what_is_op(str, i);
-            new->redir_fd = search_fd(str, j - 1);
+			new->redir_fd = search_fd(str, j - 1);
 			j = i + 1;
 		}
 		i++;
 	}
-	i = check_search_null(&new, str, i, j);
-	return (i);
+	return (check_search_null(&new, str, i, j));
 }

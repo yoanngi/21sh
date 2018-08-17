@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   insert_cmd_simple.c                              .::    .:/ .      .::   */
+/*   split_echo.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/08/08 15:04:18 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/17 14:39:11 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/08/17 14:38:34 by yoginet      #+#   ##    ##    #+#       */
+/*   Updated: 2018/08/17 15:18:04 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-int			insert_cmd_simple(t_struct *data, t_cmd **lst, char *str)
+char		**split_echo(char *str)
 {
-	if (ft_strstr(str, "echo"))
-		(*lst)->tab_cmd = split_echo(str);
+	int		i;
+	char	**new;
+
+	i = 0;
+	new = NULL;
+	if (ft_strstr(str, "\"") == NULL || ft_strstr(str, "\'") == NULL)
+		new = ft_strsplit(str, ' ');
 	else
-		(*lst)->tab_cmd = split_cmd(str, 0);
-	chose_rep(data, lst, 0);
-	(*lst)->env = ft_duplicate_tab(data->env);
-	return (0);
+	{
+		new = ft_strsplit(str, ' ');
+		// a modif
+	}
+	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/06 10:39:16 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/10 12:58:05 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/17 11:46:06 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -58,10 +58,7 @@ t_struct		*init_struct(char **env)
 
 	data = NULL;
 	if (env == NULL)
-    {
-        ft_putstr_fd("Environnement NULL\n", 2);
 		exit(EXIT_SUCCESS);
-    }
 	data = (t_struct *)malloc(sizeof(t_struct));
 	data = (t_struct *)malloc(sizeof(t_struct));
 	data->env = init_env(env);

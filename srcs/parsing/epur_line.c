@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/17 15:29:32 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/10 12:48:05 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/17 14:27:59 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,11 +30,7 @@ static int		clean_bet_suite(char *str, int i, char **new, char **tmp)
 	str[i] == '\t'))
 	{
 		*new = ft_strsub(str, 0, i);
-		while (str[i] == ' ' || str[i] == '\t')
-			i++;
-		*tmp = ft_strsub(str, i - 1, ft_strlen(str) - (i - 1));
-		if (*new[ft_strlen(*new) - 1] == '\t')
-			*new[ft_strlen(*new) - 1] = ' ';
+		*tmp = ft_strsub(str, i + 1, ft_strlen(str) - (i + 1));
 		q = 1;
 	}
 	return (q);
@@ -48,7 +44,7 @@ static int		echap_quote(char *str, int i)
 		while (str[i] && str[i] != '\"')
 			i++;
 	}
-	if (str[i] == '\'')
+	else if (str[i] == '\'')
 	{
 		i++;
 		while (str[i] && str[i] != '\'')
@@ -80,8 +76,8 @@ static int		*clean_between(char **string, int i, int q)
 	ft_strdel(&tmp);
 	ft_strdel(&new);
 	ft_strdel(&str);
-	if (i + 2 < ft_strlen(*string))
-		clean_between(string, 0, 0);
+	if (i + 2 < ft_strlen(*string) && ft_strstr(*string, "  ") != NULL)
+		clean_between(string, i, 0);
 	return (0);
 }
 

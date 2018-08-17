@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/04 14:43:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/11 14:05:12 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/17 15:17:42 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -204,11 +204,11 @@ int					exec_pipe_suite(t_struct *data);
 int					ft_process(t_cmd *data);
 int					ft_check_arg_invalid(t_struct *data, t_cmd *cmd);
 int                 fork_redirection(t_cmd *lst);
-int                 exec_redirection(t_cmd *lst, t_path *file);
+int                 exec_redirection(t_path *file);
 int					ft_kill_process(t_cmd *start);
-int                 ft_kill_fork_path(t_path *start);
 int					cmd_suivante(t_ins *cpy, int code);
-int                 check_agregateur(t_cmd *start);
+int                 check_agregateur(int stdcmd, int fd_ref);
+int					ft_close(int fd_out, int fd_err);
 /*
 **	PARSING
 */
@@ -224,6 +224,7 @@ int					ft_nefaitrien(char **line);
 int					ft_search_opnext(char *str, int i);
 int					chose_rep(t_struct *data, t_cmd **new, int provisoire);
 char				**split_cmd(char *str, int i);
+char				**split_echo(char *str);
 int					ft_verif_alphanum(char *str);
 int					check_error_inlinesplit(t_ins **lst);
 int					ft_check_line_vide(char *str, t_struct **data);

@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/08 15:29:39 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/11 16:35:40 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/17 15:51:16 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,12 +46,12 @@ int				good_tab_cmd(t_struct *data, t_cmd **lst, char *str, int i)
 	start = 0;
 	if (str == NULL)
 		return (0);
-	if (i == ft_strlen(str) - 1)
+	if (i == ft_strlen(str) - 1 || i > ft_strlen(str))
 		tmp = ft_strdup(str);
 	else if (str[i] == '>' && ft_isdigit(str[i - 1] == 0))
 		tmp = ft_strsub(str, start, i - 3);
-    else
-		tmp = ft_strsub(str, start, i - 2);
+	else
+		tmp = ft_strsub(str, start, i - 1);
 	insert_cmd_simple(data, lst, tmp);
 	ret = ft_strlen(tmp);
 	ft_strdel(&tmp);

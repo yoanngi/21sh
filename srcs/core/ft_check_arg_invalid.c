@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/20 11:13:22 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/06 14:09:36 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/17 11:49:16 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,13 +17,13 @@
 **  Dans le cs de redirection vers un mauvais fd, on retourne une erreur
 */
 
-static int      check_bad_fd(t_cmd *lst)
+static int		check_bad_fd(t_cmd *lst)
 {
-    if (lst == NULL)
-        return (0);
-    if (lst->bad_fd == 1)
-        return (1);
-    return (0);
+	if (lst == NULL)
+		return (0);
+	if (lst->bad_fd == 1)
+		return (1);
+	return (0);
 }
 
 /*
@@ -68,10 +68,10 @@ int				ft_check_arg_invalid(t_struct *data, t_cmd *cmd)
 		data->code_erreur = 126;
 		return (1);
 	}
-    if (check_bad_fd(cmd) == 1)
-    {
+	if (check_bad_fd(cmd) == 1)
+	{
 		data->code_erreur = 1;
-        return (1);
-    }
+		return (1);
+	}
 	return (0);
 }

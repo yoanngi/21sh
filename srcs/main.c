@@ -6,7 +6,7 @@
 /*   By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/29 15:00:57 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/11 13:35:08 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/17 14:13:25 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -65,12 +65,12 @@ int				main(int argc, char **argv, char **env)
 	int			code_exit;
 
 	if (help_bash(argc, argv) == 1 || !isatty(0))
-        return (0);
-    if (ft_len_tab(env) < 5)
-    {
-        ft_putstr_fd("l'environnement ne permet pas de fonctionner correctement\n", 2);
 		return (0);
-    }
+	if (ft_len_tab(env) < 5)
+	{
+		ft_putstr_fd("error: Environnment incomplet\n", 2);
+		return (0);
+	}
 	if (ft_test_system() == 1)
 		return (1);
 	print_ascii_art_start();
