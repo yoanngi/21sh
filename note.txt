@@ -17,11 +17,8 @@ A faire:
 
 tous ce aui est 1>&2
 gestion des droits des redirections (ecriture dans fichier)
-Verif que le env fonctionne:
-env path=/ ls
-
-quand path delete, il faut que les executable fonctione avec le chemin
+Quelques pb avec l'env: env PATH=/ ls ne fonctionne pas, mais env PATH=/ affiche 2 path
 Encore quelques erreur sur le cd
+probleme avec la commande wc | ls et ls | xargs cat ||||>>>>> pb termcaps ?
+pb echo test > test ||||||||>>>>> ne fait pas la redirection
 
-probleme avec la commande wc | ls
-pb parseur ls|wc > il mange le s (l | wc)

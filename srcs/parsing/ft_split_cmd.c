@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/19 11:08:13 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/17 15:49:33 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/20 16:12:15 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -63,15 +63,21 @@ static int			ft_split_cmd_suite(t_cmd **new, t_struct *data,
 	char *str, int i)
 {
 	char	*tmp;
+	int		quote;
 
 	tmp = NULL;
+	quote = 0;
 	if (check_split(data, new, str) == 1)
 		return (0);
 	tmp = ft_strdup(str);
 	while (tmp[i])
 	{
-		if (tmp[i] == '|' || tmp[i] == '>' || tmp[i] == '&' ||
-	tmp[i] == '<' || i == ft_strlen(tmp) - 1)
+		if (tmp[i] == '\"' && quote == 0)
+			quote = 1;
+		else if (tmp[i] == '\"' && quote == 1)
+			quote = 0;
+		if (quote == 0 && (tmp[i] == '|' || tmp[i] == '>' || tmp[i] == '&' ||
+	tmp[i] == '<' || i == ft_strlen(tmp) - 1))
 		{
 			i += good_op_next(new, tmp, i);
 			i = good_tab_cmd(data, new, tmp, i);

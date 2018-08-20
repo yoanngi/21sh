@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/14 14:38:25 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/11 13:54:57 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/20 16:12:42 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -97,7 +97,7 @@ t_ins			*ft_split_pvirgule(char *line, t_ins *lst, int i)
 			quote = 1;
 		else if ((tmp[i] == '\'' || tmp[i] == '\"') && quote == 1)
 			quote = 0;
-		if (i == ft_strlen(tmp) || (quote == 0 && (tmp[i] == ';' ||
+		else if (i == ft_strlen(tmp) || (quote == 0 && (tmp[i] == ';' ||
 	(tmp[i] == '&' && tmp[i + 1] == '&') ||
 	(tmp[i] == '|' && tmp[i + 1] == '|'))))
 			i = ft_split_pvir_suite(&tmp, i, &lst);
