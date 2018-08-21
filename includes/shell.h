@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/04 14:43:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/17 15:17:42 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/21 16:33:27 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -209,6 +209,7 @@ int					ft_kill_process(t_cmd *start);
 int					cmd_suivante(t_ins *cpy, int code);
 int                 check_agregateur(int stdcmd, int fd_ref);
 int					ft_close(int fd_out, int fd_err);
+int					exit_status(int status);
 /*
 **	PARSING
 */
@@ -238,6 +239,7 @@ void				print_msg_error(char *str, int i);
 void				clear_string(char **str, int deleted, int opt);
 int 				search_fd(char *str, int i);
 int 				modifie_fd(t_cmd **lst, char *str, int start);
+int					resize_str_echo(char **str, int start, int len);
 /*
  **	BUILTINS
  */
@@ -297,7 +299,7 @@ char				**ft_del_tab_index(char **tabl, int max);
 char				*ft_add_line(char *str, char **add, t_struct *data);
 int					ft_dir_exist(char *path);
 int					ft_access(char *path);
-int					ft_access_rep(char *path);
+int					ft_access_rep(char *path, int mode);
 void				basic_error(char *name, char *cmd);
 int					ft_error(int cmd, char **line);
 void				ft_error_dir(char *name, char *pre, int fd);

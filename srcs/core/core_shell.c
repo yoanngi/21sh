@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/06 10:11:53 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/20 16:47:17 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/21 12:59:55 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,11 +43,6 @@ static int			parse_line(t_struct *data, char **line)
 	if (ft_check_line_vide(*line, &data) == 0)
 		return (0);
 	data->commandes = ft_split_commandes(line, data);
-	// A DETETE **********************************************************
-	ft_putstr_fd(GREEN, 2);
-	ft_printf("Parsing ok\n");
-	ft_putstr_fd(RESET, 2);
-	// *******************************************************************
 	cpy = data->commandes;
 	while (cpy)
 	{
@@ -69,7 +64,9 @@ static int			parse_line(t_struct *data, char **line)
 		// *******************************************************************
 		cpy = what_next_link(cpy, data->code_erreur);
 	}
+	printf("clear\n");
 	data->commandes = clear_ins(data->commandes);
+	printf("end clear\n");
 	return (0);
 }
 

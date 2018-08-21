@@ -16,9 +16,12 @@ https://openclassrooms.com/forum/sujet/pipe-et-dup2-comment-faire-23270
 A faire:
 
 tous ce aui est 1>&2
-gestion des droits des redirections (ecriture dans fichier)
 Quelques pb avec l'env: env PATH=/ ls ne fonctionne pas, mais env PATH=/ affiche 2 path
 Encore quelques erreur sur le cd
 probleme avec la commande wc | ls et ls | xargs cat ||||>>>>> pb termcaps ?
 pb echo test > test ||||||||>>>>> ne fait pas la redirection
+
+VICO:
+env TERM=pouet ./21sh
+Print msg error a mettre
 

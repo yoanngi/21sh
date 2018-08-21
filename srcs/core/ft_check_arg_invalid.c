@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/20 11:13:22 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/17 11:49:16 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/21 16:34:08 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -62,7 +62,7 @@ int				ft_check_arg_invalid(t_struct *data, t_cmd *cmd)
 		data->code_erreur = 127;
 		return (1);
 	}
-	if (cmd->rep != NULL && ft_access_rep(cmd->rep) != 0)
+	if (cmd->rep != NULL && ft_access_rep(cmd->rep, 3) != 0)
 	{
 		basic_error("permission denied: ", cmd->tab_cmd[0]);
 		data->code_erreur = 126;

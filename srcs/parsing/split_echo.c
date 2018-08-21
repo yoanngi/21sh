@@ -6,90 +6,110 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/17 14:38:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/20 16:26:54 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/21 11:48:40 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-static void		resize_echo(char **tmp, char **str, int start, int end)
+static int		return_i(int i, char *str, char c)
 {
-	char	*cpy;
+	if (!(str))
+		return (0);
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (i);
+		i++;
+	}
+	return (0);
+}
 
-	cpy = NULL;
-	cpy = ft_strdup(*str);
-	ft_strdel(str);
-	if (cpy[start] == '\"' || cpy[start] == '\'')
-		start++;
-	if (cpy[end] == '\"' || cpy[end] == '\'')
-		end--;
-	*str = ft_strsub(cpy, start, end);
-	if (end + 1 < ft_strlen(cpy))
-		*tmp = ft_strsub(cpy, end + 1, ft_strlen(cpy) - (end + 1));
-	else
-		*tmp = NULL;
-	ft_strdel(&cpy);
+static char		*split_echo_suite(char *str, int i)
+{
+	char	*tmp;
+
+	tmp = NULL;
+	while (str[i])
+	{
+		if (str[i] == ' ' || str[i] == '\t')
+		{
+			tmp = ft_strsub(str, 0, i);
+			return (tmp);
+		}
+		else if (str[i] == '\'')
+		{
+			i = return_i(i + 1, str, '\'');
+			tmp = ft_strsub(str, 0, i + 1);
+			return (tmp);
+		}
+		else if (str[i] == '\"')
+		{
+			i = return_i(i + 1, str, '\"');
+			tmp = ft_strsub(str, 0, i + 1);
+			return (tmp);
+		}
+		i++;
+	}
+	return (NULL);
 }
 
 static char		*clear_quote_echo(char **str)
 {
-	char	*tmp;
-	char	*cpy;
 	int		i;
+	char	**tmp;
+	char	*cpy;
 
+	i = 0;
 	tmp = NULL;
 	cpy = NULL;
-	i = 0;
 	if (*str == NULL)
 		return (NULL);
-	if (!(cpy = ft_strdup(*str)))
+	if (ft_strlen(*str) == 0)
+	{
+		ft_strdel(str);
 		return (NULL);
-	while (cpy[i] && cpy[i] != '\"' && cpy[i] != '\'' && cpy[i] != ' ')
-		i++;
-	if (cpy[i] == '\"' && i == 0)
-	{
-		i++;
-		while (cpy[i] != '\"')
-			i++;
 	}
-	else if (cpy[i] == '\'' && i == 0)
+	if (ft_strstr(*str, "\'") == NULL && ft_strstr(*str, "\"") == NULL)
 	{
-		i++;
-		while (cpy[i] != '\'')
-			i++;
+		tmp = ft_strsplit(*str, ' ');
+		cpy = ft_strdup(tmp[0]);
+		resize_str_echo(str, ft_strlen(cpy), ft_strlen(*str) - ft_strlen(cpy));
+		tmp = ft_del_tab(tmp);
+		return (cpy);
 	}
-	printf("i = %d\n", i);
-	resize_echo(&tmp, str, 0, i);
-	printf("*str = %s\n", *str);
-	printf("tmp = %s\n", tmp);
-	ft_strdel(&cpy);
-	return (tmp);
+	cpy = split_echo_suite(*str, i);
+	resize_str_echo(str, ft_strlen(cpy), ft_strlen(*str) - ft_strlen(cpy));
+	return (cpy);
 }
 
-static int		check_split_echo(char ***tabl, char *str)
+static int		check_split_echo(char ***tabl, char *str, int len)
 {
 	int		i;
 	char	*tmp;
+	char	*tmp2;
 
 	i = 1;
 	(*tabl)[0] = ft_strdup("echo");
 	(*tabl)[1] = ft_strsub(str, 5, ft_strlen(str) - 5);
 	tmp = NULL;
-	while ((*tabl)[i])
+	tmp2 = NULL;
+	while ((*tabl)[i] && i < len)
 	{
-		printf("clear_line\n");
 		clear_line(&(*tabl)[i]);
-		printf("clear_quote\n");
 		tmp = clear_quote_echo(&(*tabl)[i]);
+		tmp2 = ft_strdup((*tabl)[i]);
 		if (tmp != NULL)
-			(*tabl)[i + 1] = ft_strdup(tmp);
-		else
-			return (0);
+		{
+			ft_strdel(&(*tabl)[i]);
+			(*tabl)[i] = ft_strdup(tmp);
+			(*tabl)[i + 1] = ft_strdup(tmp2);
+		}
 		ft_strdel(&tmp);
+		ft_strdel(&tmp2);
 		i++;
 	}
-	ft_strdel(&tmp);
 	return (0);
 }
 
@@ -109,24 +129,17 @@ char			**split_echo(char *str)
 	new = NULL;
 	tmp = NULL;
 	if (ft_strstr(str, "\"") == NULL && ft_strstr(str, "\'") == NULL)
-		new = ft_strsplit(str, ' ');
-	else
 	{
-
-		tmp = ft_strsplit(str, ' ');
-		i = ft_len_tab(tmp);
-		tmp = ft_del_tab(tmp);
-		if (i < 3)
-			i = 3;
-		if (!(new = (char **)malloc(sizeof(char *) * i)))
-			return (NULL);
-		while (j < i)
-		{
-			new[j] = NULL;
-			j++;
-		}
-		check_split_echo(&new, str);
+		new = ft_strsplit(str, ' ');
+		return (new);
 	}
-	printf("end split echo (taille tab = %d)\n", i);
+	tmp = ft_strsplit(str, ' ');
+	i = ft_len_tab(tmp);
+	tmp = ft_del_tab(tmp);
+	if (!(new = (char **)malloc(sizeof(char *) * i)))
+		return (NULL);
+	while (j < i)
+		new[j++] = NULL;
+	check_split_echo(&new, str, i);
 	return (new);
 }

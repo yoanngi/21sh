@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/11 09:36:12 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/20 16:49:20 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/21 14:08:22 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -71,7 +71,7 @@ static int		exec_cmd_recur(t_struct *mystruct, t_cmd *data, int fd_in)
 	waitpid(pid, &status, 0);
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
-	return (WEXITSTATUS(status));
+	return (exit_status(status));
 }
 
 

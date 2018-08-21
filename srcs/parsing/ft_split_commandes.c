@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/11 10:11:49 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/20 16:12:29 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/21 14:19:11 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,12 +14,7 @@
 #include "../../includes/shell.h"
 
 /*
-**	Tous le parsing de line est fait ici
 **	Retourne une liste chainee avec les differents commande, path, env, fd..
-**
-**	Difference entre && et ;
-**	&& -> si la premiere commande echoue, la 2eme ne se fait pas
-**	; -> si la premiere commande echoue, la 2 eme se fait
 */
 
 /*

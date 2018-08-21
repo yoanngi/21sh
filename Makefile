@@ -6,7 +6,7 @@
 #    By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/11/24 10:04:43 by yoginet      #+#   ##    ##    #+#        #
-#    Updated: 2018/08/17 15:18:06 by yoginet     ###    #+. /#+    ###.fr      #
+#    Updated: 2018/08/21 16:38:33 by yoginet     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -19,7 +19,7 @@ JAUNE=\033[33m
 
 NAME =		21sh
 CC = 		gcc
-FLAGS = 	-Wall -Werror -Wextra -g
+FLAGS = 	-Wall -Werror -Wextra
 DEL =		rm -rf
 
 SRC_PATH = ./srcs/
@@ -41,6 +41,7 @@ N_SRCS = 	main.c\
 			core/kill_process.c\
 			core/cmd_suivante.c\
 			core/ft_close.c\
+			core/exit_status.c\
 			init/ft_check_infos.c\
 			init/ft_delete_struct.c\
 			init/ft_init_builtins.c\
@@ -103,6 +104,7 @@ N_SRCS = 	main.c\
 			parsing/replace_in_line.c\
 			parsing/ft_error_parsing.c\
 			parsing/split_echo.c\
+			parsing/split_echo_suite.c\
 			parsing/split_cmd.c\
 			parsing/split_cmd_suite.c\
 			parsing/check_error.c\

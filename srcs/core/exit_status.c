@@ -1,41 +1,23 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_process.c                                     .::    .:/ .      .::   */
+/*   exit_status.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/06/13 15:38:15 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/21 14:00:14 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/08/21 13:54:47 by yoginet      #+#   ##    ##    #+#       */
+/*   Updated: 2018/08/21 14:04:01 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-/*
-**	Fonction pour une execution simple d'une commande
-**	return : Valeur de retour de la commande
-*/
-
-int				ft_process(t_cmd *data)
+int		exit_status(int status)
 {
-	pid_t	pid;
-	int		status;
-
-	status = 0;
-	pid = fork();
-	if (pid < 0)
-	{
-		ft_error_fork(pid);
-		exit(EXIT_FAILURE);
-	}
-	else if (pid == 0)
-	{
-		if (execve(data->rep, data->tab_cmd, data->env) == -1)
-			kill(pid, 0);
-	}
-	else
-		waitpid(pid, &status, 0);
-	return (exit_status(status));
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	else if (WIFSIGNALED(status))
+		return (WTERMSIG(status) + 128);
+	return (0);
 }

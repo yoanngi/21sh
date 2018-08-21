@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/11 09:36:12 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/20 16:28:32 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/21 15:36:05 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,7 +46,7 @@ int			fork_redirection(t_cmd *lst)
 	int		status;
 	t_path	*lst_path;
 
-    status = -1;
+	status = -1;
 	lst_path = lst->pathname;
 	while (lst->pathname)
 	{
