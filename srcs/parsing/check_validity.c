@@ -6,12 +6,35 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/11 09:42:47 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/22 14:22:06 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/22 16:40:44 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
+
+static int		replace_order(char ***tabl, int i)
+{
+	ft_strdel(&(*tabl)[i]);
+	if ((*tabl)[i + 1] != NULL)
+		(*tabl)[i] = ft_strdup((*tabl)[i + 1]);
+	i++;
+	while ((*tabl)[i])
+	{
+		if ((*tabl)[i + 1] != NULL)
+		{
+			ft_strdel(&(*tabl)[i]);
+			(*tabl)[i] = ft_strdup((*tabl)[i + 1]);
+		}
+		else
+		{
+			ft_strdel(&(*tabl)[i]);
+			return (0);
+		}
+		i++;
+	}
+	return (0);
+}
 
 /*
 **	Replace special char in tab and check access for redirection
@@ -39,9 +62,8 @@ static int		check_file_redir(t_struct *data, t_path *start)
 	return (0);
 }
 
-static int		check_lst_special(t_struct *data, t_cmd **lst)
+static int		check_lst_special(t_struct *data, t_cmd **lst, int i)
 {
-	int		i;
 	int		quit;
 	t_path	*start;
 
@@ -52,10 +74,12 @@ static int		check_lst_special(t_struct *data, t_cmd **lst)
 		quit = 0;
 		while ((*lst)->tab_cmd[i] && quit == 0)
 		{
-			if (replace_in_line(data, &(*lst)->tab_cmd[i]) == 1)
+			quit = replace_in_line(data, &(*lst)->tab_cmd[i]);
+			if (quit == -1)
 			{
-				ft_strdel(&(*lst)->tab_cmd[i]);
-				quit = 1;
+				replace_order(&(*lst)->tab_cmd, i);
+				i = 0;
+				quit = 0;
 			}
 			i++;
 		}
@@ -81,7 +105,7 @@ int				check_link(t_cmd *lst)
 }
 
 /*
-**	Check validity of lst
+**	Check validity of lst && replace $ and ~
 */
 
 int				check_validity(t_cmd **lst, t_struct *data)
@@ -91,7 +115,7 @@ int				check_validity(t_cmd **lst, t_struct *data)
 	if (!(*lst))
 		return (1);
 	start = *lst;
-	if (check_lst_special(data, &start) == 1)
+	if (check_lst_special(data, &start, 0) == 1)
 		return (1);
 // a modif
 printf("%s a revoir \n", __func__);

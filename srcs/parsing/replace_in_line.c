@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/22 11:40:00 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/22 15:46:05 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/22 16:40:46 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -47,7 +47,7 @@ static int		check_regex_classic(t_struct *data, char **line)
 	return (1);
 }
 
-static int		insert_str_suite(char **str, char *tmp, int i)
+static int		insert_str_suite(char **str, char *tmp, int i, int l)
 {
 	char	*new;
 	char	*tmp2;
@@ -62,8 +62,19 @@ static int		insert_str_suite(char **str, char *tmp, int i)
 	{
 		new = ft_strdup(*str);
 		ft_strdel(str);
-		*str = ft_strjoin(tmp, new + ft_strlen(tmp));
+		if (ft_strlen(tmp) > ft_strlen(new) || l == ft_strlen(new))
+			*str = ft_strdup(tmp);
+		else
+			*str = ft_strjoin(tmp, new + ft_strlen(tmp));
 		ft_strdel(&new);
+	}
+	else
+	{
+		// a modif
+		printf("%s A MODIFIER\n", __func__);
+		printf("tmp = %s\n*str = %s\nlen = %d\n", tmp, *str, l);
+		ft_strdel(str);
+		*str = ft_strdup(tmp);
 	}
 	return (1);
 }
@@ -90,17 +101,15 @@ static int		insert_in_str(t_struct *data, char **str, int i)
 		len++;
 		while (new[len] >= 65 && new[len] <= 90 )
 			len++;
-		printf("LEN = %d\n", len);
 		if (len > 1)
 			tmp = ft_return_dollar(data, new, len);
-		printf("tmp = %s\n", tmp);
 	}
-	insert_str_suite(str, tmp, i);
+	insert_str_suite(str, tmp, i, len);
 	ft_strdel(&new);
 	if (tmp == NULL)
 	{
 		ft_strdel(str);
-		return (0);
+		return (-1);
 	}
 	ret = ft_strlen(tmp);
 	ft_strdel(&tmp);
@@ -109,6 +118,8 @@ static int		insert_in_str(t_struct *data, char **str, int i)
 
 static int		replace_line(char **line, char *str)
 {
+	if (*line == NULL || str == NULL)
+		return (0);
 	ft_strdel(line);
 	if (!(*line = ft_strdup(str)))
 		return (1);
@@ -137,6 +148,11 @@ static int		replace_in_line_deux(t_struct *data, char **str, int i)
 		}
 		else if (tmp[i] == '~' || tmp[i] == '$')
 			i = insert_in_str(data, str, i);
+		if (i == -1)
+		{
+			ft_strdel(&tmp);
+			return (-1);
+		}
 		i++;
 	}
 	ft_strdel(&tmp);
@@ -147,12 +163,16 @@ int				replace_in_line(t_struct *data, char **line)
 {
 	char	*tmp;
 	int		i;
+	int		ret;
 
 	tmp = NULL;
 	i = 0;
-	printf("line = %s\n", *line);
+	ret = 0;
 	if (line == NULL || ft_strlen(*line) < 1)
+	{
+		ft_strdel(line);
 		return (1);
+	}
 	if ((ft_strstr(*line, "~") == NULL && ft_strstr(*line, "-") == NULL &&
 	ft_strstr(*line, "$") == NULL))
 		return (0);
@@ -160,10 +180,9 @@ int				replace_in_line(t_struct *data, char **line)
 		return (0);
 	if (!(tmp = ft_strdup(*line)))
 		return (0);
-	replace_in_line_deux(data, &tmp, i);
-	if (replace_line(line, tmp) == 1)
-		return (0);
+	if (replace_in_line_deux(data, &tmp, i) == -1)
+		ret = -1;
+	replace_line(line, tmp);
 	ft_strdel(&tmp);
-	printf("end (%s)\n", __func__);
-	return (0);
+	return (ret);
 }

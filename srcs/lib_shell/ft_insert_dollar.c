@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/22 11:56:35 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/22 15:10:26 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/22 15:51:06 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,8 +40,10 @@ char			*ft_return_dollar(t_struct *data, char *str, int len)
 	tmp = NULL;
 	if ((tmp = ft_insert_special(data, str)))
 		return (tmp);
-	if (!(new = ft_strsub(str, 1, len - 1)))
+	if (!(tmp = ft_strsub(str, 1, len - 1)))
 		return (NULL);
+	new = ft_strjoin(tmp, "=");
+	ft_strdel(&tmp);
 	tmp = ft_check_infos(data->env, new);
 	ft_strdel(&new);
 	if (tmp == NULL)
