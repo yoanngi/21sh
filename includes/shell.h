@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/04 14:43:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/21 16:33:27 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/22 14:51:10 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -308,9 +308,9 @@ void				ft_error_fork(int father);
 void				ft_check_path(t_struct *data, char **path);
 int					good_path(char *target, char *cmd, int opt);
 char				*ft_return_path(char *str);
-char				*ft_insert_home(t_struct *data, char **str, int i, int len);
-char				*ft_insert_dollar(t_struct *data, char **str, int i, int len);
-char				*ft_insert_moins(t_struct *data, char **str, int i, int len);
+char				*ft_return_home(t_struct *data);
+char				*ft_return_dollar(t_struct *data, char *str, int len);
+char				*ft_return_moins(t_struct *data);
 int					ft_existe_in_path(t_struct *data, char **path);
 char				*ft_return_pwd(void);
 int					len_list(t_cmd *lst);

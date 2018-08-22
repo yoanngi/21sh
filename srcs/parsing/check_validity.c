@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/11 09:42:47 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/21 16:36:46 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/22 14:22:06 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,6 +19,8 @@
 
 static int		check_file_redir(t_struct *data, t_path *start)
 {
+	if (start == NULL)
+		return (0);
 	while (start)
 	{
 		if (ft_access_rep(start->name, 0) == 0)
@@ -40,15 +42,21 @@ static int		check_file_redir(t_struct *data, t_path *start)
 static int		check_lst_special(t_struct *data, t_cmd **lst)
 {
 	int		i;
+	int		quit;
 	t_path	*start;
 
 	start = NULL;
 	while (*lst)
 	{
 		i = 0;
-		while ((*lst)->tab_cmd[i])
+		quit = 0;
+		while ((*lst)->tab_cmd[i] && quit == 0)
 		{
-			replace_in_line(data, &(*lst)->tab_cmd[i]);
+			if (replace_in_line(data, &(*lst)->tab_cmd[i]) == 1)
+			{
+				ft_strdel(&(*lst)->tab_cmd[i]);
+				quit = 1;
+			}
 			i++;
 		}
 		start = (*lst)->pathname;
@@ -86,7 +94,7 @@ int				check_validity(t_cmd **lst, t_struct *data)
 	if (check_lst_special(data, &start) == 1)
 		return (1);
 // a modif
-	printf("%s a revoir \n", __func__);
+printf("%s a revoir \n", __func__);
 	return (0);
 	start = *lst;
 	while (start)

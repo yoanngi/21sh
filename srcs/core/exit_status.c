@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/21 13:54:47 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/21 16:43:44 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/22 09:47:46 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,9 +24,11 @@ int		exit_status(int status)
 	{
 		code = WTERMSIG(status);
 		if (code == 11)
-		{
 			ft_putstr_fd("Segmentation fault: 11\n", 2);
-		}
+		else if (code == 6)
+			ft_putstr_fd("Abort: 6\n", 2);
+		else if (code == 13)
+			ft_putstr_fd("Broken pipe: 13\n", 2);
 		return (code + 128);
 	}
 	return (0);

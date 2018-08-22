@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/19 11:08:13 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/21 15:42:51 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/22 13:44:15 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -67,7 +67,7 @@ static int			ft_split_cmd_suite(t_cmd **new, t_struct *data,
 	if (check_split(data, new, str) == 1)
 		return (0);
 	tmp = ft_strdup(str);
-	while (tmp[i])
+	while (tmp[i] && i < ft_strlen(tmp))
 	{
 		if (tmp[i] == '\"' && quote == 0)
 			quote = 1;
@@ -113,5 +113,7 @@ t_cmd				*ft_split_cmd(char *str, t_struct *data)
 		new = clear_cmd(new);
 		return (NULL);
 	}
+// a delete
+printf("end %s\n", __func__);
 	return (start);
 }

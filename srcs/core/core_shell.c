@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/06 10:11:53 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/21 12:59:55 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/22 12:58:22 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -59,6 +59,7 @@ static int			parse_line(t_struct *data, char **line)
 		}
 		// A DETETE **********************************************************
 		ft_putstr_fd(GREEN, 2);
+		ft_printf("******* repertoire = %s\n", data->pwd);
 		ft_printf("******* Valeur de retour (data->code_erreur) = %d\n", data->code_erreur);
 		ft_putstr_fd(RESET, 2);
 		// *******************************************************************
