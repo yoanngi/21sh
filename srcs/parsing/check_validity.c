@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/11 09:42:47 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/23 11:20:51 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/23 15:36:33 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -118,6 +118,7 @@ int				check_validity(t_cmd **lst, t_struct *data)
 	if (check_lst_special(data, &start, 0) == 1)
 		return (1);
 	start = *lst;
+	return (0);
 	while (start)
 	{
 		if (check_link(start) != 0)

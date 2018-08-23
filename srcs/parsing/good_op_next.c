@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/23 13:01:15 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/23 13:06:13 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/23 16:26:08 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,4 +43,17 @@ int					good_op_next(t_cmd **lst, char *str, int i)
 		(*lst)->op_next = 8;
 	ret = good_return(lst);
 	return (ret);
+}
+
+void				verifie_op(t_cmd **lst, char *str, int i)
+{
+	if (lst == NULL || str == NULL || i > ft_strlen(str))
+		return ;
+	if ((*lst)->op_next == 2 || (*lst)->op_next == 3)
+	{
+		if (str[i] == '|')
+		{
+			(*lst)->op_next = 1;
+		}
+	}
 }

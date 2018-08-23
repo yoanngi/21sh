@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/23 13:09:39 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/23 14:43:13 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/23 16:48:34 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,5 +16,9 @@
 int		wait_or_not(int *status, pid_t pid)
 {
 	waitpid(pid, status, 0);
+	// a modif
+	// ne marche pas avec top | head
+	while (wait(0) > 0)
+		;
 	return (0);
 }

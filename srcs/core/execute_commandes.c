@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/11 09:36:12 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/23 14:48:55 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/23 15:42:53 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,7 @@ static int		exec_pipe_child(t_struct *mystruct, t_cmd *lst, int pipe_fd[2],
 
 	if ((builtins = execute_builtins(mystruct, lst, pipe_fd, fd_in)) != -1)
 		return (builtins);
-	if (lst->pathname != NULL && (lst->op_next == 2 || lst->op_next == 3))
+	if (lst->pathname != NULL)
 		return (fork_redirection(lst));
 	if (lst->op_next == 1)
 	{

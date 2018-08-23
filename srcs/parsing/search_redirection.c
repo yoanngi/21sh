@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/10 14:27:41 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/21 16:25:18 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/23 16:25:38 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -89,6 +89,14 @@ static char		*return_name(t_cmd **lst, char *str, int start, int end)
 
 static int		check_search_null(t_path **new, char *str, int i, int j)
 {
+	if (str[i] == '|' || str[i] == '<')
+	{
+		*new = ft_init_path();
+		(*new)->name = ft_strsub(str, j, i - j);
+		(*new)->s_or_d = what_is_op(str, j);
+		clear_line(&(*new)->name);
+		return (i);
+	}
 	if (new == NULL)
 	{
 		*new = ft_init_path();
@@ -118,8 +126,10 @@ static int		check_search_null(t_path **new, char *str, int i, int j)
 int				search_redirection(t_cmd **lst, char *str, int i, int j)
 {
 	t_path		*new;
+	int			val;
 
 	new = NULL;
+	val = 0;
 	while (str[i] && str[i] != '|' && str[i] != '<')
 	{
 		if (str[i] == '>' || str[i + 1] == '\0')
@@ -141,5 +151,12 @@ int				search_redirection(t_cmd **lst, char *str, int i, int j)
 		}
 		i++;
 	}
-	return (check_search_null(&new, str, i, j));
+	if (new == NULL)
+	{
+		val = check_search_null(&new, str, i, j);
+		(*lst)->pathname = new;
+		return (val);
+	}
+	val = check_search_null(&new, str, i, j);
+	return (val);
 }
