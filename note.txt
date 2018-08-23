@@ -25,7 +25,9 @@ heredoc et <
 
 VICO:
 
-probleme avec la commande wc | ls et ls | xargs cat ||||>>>>> pb termcaps ?
+probleme avec la commande wc | ls
+ls | xargs cat
+||||>>>>> pb termcaps ?
 
 env TERM=pouet ./21sh
 Print msg error a mettre

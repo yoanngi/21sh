@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/19 11:08:13 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/22 13:44:15 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/23 11:10:55 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -113,7 +113,5 @@ t_cmd				*ft_split_cmd(char *str, t_struct *data)
 		new = clear_cmd(new);
 		return (NULL);
 	}
-// a delete
-printf("end %s\n", __func__);
 	return (start);
 }

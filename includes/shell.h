@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/04 14:43:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/22 14:51:10 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/23 10:36:54 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -240,6 +240,7 @@ void				clear_string(char **str, int deleted, int opt);
 int 				search_fd(char *str, int i);
 int 				modifie_fd(t_cmd **lst, char *str, int start);
 int					resize_str_echo(char **str, int start, int len);
+int					check_regex_classic(t_struct *data, char **line);
 /*
  **	BUILTINS
  */
@@ -315,6 +316,7 @@ int					ft_existe_in_path(t_struct *data, char **path);
 char				*ft_return_pwd(void);
 int					len_list(t_cmd *lst);
 int					resize_str(char **str, int len);
+int					replace_line(char **line, char *str);
 /*
 **	DEBUG
 */

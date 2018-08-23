@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/11 10:11:49 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/22 12:59:00 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/23 11:06:46 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -81,7 +81,5 @@ t_ins			*ft_split_commandes(char **line, t_struct *data)
 		cpy = cpy->next;
 		ft_strdel(&tmp);
 	}
-	// a delete
-	printf("end %s\n", __func__);
 	return (new_ins);
 }

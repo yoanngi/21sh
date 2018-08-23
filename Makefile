@@ -6,7 +6,7 @@
 #    By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/11/24 10:04:43 by yoginet      #+#   ##    ##    #+#        #
-#    Updated: 2018/08/21 16:38:33 by yoginet     ###    #+. /#+    ###.fr      #
+#    Updated: 2018/08/23 10:38:34 by yoginet     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -85,6 +85,7 @@ N_SRCS = 	main.c\
 			lib_shell/len_list.c\
 			lib_shell/resize_str.c\
 			lib_shell/ft_replace_word.c\
+			lib_shell/replace_line.c\
 			builtins/good_func.c\
 			builtins/func_cd.c\
 			builtins/func_echo.c\
@@ -116,6 +117,7 @@ N_SRCS = 	main.c\
 			parsing/check_validity.c\
 			parsing/print_msg_error.c\
 			parsing/modifie_fd.c\
+			parsing/check_regex_classic.c\
 			debug.c\
 
 all: $(NAME)

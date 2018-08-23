@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/14 14:38:25 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/22 12:57:09 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/23 11:07:46 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -104,7 +104,5 @@ t_ins			*ft_split_pvirgule(char *line, t_ins *lst, int i)
 		i++;
 	}
 	ft_strdel(&tmp);
-	// a delete
-	printf("end %s\n", __func__);
 	return (start);
 }

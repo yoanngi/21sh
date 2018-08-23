@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/11 09:42:47 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/22 16:40:44 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/23 11:10:03 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -97,7 +97,7 @@ static int		check_lst_special(t_struct *data, t_cmd **lst, int i)
 
 int				check_link(t_cmd *lst)
 {
-	if (lst->op_next == 1 && lst->pathname != NULL)
+	if (lst->op_next == 1 && lst->next->rep == NULL)
 		return (1);
 	if (lst->op_next == 2 && lst->pathname == NULL)
 		return (1);
@@ -117,15 +117,11 @@ int				check_validity(t_cmd **lst, t_struct *data)
 	start = *lst;
 	if (check_lst_special(data, &start, 0) == 1)
 		return (1);
-// a modif
-printf("%s a revoir \n", __func__);
-	return (0);
 	start = *lst;
 	while (start)
 	{
 		if (check_link(start) != 0)
 		{
-			*lst = clear_cmd(*lst);
 			ft_putstr_fd("21sh: invalid command\n", 2);
 			data->code_erreur = 1;
 			return (1);
