@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/06 10:11:53 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/23 14:25:24 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/23 14:49:31 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,6 +46,7 @@ static int			parse_line(t_struct *data, char **line)
 	cpy = data->commandes;
 	while (cpy)
 	{
+		// a delete (print_debug)
 		print_debug(&cpy->cmd, cpy->code);
 		if (ft_check_arg_invalid(data, cpy->cmd) == 0)
 		{
@@ -65,7 +66,6 @@ static int			parse_line(t_struct *data, char **line)
 		// *******************************************************************
 		cpy = what_next_link(cpy, data->code_erreur);
 	}
-	printf("clear\n");
 	data->commandes = clear_ins(data->commandes);
 	printf("end clear (%d)\n", getpid());
 	return (0);

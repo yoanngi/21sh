@@ -6,7 +6,7 @@
 #    By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/11/24 10:04:43 by yoginet      #+#   ##    ##    #+#        #
-#    Updated: 2018/08/23 13:12:42 by yoginet     ###    #+. /#+    ###.fr      #
+#    Updated: 2018/08/23 14:42:27 by yoginet     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -40,7 +40,6 @@ N_SRCS = 	main.c\
 			core/ft_check_arg_invalid.c\
 			core/kill_process.c\
 			core/cmd_suivante.c\
-			core/ft_close.c\
 			core/exit_status.c\
 			core/wait_or_not.c\
 			core/redirection_fd.c\

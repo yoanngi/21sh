@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/23 13:09:39 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/23 14:33:53 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/23 14:43:13 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,8 +15,6 @@
 
 int		wait_or_not(int *status, pid_t pid)
 {
-	int		ret;
-
-	ret = waitpid(pid, status, 0);
+	waitpid(pid, status, 0);
 	return (0);
 }

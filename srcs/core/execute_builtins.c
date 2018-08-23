@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/11 09:36:12 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/22 09:52:19 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/23 14:49:33 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,8 +27,10 @@ int			execute_builtins(t_struct *mystruct, t_cmd *lst, int pipe_fd[2],
 		{
 			if (lst->pathname != NULL)
 				return (fork_redirection(lst));
-			dup2(*fd_in, lst->stdin_cmd) == -1 ? basic_error("dup2", "failled") : 0;
-			dup2(pipe_fd[1], lst->stdout_cmd) == -1 ? basic_error("dup2", "failled") : 0;
+			dup2(*fd_in, lst->stdin_cmd) == -1 ?
+	basic_error("dup2", "failled") : 0;
+			dup2(pipe_fd[1], lst->stdout_cmd) == -1 ?
+	basic_error("dup2", "failled") : 0;
 			close(pipe_fd[0]) == -1 ? basic_error("close", "failled") : 0;
 			ret = ft_search_func(mystruct, lst, i);
 			exit(ret);
