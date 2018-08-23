@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/11 09:36:12 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/22 09:51:39 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/23 11:54:17 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,7 +33,7 @@ int			exec_redirection(t_path *file)
 	if (fd == -1)
 		exit(EXIT_FAILURE);
 	dup2(fd, file->redir_fd) == -1 ? basic_error("dup2", "failled") : 0;
-    close(fd) == -1 ? basic_error("close", "failled") : 0;
+   	close(fd) == -1 ? basic_error("close", "failled") : 0;
 	return (fd);
 }
 
@@ -54,6 +54,7 @@ int			fork_redirection(t_cmd *lst)
         lst->pathname = lst->pathname->next;
 	}
     lst->pathname = lst_path;
+	redirection_fd(lst);
 	status = execve(lst->rep, lst->tab_cmd, lst->env);
 	return (status);
 }

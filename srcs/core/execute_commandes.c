@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/11 09:36:12 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/21 14:08:22 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/23 14:37:18 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,20 +20,20 @@ static int		exec_pipe_child(t_struct *mystruct, t_cmd *lst, int pipe_fd[2],
 
 	if ((builtins = execute_builtins(mystruct, lst, pipe_fd, fd_in)) != -1)
 		return (builtins);
-	if (lst->pathname != NULL)
+	if (lst->pathname != NULL && (lst->op_next == 2 || lst->op_next == 3))
 	{
-		printf("Redirection\n");
+		//printf("Redirection\n");
 		return (fork_redirection(lst));
 	}
 	if (lst->op_next == 1)
 	{
-		printf("Pipe:\n");
+		//printf("Pipe:\n");
 		dup2(*fd_in, lst->stdin_cmd) == -1 ? basic_error("dup2", "failled") : 0;
 		dup2(pipe_fd[1], lst->stdout_cmd) == -1 ? basic_error("dup2", "failled") : 0;
 		close(pipe_fd[0]) == -1 ? basic_error("close", "failled") : 0;
 		return (execve(lst->rep, lst->tab_cmd, lst->env));
 	}
-	printf("Execution:\n");
+	//printf("Execution:\n");
 	dup2(*fd_in, lst->stdin_cmd) == -1 ? basic_error("dup2", "failled") : 0;
 	close(pipe_fd[1]) == -1 ? basic_error("close", "failled") : 0;
 	close(pipe_fd[0]) == -1 ? basic_error("close", "failled") : 0;
@@ -41,7 +41,7 @@ static int		exec_pipe_child(t_struct *mystruct, t_cmd *lst, int pipe_fd[2],
 }
 
 /*
-**	Bla
+**	boucle sur la liste chainer des commandes et fork
 */
 
 static int		exec_cmd_recur(t_struct *mystruct, t_cmd *data, int fd_in)
@@ -57,9 +57,7 @@ static int		exec_cmd_recur(t_struct *mystruct, t_cmd *data, int fd_in)
 		if ((pid = fork()) == -1)
 			exit(EXIT_FAILURE);
 		if (pid == 0)
-        {
 			exec_pipe_child(mystruct, data, pipe_fd, &fd_in);
-        }
 		else
 		{
 			data->pid = pid;
@@ -68,7 +66,7 @@ static int		exec_cmd_recur(t_struct *mystruct, t_cmd *data, int fd_in)
 		}
 		data = data->next;
 	}
-	waitpid(pid, &status, 0);
+	wait_or_not(&status, pid);
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
 	return (exit_status(status));

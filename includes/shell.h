@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/04 14:43:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/23 10:36:54 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/23 13:13:32 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -210,6 +210,8 @@ int					cmd_suivante(t_ins *cpy, int code);
 int                 check_agregateur(int stdcmd, int fd_ref);
 int					ft_close(int fd_out, int fd_err);
 int					exit_status(int status);
+int					wait_or_not(int *status, pid_t pid);
+int					redirection_fd(t_cmd *data);
 /*
 **	PARSING
 */
@@ -241,6 +243,7 @@ int 				search_fd(char *str, int i);
 int 				modifie_fd(t_cmd **lst, char *str, int start);
 int					resize_str_echo(char **str, int start, int len);
 int					check_regex_classic(t_struct *data, char **line);
+int					good_op_next(t_cmd **lst, char *str, int i);
 /*
  **	BUILTINS
  */

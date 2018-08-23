@@ -15,17 +15,14 @@ https://openclassrooms.com/forum/sujet/pipe-et-dup2-comment-faire-23270
 
 A faire:
 
-tous ce aui est 1>&2
+2>&1 (ok) 2>&/dev/null (non ok)
 Quelques pb avec l'env: env PATH=/ ls ne fonctionne pas, mais env PATH=/ affiche 2 path
-pb: ls | $ccccc |||>>> marche pas
 Encore quelques erreur sur le cd
-pb sur replace in line
 heredoc et <
 
 
 VICO:
 
-probleme avec la commande wc | ls
 ls | xargs cat
 ||||>>>>> pb termcaps ?
 

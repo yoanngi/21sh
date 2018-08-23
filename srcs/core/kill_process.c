@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/26 13:22:36 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/20 16:49:22 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/23 14:34:05 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,7 +17,7 @@ int				ft_kill_process(t_cmd *start)
 {
 	while (start)
 	{
-		kill(start->pid, 0);
+		kill(start->pid, SIGTERM);
 		start = start->next;
 	}
 	return (0);

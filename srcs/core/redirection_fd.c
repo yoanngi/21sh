@@ -1,41 +1,30 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_process.c                                     .::    .:/ .      .::   */
+/*   redirection_fd.c                                 .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/06/13 15:38:15 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/23 13:30:51 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/08/23 11:22:16 by yoginet      #+#   ##    ##    #+#       */
+/*   Updated: 2018/08/23 13:01:03 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-/*
-**	Fonction pour une execution simple d'une commande
-**	return : Valeur de retour de la commande
-*/
-
-int				ft_process(t_cmd *data)
+int			redirection_fd(t_cmd *data)
 {
-	pid_t	pid;
-	int		status;
-
-	status = 0;
-	pid = fork();
-	if (pid < 0)
+	printf("%s (pid = %d)\n", __func__, getpid());
+	if (data->stdout_cmd != 1)
 	{
-		ft_error_fork(pid);
-		exit(EXIT_FAILURE);
+		printf("stdout != 1\n");
+		dup2(data->stdout_cmd, 1);
 	}
-	else if (pid == 0)
+	if (data->stderr_cmd != 2)
 	{
-		if (execve(data->rep, data->tab_cmd, data->env) == -1)
-			kill(pid, 0);
+		printf("stderr != 2\n");
+		dup2(data->stderr_cmd, 2);
 	}
-	else
-		waitpid(pid, &status, 0);
-	return (exit_status(status));
+	return (0);
 }

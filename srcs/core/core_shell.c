@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/06 10:11:53 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/22 12:58:22 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/23 14:25:24 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -67,7 +67,7 @@ static int			parse_line(t_struct *data, char **line)
 	}
 	printf("clear\n");
 	data->commandes = clear_ins(data->commandes);
-	printf("end clear\n");
+	printf("end clear (%d)\n", getpid());
 	return (0);
 }
 
