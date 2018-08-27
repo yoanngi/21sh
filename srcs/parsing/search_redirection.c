@@ -6,14 +6,14 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/10 14:27:41 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/27 12:15:47 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/27 14:48:46 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-static char		**insert_option_cmd(char **tab_cmd, char **new_tab,
+static char			**insert_option_cmd(char **tab_cmd, char **new_tab,
 		int len_1, int len_2)
 {
 	char	**new;
@@ -42,7 +42,7 @@ static char		**insert_option_cmd(char **tab_cmd, char **new_tab,
 	return (new);
 }
 
-static int		return_name_suite(t_cmd **lst, char **new, char **tmp,
+static int			return_name_suite(t_cmd **lst, char **new, char **tmp,
 		char **tab_tmp)
 {
 	char **tmp2;
@@ -60,7 +60,7 @@ static int		return_name_suite(t_cmd **lst, char **new, char **tmp,
 	return (0);
 }
 
-static char		*return_name(t_cmd **lst, char *str, int start, int end)
+static char			*return_name(t_cmd **lst, char *str, int start, int end)
 {
 	char	*new;
 	char	*tmp;
@@ -87,34 +87,6 @@ static char		*return_name(t_cmd **lst, char *str, int start, int end)
 	return (new);
 }
 
-static int		check_search_null(t_path **new, char *str, int i, int j)
-{
-	if (str[i] == '|' || str[i] == '<')
-	{
-		*new = ft_init_path();
-		(*new)->name = ft_strsub(str, j, i - j);
-		(*new)->s_or_d = what_is_op(str, j);
-		clear_line(&(*new)->name);
-		return (i);
-	}
-	if (new == NULL)
-	{
-		*new = ft_init_path();
-		(*new)->name = ft_strdup(str);
-		(*new)->s_or_d = what_is_op(str, i);
-		clear_line(&(*new)->name);
-		return (ft_strlen(str));
-	}
-	else if (j < i)
-	{
-		(*new)->next = ft_init_path();
-		*new = (*new)->next;
-		(*new)->name = ft_strsub(str, j, i);
-		(*new)->s_or_d = 0;
-	}
-	return (i);
-}
-
 /*
 **	Fonction appeler par good_tab_cmd
 **	Insert dans une liste chainer toutes les redirections a faire
@@ -123,7 +95,22 @@ static int		check_search_null(t_path **new, char *str, int i, int j)
 **					  |-> i
 */
 
-int				search_redirection(t_cmd **lst, char *str, int i, int j)
+static t_path		*search_suite(t_path **new, t_cmd **lst)
+{
+	if (*new == NULL)
+	{
+		*new = ft_init_path();
+		(*lst)->pathname = *new;
+	}
+	else if ((*new)->name != NULL)
+	{
+		(*new)->next = ft_init_path();
+		*new = (*new)->next;
+	}
+	return (*new);
+}
+
+int					search_redirection(t_cmd **lst, char *str, int i, int j)
 {
 	t_path		*new;
 	int			val;
@@ -134,16 +121,7 @@ int				search_redirection(t_cmd **lst, char *str, int i, int j)
 	{
 		if (str[i] == '>' || str[i + 1] == '\0')
 		{
-			if (new == NULL)
-			{
-				new = ft_init_path();
-				(*lst)->pathname = new;
-			}
-			else if (new->name != NULL)
-			{
-				new->next = ft_init_path();
-				new = new->next;
-			}
+			new = search_suite(&new, lst);
 			new->name = return_name(lst, str, j, i);
 			new->s_or_d = what_is_op(str, i);
 			new->redir_fd = search_fd(str, j - 1);

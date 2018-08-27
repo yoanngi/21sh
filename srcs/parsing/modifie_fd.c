@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/08 15:29:39 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/27 13:13:35 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/27 14:21:29 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,17 +55,27 @@ static int		ft_fd_before(char *str, int i)
 **  Return fd next >&
 */
 
-static int		ft_fd_next(char *str, int i, int *fd_next)
+static int		fd_next_suite(char *str, int i, int add, int *fd_next)
 {
-	int		add;
 	char	*tmp;
 
 	tmp = NULL;
+	while (ft_isalpha(str[i + add]) == 1 || str[i + add] == '/')
+		add++;
+	tmp = ft_strsub(str, i + 1, add);
+	basic_error(tmp, ": ambigous redirect");
+	*fd_next = -1;
+	ft_strdel(&tmp);
+	return (-2);
+}
+
+static int		ft_fd_next(char *str, int i, int *fd_next)
+{
+	int		add;
+
 	add = 1;
 	*fd_next = 1;
-	if (!(str))
-		return (-2);
-	if (i > ft_strlen(str))
+	if (!(str) || i > ft_strlen(str))
 		return (-2);
 	if (str[i + 1] == '-')
 	{
@@ -77,15 +87,7 @@ static int		ft_fd_next(char *str, int i, int *fd_next)
 	if (ft_isdigit(str[i + add]) == 1)
 		*fd_next = ft_atoi(str + (i + add));
 	else if (ft_isalpha(str[i + add] == 1) || str[i + add] == '/')
-	{
-		while (ft_isalpha(str[i + add]) == 1 || str[i + add] == '/')
-			add++;
-		tmp = ft_strsub(str, i + 1, add);
-		basic_error(tmp, ": ambigous redirect");
-		*fd_next = -1;
-		ft_strdel(&tmp);
-		return (-2);
-	}
+		return (fd_next_suite(str, i, add, fd_next));
 	if (valid_fd(*fd_next) == -1)
 		return (-2);
 	return (add);
@@ -117,12 +119,9 @@ int				modifie_fd(t_cmd **lst, char *str, int start)
 		(*lst)->stdout_cmd = -1;
 		return (ft_strlen(str));
 	}
-	else
-	{
-		if (fd_before == 1)
-			(*lst)->stdout_cmd = fd_next;
-		else if (fd_before == 2)
-			(*lst)->stderr_cmd = fd_next;
-	}
+	if (fd_before == 1)
+		(*lst)->stdout_cmd = fd_next;
+	else if (fd_before == 2)
+		(*lst)->stderr_cmd = fd_next;
 	return (len_next);
 }

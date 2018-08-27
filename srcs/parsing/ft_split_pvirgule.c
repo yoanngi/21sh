@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/14 14:38:25 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/23 11:07:46 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/27 15:26:49 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -79,13 +79,11 @@ static int		ft_split_pvir_suite(char **line, int i, t_ins **lst)
 	return (-1);
 }
 
-t_ins			*ft_split_pvirgule(char *line, t_ins *lst, int i)
+t_ins			*ft_split_pvirgule(char *line, t_ins *lst, int i, int quote)
 {
 	t_ins	*start;
-	int		quote;
 	char	*tmp;
 
-	quote = 0;
 	tmp = NULL;
 	start = lst;
 	if (ft_check_vir(&lst, line) == 0)
@@ -103,6 +101,8 @@ t_ins			*ft_split_pvirgule(char *line, t_ins *lst, int i)
 			i = ft_split_pvir_suite(&tmp, i, &lst);
 		i++;
 	}
+	ft_split_pvir_suite(&tmp, i, &lst);
 	ft_strdel(&tmp);
-	return (start);
+	lst = start;
+	return (lst);
 }

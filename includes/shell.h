@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/04 14:43:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/27 13:26:50 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/27 16:33:48 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -214,7 +214,7 @@ int					redirection_fd(t_cmd *data);
 **	PARSING
 */
 t_ins				*ft_split_commandes(char **line, t_struct *data);
-t_ins				*ft_split_pvirgule(char *line, t_ins *lst, int i);
+t_ins				*ft_split_pvirgule(char *line, t_ins *lst, int i, int quote);
 t_cmd				*ft_split_cmd(char *str, t_struct *data);
 int					clear_line(char **line);
 char				*clean_before(char *str);
@@ -243,6 +243,7 @@ int					resize_str_echo(char **str, int start, int len);
 int					check_regex_classic(t_struct *data, char **line);
 int					good_op_next(t_cmd **lst, char *str, int i);
 void				verifie_op(t_cmd **lst, char *str, int i);
+int					check_search_null(t_path **lst, char *str, int i, int j);
 /*
  **	BUILTINS
  */
@@ -250,13 +251,18 @@ int					ft_search_func(t_struct *mystruct, t_cmd *lst, int i);
 int					func_exit(t_struct *data, t_cmd *lst);
 int					func_env(t_struct *data, t_cmd *lst);
 int					execute_with_env(t_struct **data, t_cmd *lst, int i, int opt);
+int					ft_is_func(t_struct *data, char *str, int hash);
 int					execute_var_modif(t_struct *data, t_cmd **lst, int i, int opt);
 int					func_echo(t_struct *data, t_cmd *lst);
 int					func_cd(t_struct *data, t_cmd *lst);
+int					func_history(t_struct *data, t_cmd *lst);
 int					func_setenv(t_struct **data, t_cmd *lst);
 int					modifie_env(t_struct **data, t_cmd *lst, int i);
 int					check_if_path_modif(t_struct **data, t_cmd *lst);
 int					func_unsetenv(t_struct **data, t_cmd *lst);
+char				**malloc_for_env(t_struct **data, t_cmd **lst, int i, int opt);
+char				**malloc_for_env_deux(t_struct **data, t_cmd **lst, int i);
+int					malloc_for_env_suite(char ***str, t_struct *data, t_cmd *lst, int i);
 /*
  **	INIT
  */

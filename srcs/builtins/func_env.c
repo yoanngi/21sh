@@ -6,74 +6,12 @@
 /*   By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/15 13:22:16 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/27 13:26:08 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/27 15:50:21 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
-
-/*
-**	Check si str et hash son valide
-*/
-
-static int		ft_is_func(t_struct *data, char *str, int hash)
-{
-	char		*tmp;
-
-	tmp = NULL;
-	if (!(data->tab_hash) || hash == 0)
-		return (1);
-	if (data->tab_hash[hash] != 0)
-	{
-		tmp = ft_search_path(str, data);
-		if (tmp == NULL)
-		{
-			ft_strdel(&tmp);
-			return (1);
-		}
-		ft_strdel(&tmp);
-		return (0);
-	}
-	return (1);
-}
-
-/*
-**	Execute commande
-*/
-
-int				execute_with_env(t_struct **data, t_cmd *lst, int i, int opt)
-{
-	char		**new;
-	int			cpy;
-	int			j;
-
-	new = NULL;
-	cpy = i;
-	j = 0;
-	while (lst->tab_cmd[cpy])
-		cpy++;
-	if (!(new = (char **)malloc(sizeof(char *) * (cpy - i + 1))))
-		return (1);
-	while (lst->tab_cmd[i])
-	{
-		new[j] = ft_strdup(lst->tab_cmd[i]);
-		i++;
-		j++;
-	}
-	new[j] = NULL;
-	lst->tab_cmd = ft_del_tab(lst->tab_cmd);
-	lst->tab_cmd = ft_duplicate_tab(new);
-	new = ft_del_tab(new);
-	ft_strdel(&lst->rep);
-	chose_rep(*data, &lst, 1);
-	if (opt == 1)
-		lst->env = ft_del_tab(lst->env);
-	if (ft_check_arg_invalid(*data, lst) == 1)
-		return ((*data)->code_erreur);
-	j = ft_process(lst);
-	return (j);
-}
 
 /*
 **	Print env ou execute commande avec env modifier
@@ -122,15 +60,9 @@ static int		func_env_suite(t_struct **data, t_cmd *lst, int i, int opt)
 	{
 		hash = ft_calcul_hash(lst->tab_cmd[i], (*data)->sizemax);
 		if (ft_is_func(*data, lst->tab_cmd[i], hash) == 0)
-		{
-			ret = execute_with_env(data, lst, i, opt);
-			return (ret);
-		}
+			return (execute_with_env(data, lst, i, opt));
 		if (ft_strstr(lst->tab_cmd[i], "=") != NULL)
-		{
-			ret = print_env(*data, lst, i, opt);
-			return (ret);
-		}
+			return (print_env(*data, lst, i, opt));
 		else
 		{
 			ft_error_dir("env: ", lst->tab_cmd[i], lst->stderr_cmd);
@@ -144,6 +76,19 @@ static int		func_env_suite(t_struct **data, t_cmd *lst, int i, int opt)
 /*
 **	Core env
 */
+
+static int		suite_func_env(char *str, int *i)
+{
+	int		option_i;
+
+	option_i = 0;
+	if (ft_strcmp(str, "-i") == 0)
+	{
+		option_i = 1;
+		*i = *i + 1;
+	}
+	return (option_i);
+}
 
 int				func_env(t_struct *data, t_cmd *lst)
 {
@@ -168,11 +113,7 @@ int				func_env(t_struct *data, t_cmd *lst)
 		else
 			i++;
 	}
-	if (ft_strcmp(lst->tab_cmd[i], "-i") == 0)
-	{
-		option_i = 1;
-		i++;
-	}
+	option_i = suite_func_env(lst->tab_cmd[i], &i);
 	ret = func_env_suite(&data, lst, i, option_i);
 	return (ret);
 }

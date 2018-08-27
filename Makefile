@@ -6,7 +6,7 @@
 #    By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/11/24 10:04:43 by yoginet      #+#   ##    ##    #+#        #
-#    Updated: 2018/08/23 14:42:27 by yoginet     ###    #+. /#+    ###.fr      #
+#    Updated: 2018/08/27 16:30:25 by yoginet     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -92,10 +92,13 @@ N_SRCS = 	main.c\
 			builtins/func_echo.c\
 			builtins/func_env.c\
 			builtins/func_env_suite.c\
+			builtins/func_env_suite_deux.c\
+			builtins/malloc_for_env.c\
 			builtins/func_setenv.c\
 			builtins/func_setenv_suite.c\
 			builtins/func_unsetenv.c\
 			builtins/func_exit.c\
+			builtins/func_history.c\
 			parsing/ft_split_commandes.c\
 			parsing/ft_split_pvirgule.c\
 			parsing/ft_split_cmd.c\
@@ -114,6 +117,7 @@ N_SRCS = 	main.c\
 			parsing/insert_cmd_simple.c\
 			parsing/good_tab_cmd.c\
 			parsing/search_redirection.c\
+			parsing/search_redirection_suite.c\
 			parsing/search_redirection_fd.c\
 			parsing/check_validity.c\
 			parsing/print_msg_error.c\

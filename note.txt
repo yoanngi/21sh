@@ -16,6 +16,7 @@ https://openclassrooms.com/forum/sujet/pipe-et-dup2-comment-faire-23270
 A faire:
 
 Encore quelques erreur sur le cd
+segfault env -i PATH=/ ls   >>> Segfault
 heredoc et <
 
 

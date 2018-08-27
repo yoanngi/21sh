@@ -6,7 +6,7 @@
 /*   By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/15 11:20:03 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/28 10:29:32 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/27 16:00:43 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,5 +34,7 @@ int		ft_search_func(t_struct *mystruct, t_cmd *lst, int i)
 		ret = func_env(mystruct, lst);
 	else if (i == 5)
 		ret = func_exit(mystruct, lst);
+	else if (i == 6)
+		ret = func_history(mystruct, lst);
 	return (ret);
 }

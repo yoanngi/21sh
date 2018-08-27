@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/08 15:29:39 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/27 12:50:23 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/27 14:42:50 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,6 +35,21 @@ int				what_is_op(char *str, int i)
 **	insert la commande a executer et search les redirections a faire
 */
 
+static int		what_return(t_cmd **lst, char *str, int i)
+{
+	int		ret;
+
+	ret = 0;
+	if ((*lst)->op_next == 2 || (*lst)->op_next == 3)
+		ret = search_redirection(lst, str, i, i);
+	else if ((*lst)->op_next == 9)
+	{
+		ret = search_redirection(lst, str, i - 1, i - 1);
+		(*lst)->op_next = 0;
+	}
+	return (ret);
+}
+
 int				good_tab_cmd(t_struct *data, t_cmd **lst, char *str, int i)
 {
 	char		*tmp;
@@ -54,18 +69,9 @@ int				good_tab_cmd(t_struct *data, t_cmd **lst, char *str, int i)
 		tmp = ft_strsub(str, start, i - 3);
 	else
 		tmp = ft_strsub(str, start, i - 1);
-	// a delete
-	printf("%s\n", __func__);
-	printf("tmp == |%s|\n", tmp);
 	insert_cmd_simple(data, lst, tmp);
 	ret = ft_strlen(tmp);
 	ft_strdel(&tmp);
-	if ((*lst)->op_next == 2 || (*lst)->op_next == 3)
-		ret = search_redirection(lst, str, i, i);
-	else if ((*lst)->op_next == 9)
-	{
-		ret = search_redirection(lst, str, i - 1, i - 1);
-		(*lst)->op_next = 0;
-	}
+	ret = what_return(lst, str, i);
 	return (ret);
 }

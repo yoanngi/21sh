@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/17 10:26:53 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/11 13:48:00 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/27 14:14:13 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -104,13 +104,14 @@ int				ft_nefaitrien(char **line)
 {
 	if (ft_check_start_line(*line) == 1)
 		return (1);
-	else if (ft_strstr(*line, "\"") == NULL &&
+	if (ft_strstr(*line, "\"") == NULL &&
 	(ft_strstr(*line, ";;") || ft_strstr(*line, "><")))
 	{
 		print_msg_error(*line, 2);
 		return (1);
 	}
-	else if (check_end_line(*line) == 1)
+	clear_line(line);
+	if (check_end_line(*line) == 1)
 		return (1);
 	else if (check_regex_invalid(*line, 0) == 1)
 		return (1);
