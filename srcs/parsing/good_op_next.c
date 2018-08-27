@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/23 13:01:15 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/23 16:26:08 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/27 12:13:42 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,8 +29,10 @@ int					good_op_next(t_cmd **lst, char *str, int i)
 		return (1);
 	if (str[i] == '|' && (str[i + 1] != '|' && str[i + 1] != '\0'))
 		(*lst)->op_next = 1;
-	else if (str[i] == '>' && str[i + 1] != '>')
+	else if (str[i] == '>' && str[i + 1] != '>' && str[i + 1] != '&')
 		(*lst)->op_next = 2;
+	else if (str[i] == '>' && str[i + 1] == '&')
+		(*lst)->op_next = 9;
 	else if (str[i] == '>' && str[i + 1] == '>')
 		(*lst)->op_next = 3;
 	else if (str[i] == '<' && str[i + 1] != '<')
@@ -52,8 +54,6 @@ void				verifie_op(t_cmd **lst, char *str, int i)
 	if ((*lst)->op_next == 2 || (*lst)->op_next == 3)
 	{
 		if (str[i] == '|')
-		{
 			(*lst)->op_next = 1;
-		}
 	}
 }

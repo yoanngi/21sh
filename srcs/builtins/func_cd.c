@@ -6,7 +6,7 @@
 /*   By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/15 13:21:57 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/23 10:57:19 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/27 13:37:08 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -130,5 +130,7 @@ int				func_cd(t_struct *data, t_cmd *lst)
 		pwd_replace(data, lst);
 	else
 		change_directory(data, lst, NULL);
+	ft_strdel(&data->pwd);
+	data->pwd = ft_return_pwd();
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/06 10:11:53 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/23 14:49:31 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/27 13:34:16 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -101,11 +101,6 @@ void				core_shell(t_struct *data)
 				full_line = str_append(full_line, g_info.line);
 				ft_strdel(&(g_info.line));
 				default_term_mode(&g_info);
-				// A DETETE **********************************************************
-				ft_putstr_fd(GREEN, 2);
-				printf("********************************************* LINE = |%s|***\n", full_line);
-				ft_putstr_fd(RESET, 2);
-				// *******************************************************************
 				quit = parse_line(data, &(full_line));
 				ft_strdel(&full_line);
 			}

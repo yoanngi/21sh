@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/08 15:29:39 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/23 11:31:21 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/27 13:13:35 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,24 +55,40 @@ static int		ft_fd_before(char *str, int i)
 **  Return fd next >&
 */
 
-static int		ft_fd_next(char *str, int i)
+static int		ft_fd_next(char *str, int i, int *fd_next)
 {
-	int		fd_next;
+	int		add;
+	char	*tmp;
 
-	fd_next = 1;
+	tmp = NULL;
+	add = 1;
+	*fd_next = 1;
 	if (!(str))
 		return (-2);
 	if (i > ft_strlen(str))
 		return (-2);
 	if (str[i + 1] == '-')
-		return (-1);
-	if (ft_isdigit(str[i + 1]) == 1)
 	{
-		fd_next = ft_atoi(str + (i + 1));
+		*fd_next = open("/dev/null", O_RDWR);
+		return (1);
 	}
-	if (valid_fd(fd_next) == -1)
+	if (str[i + 1] == ' ' || str[i + 1] == '\t')
+		add++;
+	if (ft_isdigit(str[i + add]) == 1)
+		*fd_next = ft_atoi(str + (i + add));
+	else if (ft_isalpha(str[i + add] == 1) || str[i + add] == '/')
+	{
+		while (ft_isalpha(str[i + add]) == 1 || str[i + add] == '/')
+			add++;
+		tmp = ft_strsub(str, i + 1, add);
+		basic_error(tmp, ": ambigous redirect");
+		*fd_next = -1;
+		ft_strdel(&tmp);
 		return (-2);
-	return (fd_next);
+	}
+	if (valid_fd(*fd_next) == -1)
+		return (-2);
+	return (add);
 }
 
 /*
@@ -93,11 +109,14 @@ int				modifie_fd(t_cmd **lst, char *str, int start)
 	if (str[start] != '&')
 		return (0);
 	fd_before = ft_fd_before(str, start);
-	fd_next = ft_fd_next(str, start);
-	if (fd_before == fd_next)
+	len_next = ft_fd_next(str, start, &fd_next);
+	if (fd_before == fd_next && fd_before > 0 && fd_next > 0)
 		return (len_next);
-	if (fd_before == -1 || fd_next == -2)
+	if (fd_before == -1 || fd_next == -2 || len_next == -2)
+	{
+		(*lst)->stdout_cmd = -1;
 		return (ft_strlen(str));
+	}
 	else
 	{
 		if (fd_before == 1)

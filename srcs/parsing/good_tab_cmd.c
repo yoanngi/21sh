@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/08 15:29:39 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/23 16:23:08 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/27 12:50:23 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,16 +46,26 @@ int				good_tab_cmd(t_struct *data, t_cmd **lst, char *str, int i)
 	start = 0;
 	if (str == NULL)
 		return (0);
-	if (i == ft_strlen(str) - 1 || i > ft_strlen(str))
+	if ((i == ft_strlen(str) - 1 || i > ft_strlen(str)) && (*lst)->op_next != 9)
 		tmp = ft_strdup(str);
-	else if (str[i] == '>' && ft_isdigit(str[i - 1] == 0))
+	else if (str[i - 1] == '>' && ft_isdigit(str[i - 2]))
+		tmp = ft_strsub(str, start, i - 3);
+	else if ((*lst)->op_next == 9)
 		tmp = ft_strsub(str, start, i - 3);
 	else
 		tmp = ft_strsub(str, start, i - 1);
+	// a delete
+	printf("%s\n", __func__);
+	printf("tmp == |%s|\n", tmp);
 	insert_cmd_simple(data, lst, tmp);
 	ret = ft_strlen(tmp);
 	ft_strdel(&tmp);
 	if ((*lst)->op_next == 2 || (*lst)->op_next == 3)
 		ret = search_redirection(lst, str, i, i);
+	else if ((*lst)->op_next == 9)
+	{
+		ret = search_redirection(lst, str, i - 1, i - 1);
+		(*lst)->op_next = 0;
+	}
 	return (ret);
 }

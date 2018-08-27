@@ -6,7 +6,7 @@
 /*   By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/15 13:22:16 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/21 13:50:08 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/27 13:26:08 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -96,7 +96,7 @@ static int		print_env(t_struct *data, t_cmd *lst, int i, int opt)
 		j++;
 	}
 	if (opt == 0)
-		ft_print_tab(data->env);
+		ft_print_tab_spe(data->env, lst->tab_cmd, i);
 	while (lst->tab_cmd[i])
 	{
 		ft_putendl(lst->tab_cmd[i]);

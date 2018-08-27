@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/20 11:13:22 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/23 11:13:02 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/27 13:08:52 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,6 +22,8 @@ static int		check_bad_fd(t_cmd *lst)
 	if (lst == NULL)
 		return (0);
 	if (lst->bad_fd == 1)
+		return (1);
+	if (lst->stdout_cmd == -1 || lst->stderr_cmd == -1)
 		return (1);
 	return (0);
 }

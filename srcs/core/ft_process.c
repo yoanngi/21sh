@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/13 15:38:15 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/23 13:30:51 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/27 12:53:35 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,10 +32,14 @@ int				ft_process(t_cmd *data)
 	}
 	else if (pid == 0)
 	{
+		redirection_fd(data);
 		if (execve(data->rep, data->tab_cmd, data->env) == -1)
-			kill(pid, 0);
+			kill(data->pid, SIGTERM);
 	}
 	else
+	{
+		data->pid = pid;
 		waitpid(pid, &status, 0);
+	}
 	return (exit_status(status));
 }
