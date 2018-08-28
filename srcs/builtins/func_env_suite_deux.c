@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/27 15:31:53 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/27 15:50:57 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/28 11:17:44 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,7 +22,7 @@ int				ft_is_func(t_struct *data, char *str, int hash)
 	char	*tmp;
 
 	tmp = NULL;
-	if (!(data->tab_hash) || hash == 0)
+	if (!(data->tab_hash) || hash == 0 || !(str))
 		return (1);
 	if (data->tab_hash[hash] != 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/15 11:20:03 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/27 16:00:43 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/28 10:43:31 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,7 +31,7 @@ int		ft_search_func(t_struct *mystruct, t_cmd *lst, int i)
 	else if (i == 3)
 		ret = func_unsetenv(&mystruct, lst);
 	else if (i == 4)
-		ret = func_env(mystruct, lst);
+		ret = func_env(mystruct, &lst);
 	else if (i == 5)
 		ret = func_exit(mystruct, lst);
 	else if (i == 6)

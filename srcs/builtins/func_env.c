@@ -6,7 +6,7 @@
 /*   By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/15 13:22:16 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/27 15:50:21 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/28 11:18:49 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -82,6 +82,8 @@ static int		suite_func_env(char *str, int *i)
 	int		option_i;
 
 	option_i = 0;
+	if (str == NULL)
+		return (option_i);
 	if (ft_strcmp(str, "-i") == 0)
 	{
 		option_i = 1;
@@ -90,7 +92,7 @@ static int		suite_func_env(char *str, int *i)
 	return (option_i);
 }
 
-int				func_env(t_struct *data, t_cmd *lst)
+int				func_env(t_struct *data, t_cmd **lst)
 {
 	int		i;
 	int		ret;
@@ -103,17 +105,18 @@ int				func_env(t_struct *data, t_cmd *lst)
 	exit = 0;
 	while (exit == 0)
 	{
-		if (lst->tab_cmd[i] == NULL)
+		if ((*lst)->tab_cmd[i] == NULL)
 		{
 			ft_print_tab(data->env);
 			return (0);
 		}
-		else if (ft_strcmp(lst->tab_cmd[i], "env") != 0)
+		else if (ft_strcmp((*lst)->tab_cmd[i], "env") != 0)
 			exit = 1;
 		else
 			i++;
 	}
-	option_i = suite_func_env(lst->tab_cmd[i], &i);
-	ret = func_env_suite(&data, lst, i, option_i);
+	if ((option_i = suite_func_env((*lst)->tab_cmd[i], &i)) == 1)
+		(*lst)->env = ft_del_tab((*lst)->env);
+	ret = func_env_suite(&data, *lst, i, option_i);
 	return (ret);
 }

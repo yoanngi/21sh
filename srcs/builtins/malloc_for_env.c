@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/27 16:26:33 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/27 16:30:29 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/28 11:15:55 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -60,6 +60,6 @@ char			**malloc_for_env(t_struct **data, t_cmd **lst, int i, int opt)
 		i++;
 		x++;
 	}
-	new[len - 1] = NULL;
+	new[x] = NULL;
 	return (new);
 }

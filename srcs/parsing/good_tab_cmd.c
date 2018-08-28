@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/08 15:29:39 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/27 14:42:50 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/28 14:13:06 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,16 +35,18 @@ int				what_is_op(char *str, int i)
 **	insert la commande a executer et search les redirections a faire
 */
 
-static int		what_return(t_cmd **lst, char *str, int i)
+static int		what_return(t_cmd **lst, char *str, int i, int ret)
 {
-	int		ret;
-
-	ret = 0;
 	if ((*lst)->op_next == 2 || (*lst)->op_next == 3)
 		ret = search_redirection(lst, str, i, i);
 	else if ((*lst)->op_next == 9)
 	{
 		ret = search_redirection(lst, str, i - 1, i - 1);
+		(*lst)->op_next = 0;
+	}
+	else if ((*lst)->op_next == 4 || (*lst)->op_next == 5)
+	{
+		ret += search_heredoc(lst, str, i, i);
 		(*lst)->op_next = 0;
 	}
 	return (ret);
@@ -61,6 +63,8 @@ int				good_tab_cmd(t_struct *data, t_cmd **lst, char *str, int i)
 	start = 0;
 	if (str == NULL)
 		return (0);
+	if ((*lst)->op_next != 1 && (*lst)->op_next != 2 && (*lst)->op_next != 4)
+		i--;
 	if ((i == ft_strlen(str) - 1 || i > ft_strlen(str)) && (*lst)->op_next != 9)
 		tmp = ft_strdup(str);
 	else if (str[i - 1] == '>' && ft_isdigit(str[i - 2]))
@@ -72,6 +76,6 @@ int				good_tab_cmd(t_struct *data, t_cmd **lst, char *str, int i)
 	insert_cmd_simple(data, lst, tmp);
 	ret = ft_strlen(tmp);
 	ft_strdel(&tmp);
-	ret = what_return(lst, str, i);
+	ret = what_return(lst, str, i, ret);
 	return (ret);
 }

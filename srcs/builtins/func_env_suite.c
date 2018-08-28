@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/25 13:36:26 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/27 16:45:52 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/28 11:17:46 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,6 +24,8 @@ static int	ft_existe_in_env(char *str, char **env, int mode)
 
 	i = 0;
 	len = 0;
+	if (!(str) || !(env))
+		return (1);
 	while (str[len] && str[len] != '=')
 		len++;
 	if (mode == 0)
@@ -43,12 +45,18 @@ static int	ft_existe_in_env(char *str, char **env, int mode)
 	return (1);
 }
 
-static int	return_i_env(t_cmd *lst, int i)
+static int	return_i_env(t_cmd *lst)
 {
+	int		i;
+
 	i = 0;
 	while (lst->tab_cmd[i] && (ft_strcmp(lst->tab_cmd[i], "env") == 0 ||
 	ft_strcmp(lst->tab_cmd[i], "-i") == 0))
+	{
+		if (lst->tab_cmd[i] == NULL)
+			return (i);
 		i++;
+	}
 	return (i);
 }
 
@@ -57,6 +65,8 @@ static int	cpy_env(t_struct *data, char ***str)
 	int		j;
 
 	j = 0;
+	if (!(data->env) || !(*str))
+		return (-1);
 	while (data->env[j])
 	{
 		if (!((*str)[j] = ft_strdup(data->env[j])))
@@ -74,7 +84,7 @@ int			malloc_for_env_suite(char ***str, t_struct *data, t_cmd *lst, int i)
 	ret = 0;
 	if ((j = cpy_env(data, str)) == -1)
 		return (1);
-	i = return_i_env(lst, i);
+	i = return_i_env(lst);
 	while (lst->tab_cmd[i] && ft_strstr(lst->tab_cmd[i], "=") != NULL)
 	{
 		if ((ret = ft_existe_in_env(lst->tab_cmd[i], data->env, 1)) != 0)
@@ -90,8 +100,6 @@ int			malloc_for_env_suite(char ***str, t_struct *data, t_cmd *lst, int i)
 		}
 		i++;
 		j++;
-		if (lst->tab_cmd[i] == NULL)
-			return (0);
 	}
 	return (0);
 }
@@ -113,11 +121,13 @@ int			execute_var_modif(t_struct *data, t_cmd **lst, int i, int opt)
 			j++;
 		i++;
 	}
-	new = malloc_for_env(&data, lst, j, opt);
-	if (new == NULL)
+	if (!(new = malloc_for_env(&data, lst, j, opt)))
 		return (1);
-	(*lst)->env = ft_del_tab((*lst)->env);
-	(*lst)->env = ft_duplicate_tab(new);
+	if (new != NULL)
+	{
+		(*lst)->env = ft_del_tab((*lst)->env);
+		(*lst)->env = ft_duplicate_tab(new);
+	}
 	new = ft_del_tab(new);
 	ret = execute_with_env(&data, *lst, i, 0);
 	return (ret);

@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/19 11:08:13 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/27 14:48:55 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/28 14:13:22 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,7 +16,7 @@
 static int			check_split(t_struct *data, t_cmd **new, char *str)
 {
 	if (ft_strstr(str, ">") == NULL && ft_strstr(str, "|") == NULL
-	&& ft_strstr(str, "&") == NULL)
+	&& ft_strstr(str, ">&") == NULL && ft_strstr(str, "<") == NULL)
 	{
 		insert_cmd_simple(data, new, str);
 		return (1);

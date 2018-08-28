@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/28 12:57:46 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/21 15:28:51 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/28 14:11:26 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,6 +43,16 @@ void		print_debug(t_cmd **data, int code)
 			while (start->tab_cmd[i])
 			{
 				printf("\ttab_cmd[%d] = |%s|\n", i, start->tab_cmd[i]);
+				i++;
+			}
+		}
+		i = 0;
+		printf("HEREDOC:\n");
+		if (start->heredoc != NULL)
+		{
+			while (start->heredoc[i])
+			{
+				printf("\theredoc[%d] = |%s|\n", i, start->heredoc[i]);
 				i++;
 			}
 		}

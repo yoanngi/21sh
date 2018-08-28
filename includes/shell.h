@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/04 14:43:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/27 16:33:48 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/28 13:19:30 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -111,6 +111,7 @@ typedef struct		s_cmd
 {
 	char			**env;
 	char			**tab_cmd;
+	char			**heredoc;
 	char			*rep;
 	int				op_next;
 	int				stdin_cmd;
@@ -233,6 +234,7 @@ int					insert_cmd_simple(t_struct *data, t_cmd **lst, char *str);
 int					good_tab_cmd(t_struct *data, t_cmd **lst, char *str, int i);
 int					what_is_op(char *str, int i);
 int					search_redirection(t_cmd **lst, char *str, int i, int j);
+int					search_heredoc(t_cmd **lst, char *str, int i, int j);
 int					check_validity(t_cmd **lst, t_struct *data);
 int					check_link(t_cmd *lst);
 void				print_msg_error(char *str, int i);
@@ -249,7 +251,7 @@ int					check_search_null(t_path **lst, char *str, int i, int j);
  */
 int					ft_search_func(t_struct *mystruct, t_cmd *lst, int i);
 int					func_exit(t_struct *data, t_cmd *lst);
-int					func_env(t_struct *data, t_cmd *lst);
+int					func_env(t_struct *data, t_cmd **lst);
 int					execute_with_env(t_struct **data, t_cmd *lst, int i, int opt);
 int					ft_is_func(t_struct *data, char *str, int hash);
 int					execute_var_modif(t_struct *data, t_cmd **lst, int i, int opt);

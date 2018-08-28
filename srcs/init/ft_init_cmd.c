@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/14 15:37:03 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/10 15:07:04 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/28 13:20:12 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,6 +24,7 @@ t_cmd			*ft_init_cmd(void)
 	new->rep = NULL;
 	new->tab_cmd = NULL;
 	new->pathname = NULL;
+	new->heredoc = NULL;
 	new->op_next = 0;
 	new->stdin_cmd = 0;
 	new->stdout_cmd = 1;
@@ -48,6 +49,7 @@ t_cmd			*clear_cmd(t_cmd *start)
 	{
 		ft_strdel(&clear->rep);
 		clear->tab_cmd = ft_del_tab(clear->tab_cmd);
+		clear->heredoc = ft_del_tab(clear->heredoc);
 		clear_pathname(&clear->pathname);
 		clear->env = ft_del_tab(clear->env);
 		cpy = clear;
