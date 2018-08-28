@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/08 15:29:39 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/28 14:13:06 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/28 15:03:19 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -47,7 +47,6 @@ static int		what_return(t_cmd **lst, char *str, int i, int ret)
 	else if ((*lst)->op_next == 4 || (*lst)->op_next == 5)
 	{
 		ret += search_heredoc(lst, str, i, i);
-		(*lst)->op_next = 0;
 	}
 	return (ret);
 }

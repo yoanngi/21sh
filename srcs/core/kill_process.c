@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/26 13:22:36 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/28 13:29:11 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/28 16:11:44 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,5 +24,6 @@ int				ft_kill_process(t_cmd *start)
 			close(start->stderr_cmd);
 		start = start->next;
 	}
+	fork_heredoc(NULL, 1);
 	return (0);
 }

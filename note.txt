@@ -16,8 +16,8 @@ https://openclassrooms.com/forum/sujet/pipe-et-dup2-comment-faire-23270
 A faire:
 
 Encore quelques erreur sur le cd
-env | grep PATH
-heredoc et <
+reste gestion du heredoc et <
+parsing dans un tableau normalement ok
 
 
 VICO:

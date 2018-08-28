@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/26 12:06:01 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/27 14:11:05 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/28 16:17:02 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,6 +35,12 @@ int			ft_check_line_vide(char *str, t_struct **data)
 	{
 		(*data)->code_erreur = 258;
 		ft_putstr_fd("21sh: syntax error near unexpected token `;'\n", 2);
+		return (0);
+	}
+	if (ft_strlen(str) == 1 && str[0] == '.')
+	{
+		(*data)->code_erreur = 2;
+		ft_putstr_fd("21sh: .: filename argument required\n", 2);
 		return (0);
 	}
 	if (ft_strstr(str, "\"") == NULL && ft_strstr(str, "\'") == NULL)

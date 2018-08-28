@@ -6,7 +6,7 @@
 #    By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/11/24 10:04:43 by yoginet      #+#   ##    ##    #+#        #
-#    Updated: 2018/08/28 11:38:03 by yoginet     ###    #+. /#+    ###.fr      #
+#    Updated: 2018/08/28 14:49:55 by yoginet     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -43,6 +43,7 @@ N_SRCS = 	main.c\
 			core/exit_status.c\
 			core/wait_or_not.c\
 			core/redirection_fd.c\
+			core/heredoc.c\
 			init/ft_check_infos.c\
 			init/ft_delete_struct.c\
 			init/ft_init_builtins.c\
