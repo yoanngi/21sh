@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/28 11:34:39 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/28 14:14:50 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/30 10:03:01 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -76,8 +76,6 @@ int			search_heredoc(t_cmd **lst, char *str, int i, int j)
 	char	*tmp;
 
 	tmp = NULL;
-	// a delete
-	printf("HEREDOC\n");
 	if (!lst || !str)
 		return (-1);
 	if ((*lst)->op_next == 4)

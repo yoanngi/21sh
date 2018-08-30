@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/14 15:37:03 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/28 13:20:12 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/30 13:01:48 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,6 +31,7 @@ t_cmd			*ft_init_cmd(void)
 	new->stderr_cmd = 2;
 	new->bad_fd = 0;
 	new->pid = 0;
+	new->pipe = 0;
 	new->env = NULL;
 	new->next = NULL;
 	return (new);

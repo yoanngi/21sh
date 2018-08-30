@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/04 14:43:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/28 16:12:29 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/30 13:04:35 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -118,6 +118,7 @@ typedef struct		s_cmd
 	int				stdout_cmd;
 	int				stderr_cmd;
 	int				pid;
+	long			pipe;
     int             bad_fd;
 	struct s_path	*pathname;
 	struct s_cmd	*next;
@@ -207,10 +208,10 @@ int					ft_check_arg_invalid(t_struct *data, t_cmd *cmd);
 int                 fork_redirection(t_cmd *lst);
 int                 fork_heredoc(t_cmd *lst, int code);
 int                 exec_redirection(t_path *file);
-int					ft_kill_process(t_cmd *start);
+int					ft_kill_process(t_cmd *start, int pid);
 int					cmd_suivante(t_ins *cpy, int code);
 int					exit_status(int status);
-int					wait_or_not(int *status, pid_t pid);
+int					wait_or_not(int *status, pid_t pid, t_cmd *start);
 int					redirection_fd(t_cmd *data);
 int					delete_tmp(char **file);
 /*

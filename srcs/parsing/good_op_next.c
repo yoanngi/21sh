@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/23 13:01:15 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/28 15:00:48 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/30 10:37:41 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,7 +31,7 @@ int					good_op_next(t_cmd **lst, char *str, int i)
 		(*lst)->op_next = 1;
 	else if (str[i] == '>' && str[i + 1] != '>' && str[i + 1] != '&')
 		(*lst)->op_next = 2;
-	else if (str[i] == '>' && str[i + 1] == '&')
+	else if ((str[i] == '>' || str[i] == '<') && str[i + 1] == '&')
 		(*lst)->op_next = 9;
 	else if (str[i] == '>' && str[i + 1] == '>')
 		(*lst)->op_next = 3;

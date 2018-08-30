@@ -6,18 +6,19 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/26 13:22:36 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/28 16:11:44 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/30 10:27:17 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-int				ft_kill_process(t_cmd *start)
+int				ft_kill_process(t_cmd *start, int pid)
 {
 	while (start)
 	{
-		kill(start->pid, SIGTERM);
+		if (start->pid != pid && start->pid != 0)
+			kill(start->pid, SIGTERM);
 		if (start->stdout_cmd != 1 && start->stdout_cmd != 2)
 			close(start->stdout_cmd);
 		if (start->stderr_cmd != 2 && start->stdout_cmd != 1)

@@ -19,11 +19,17 @@ Encore quelques erreur sur le cd
 reste gestion du heredoc et <
 parsing dans un tableau normalement ok
 
+ls ; unsetenv PATH ; ls
+
+echo $OLDPWD $PWD ; cd /; echo $OLDPWD $PWD
+modifier les dollars apres les ;
+
 
 VICO:
 
 ls | xargs cat
-||||>>>>> pb termcaps ?
+cat 21sh
+||||>>>>> pb termcaps ? >> voir avec kevin
 
 env TERM=pouet ./21sh
 Print msg error a mettre
