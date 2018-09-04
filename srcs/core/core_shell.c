@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/06 10:11:53 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/28 12:45:18 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/04 15:39:01 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -67,6 +67,8 @@ static int			parse_line(t_struct *data, char **line)
 		cpy = what_next_link(cpy, data->code_erreur);
 	}
 	data->commandes = clear_ins(data->commandes);
+	if (*line != NULL)
+		parse_line(data, line);
 	return (0);
 }
 

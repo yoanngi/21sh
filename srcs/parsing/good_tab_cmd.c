@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/08 15:29:39 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/30 11:07:43 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/04 15:47:38 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -64,7 +64,7 @@ int				good_tab_cmd(t_struct *data, t_cmd **lst, char *str, int i)
 		return (0);
 	if ((*lst)->op_next != 1 && (*lst)->op_next != 2 && (*lst)->op_next != 4)
 		i--;
-	if ((i >= ft_strlen(str)  && (*lst)->op_next != 9))
+	if ((i >= ft_strlen(str) && (*lst)->op_next != 9))
 		tmp = ft_strdup(str);
 	else if (str[i - 1] == '>' && (ft_isdigit(str[i - 2]) || str[i - 2] == '&'))
 		tmp = ft_strsub(str, start, i - 3);
@@ -72,8 +72,6 @@ int				good_tab_cmd(t_struct *data, t_cmd **lst, char *str, int i)
 		tmp = ft_strsub(str, start, i - 3);
 	else
 		tmp = ft_strsub(str, start, i - 1);
-	// a delete
-	printf("(%s) tmp = %s\n", __func__, tmp);
 	insert_cmd_simple(data, lst, tmp);
 	ret = ft_strlen(tmp);
 	ft_strdel(&tmp);

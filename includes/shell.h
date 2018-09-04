@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/04 14:43:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/04 13:31:14 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/04 14:35:24 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -217,7 +217,7 @@ int					delete_tmp(char **file);
 **	PARSING
 */
 t_ins				*ft_split_commandes(char **line, t_struct *data);
-t_ins				*ft_split_pvirgule(char *line, t_ins *lst, int i, int quote);
+t_ins				*ft_split_pvirgule(char **line, t_ins *lst, int i, int quote);
 t_cmd				*ft_split_cmd(char *str, t_struct *data);
 int					clear_line(char **line);
 char				*clean_before(char *str);

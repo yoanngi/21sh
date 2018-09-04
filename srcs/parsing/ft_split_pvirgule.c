@@ -6,19 +6,20 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/14 14:38:25 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/28 11:25:31 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/04 15:48:40 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-static int		ft_check_vir(t_ins **lst, char *line)
+static int		ft_check_vir(t_ins **lst, char **line)
 {
-	if (ft_strstr(line, ";") == NULL && ft_strstr(line, "&&") == NULL
-	&& ft_strstr(line, "||") == NULL)
+	if (ft_strstr(*line, ";") == NULL && ft_strstr(*line, "&&") == NULL
+	&& ft_strstr(*line, "||") == NULL)
 	{
-		(*lst)->str = ft_strdup(line);
+		(*lst)->str = ft_strdup(*line);
+		ft_strdel(line);
 		return (0);
 	}
 	return (1);
@@ -55,6 +56,8 @@ static int		ft_split_pvir_suite(char **line, int i, t_ins **lst)
 	char	*tmp;
 
 	tmp = NULL;
+	if (i == -1 || !(*line))
+		return (0);
 	if ((*lst)->str != NULL)
 	{
 		while ((*lst)->next)
@@ -76,10 +79,12 @@ static int		ft_split_pvir_suite(char **line, int i, t_ins **lst)
 		i++;
 	ft_strdel(&tmp);
 	resize_line(line, i, lst);
+	if ((*lst)->code == 0)
+		return (-2);
 	return (-1);
 }
 
-t_ins			*ft_split_pvirgule(char *line, t_ins *lst, int i, int quote)
+t_ins			*ft_split_pvirgule(char **line, t_ins *lst, int i, int quote)
 {
 	t_ins	*start;
 	char	*tmp;
@@ -88,7 +93,7 @@ t_ins			*ft_split_pvirgule(char *line, t_ins *lst, int i, int quote)
 	start = lst;
 	if (ft_check_vir(&lst, line) == 0)
 		return (start);
-	tmp = ft_strdup(line);
+	tmp = ft_strdup(*line);
 	while (i != -1 && i < ft_strlen(tmp))
 	{
 		if ((tmp[i] == '\'' || tmp[i] == '\"') && quote == 0)
@@ -102,6 +107,9 @@ t_ins			*ft_split_pvirgule(char *line, t_ins *lst, int i, int quote)
 		i++;
 	}
 	ft_split_pvir_suite(&tmp, i, &lst);
+	ft_strdel(line);
+	if (tmp != NULL && ft_strlen(tmp) > 0)
+		*line = ft_strdup(tmp);
 	ft_strdel(&tmp);
 	lst = start;
 	return (lst);

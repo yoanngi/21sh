@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/10 14:27:41 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/30 10:47:34 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/04 15:46:22 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,8 +48,6 @@ static int			return_name_suite(t_cmd **lst, char **new, char **tmp,
 	char **tmp2;
 
 	tmp2 = NULL;
-	// a delete
-	printf("HEREEEEEE (%s)\n", __func__);
 	*tmp = ft_strsub(*new, 0, ft_strlen(tab_tmp[0]));
 	ft_strdel(new);
 	*new = ft_strdup(*tmp);
@@ -71,8 +69,6 @@ static char			*return_name(t_cmd **lst, char *str, int start, int end)
 	new = NULL;
 	tmp = NULL;
 	tab_tmp = NULL;
-	// a delete
-	printf("HEREEEEEE (%s)\n", __func__);
 	if (str[start] == '&')
 		start += modifie_fd(lst, str, start);
 	if (start > end)

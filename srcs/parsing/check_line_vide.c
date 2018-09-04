@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/26 12:06:01 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/28 16:17:02 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/04 15:43:02 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,25 +24,32 @@ static int	suite_vide(char *str, int i)
 	return (0);
 }
 
-int			ft_check_line_vide(char *str, t_struct **data)
+static int	other_check(char *str, t_struct **data)
 {
-	int		i;
-
-	i = 0;
-	if (ft_strlen(str) == 0)
-		return (0);
 	if (ft_strlen(str) == 1 && str[0] == ';')
 	{
 		(*data)->code_erreur = 258;
 		ft_putstr_fd("21sh: syntax error near unexpected token `;'\n", 2);
-		return (0);
+		return (1);
 	}
 	if (ft_strlen(str) == 1 && str[0] == '.')
 	{
 		(*data)->code_erreur = 2;
 		ft_putstr_fd("21sh: .: filename argument required\n", 2);
-		return (0);
+		return (1);
 	}
+	return (0);
+}
+
+int			ft_check_line_vide(char *str, t_struct **data)
+{
+	int		i;
+
+	i = 0;
+	if (str == NULL || ft_strlen(str) == 0)
+		return (0);
+	if (other_check(str, data) == 1)
+		return (0);
 	if (ft_strstr(str, "\"") == NULL && ft_strstr(str, "\'") == NULL)
 	{
 		if (ft_strstr(str, ";;") != NULL)

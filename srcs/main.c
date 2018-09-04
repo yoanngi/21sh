@@ -6,7 +6,7 @@
 /*   By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/29 15:00:57 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/22 09:53:49 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/04 13:58:26 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -59,7 +59,7 @@ static int		env_incompleted(char **env)
 {
 	if (ft_len_tab(env) < 20)
 	{
-		ft_putstr_fd("error: Environnment incomplet 🖕\n", 2);
+		ft_putstr_fd("21sh: Environnment incomplet 🖕\n", 2);
 		return (1);
 	}
 	return (0);
