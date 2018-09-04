@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/11 09:36:12 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/30 13:52:29 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/04 13:35:21 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,8 +42,7 @@ static int		exec_pipe_child(t_struct *mystruct, t_cmd *lst, int pipe_fd[2],
 **	boucle sur la liste chainer des commandes et fork
 */
 
-static int		exec_cmd_recur(t_struct *mystruct, t_cmd *data, t_cmd *start,
-	int fd_in)
+static int		exec_cmd_recur(t_struct *mystruct, t_cmd *data, int fd_in, t_cmd *start)
 {
 	pid_t	pid;
 	int		pipe_fd[2];
@@ -56,10 +55,15 @@ static int		exec_cmd_recur(t_struct *mystruct, t_cmd *data, t_cmd *start,
 		if ((pid = fork()) == -1)
 			exit(EXIT_FAILURE);
 		if (pid == 0)
-			exec_pipe_child(mystruct, data, pipe_fd, &fd_in);
+		{
+			if (exec_pipe_child(mystruct, data, pipe_fd, &fd_in) == -1)
+			{
+				basic_error(data->tab_cmd[0], ": command not found");
+				exit(EXIT_FAILURE);
+			}
+		}
 		else
 		{
-			data->pipe = (long)&pipe_fd;
 			data->pid = pid;
 			close(pipe_fd[1]);
 			fd_in = pipe_fd[0];
@@ -95,7 +99,7 @@ int				execute_commandes(t_struct *mystruct, t_cmd *data)
 			return (ret);
 	}
 	start = data;
-	ret = exec_cmd_recur(mystruct, data, data, fd_in);
+	ret = exec_cmd_recur(mystruct, data, fd_in, data);
 	ft_kill_process(start, mystruct->pid);
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/04 14:43:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/30 13:04:35 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/04 13:31:14 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -118,7 +118,6 @@ typedef struct		s_cmd
 	int				stdout_cmd;
 	int				stderr_cmd;
 	int				pid;
-	long			pipe;
     int             bad_fd;
 	struct s_path	*pathname;
 	struct s_cmd	*next;

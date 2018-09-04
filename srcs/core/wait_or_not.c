@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/23 13:09:39 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/30 13:52:27 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/04 13:35:20 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,17 +15,13 @@
 
 int		wait_or_not(int *status, pid_t pid, t_cmd *start)
 {
-	int		*pipe_fd[2];
-
-	waitpid(pid, status, 0);
+	waitpid(pid, status, WNOHANG);
 	while (start)
 	{
-		*pipe_fd = (int *)start->pipe;
-		close(*pipe_fd[0]);
-		close(*pipe_fd[1]);
+		if (ft_strcmp(start->tab_cmd[0], "top") != 0 &&
+	ft_strcmp(start->tab_cmd[0], "yes") != 0)
+			waitpid(start->pid, NULL, 0);
 		start = start->next;
 	}
-	while (wait(0) > 0)
-		;
 	return (0);
 }
