@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/08 15:29:39 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/30 10:33:39 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 10:42:35 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -60,6 +60,7 @@ static int		fd_next_suite(char *str, int i, int add, int *fd_next)
 	char	*tmp;
 
 	tmp = NULL;
+	// add gestion chemin a faire
 	while (ft_isalpha(str[i + add]) == 1 || str[i + add] == '/')
 		add++;
 	tmp = ft_strsub(str, i + 1, add);
@@ -80,17 +81,20 @@ static int		ft_fd_next(char *str, int i, int *fd_next)
 	if (str[i + 1] == '-')
 	{
 		*fd_next = open("/dev/null", O_RDWR);
-		return (1);
+		return (2);
 	}
-	if (str[i + 1] == ' ' || str[i + 1] == '\t')
+	while(str[i + 1] == ' ' || str[i + 1] == '\t')
+	{
+		i++;
 		add++;
+	}
 	if (ft_isdigit(str[i + add]) == 1)
 		*fd_next = ft_atoi(str + (i + add));
 	else if (ft_isalpha(str[i + add] == 1) || str[i + add] == '/')
 		return (fd_next_suite(str, i, add, fd_next));
 	if (valid_fd(*fd_next) == -1)
 		return (-2);
-	return (add);
+	return (add + 1);
 }
 
 /*

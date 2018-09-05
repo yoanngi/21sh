@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/10 14:27:41 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/04 15:46:22 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 10:38:31 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -79,7 +79,14 @@ static char			*return_name(t_cmd **lst, char *str, int start, int end)
 		new = ft_strsub(str, start, (end - start - 2));
 	else
 		new = ft_strsub(str, start, (end - start));
+	if (new == NULL)
+		return (NULL);
 	clear_line(&new);
+	if (ft_strlen(new) == 0)
+	{
+		ft_strdel(&new);
+		return (NULL);
+	}
 	tab_tmp = ft_strsplit(new, ' ');
 	if (ft_len_tab(tab_tmp) > 1)
 		return_name_suite(lst, &new, &tmp, tab_tmp);

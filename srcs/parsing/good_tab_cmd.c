@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/08 15:29:39 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/04 15:47:38 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 10:42:33 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,7 +42,8 @@ static int		what_return(t_cmd **lst, char *str, int i, int ret)
 	else if ((*lst)->op_next == 9)
 	{
 		ret = search_redirection(lst, str, i - 1, i - 1);
-		(*lst)->op_next = 0;
+		if (ft_strstr(str + i, ">") == NULL)
+			(*lst)->op_next = 0;
 	}
 	else if ((*lst)->op_next == 4 || (*lst)->op_next == 5)
 	{
