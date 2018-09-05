@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/22 11:40:00 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/23 11:05:32 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 16:11:52 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,6 +15,7 @@
 
 /*
 **  remplace ~ et $ dans line
+**	Appeler dans check_validity
 */
 
 static int		insert_str_suite(char **str, char *tmp, int i, int l)
@@ -42,7 +43,14 @@ static int		insert_in_str(t_struct *data, char **str, int i)
 	tmp = NULL;
 	new = NULL;
 	len = 1;
-	ret = 0;
+	ret = 1;
+	// a delete ?
+	if (i > 0 && *str[i] == '$' && *str[i - 1] == '\\')
+	{
+		printf("HERE\n");
+		return (-1);
+	}
+	// end
 	if (!(new = ft_strsub(*str, i, ft_strlen(*str) - i)))
 		return (1);
 	if (new[0] == '~')
@@ -102,6 +110,8 @@ int				replace_in_line(t_struct *data, char **line)
 
 	tmp = NULL;
 	ret = 0;
+	// test
+	printf("line = %s\n", *line);
 	if (line == NULL || ft_strlen(*line) < 1)
 	{
 		ft_strdel(line);
@@ -115,6 +125,8 @@ int				replace_in_line(t_struct *data, char **line)
 		ret = -1;
 	replace_line(line, tmp);
 	ft_strdel(&tmp);
+	// test
+	printf("line = %s\n", *line);
 	if (ret == -1)
 		return (0);
 	if ((ft_strstr(*line, "~") != NULL || ft_strstr(*line, "$") != NULL) &&

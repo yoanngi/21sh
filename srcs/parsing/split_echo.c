@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/17 14:38:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 11:05:48 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 15:16:55 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -47,7 +47,10 @@ static char		*split_echo_suite(char *str, int i)
 		else if (str[i] == '\"')
 		{
 			i = return_i(i + 1, str, '\"');
-			tmp = ft_strsub(str, 0, i + 1);
+			if (i == ft_strlen(str))
+				tmp = ft_strdup(str);
+			else
+				tmp = ft_strsub(str, 0, i + 1);
 			return (tmp);
 		}
 		i++;
@@ -117,6 +120,7 @@ static int		check_split_echo(char ***tabl, char *str, int len)
 **	Appleler via insert_cmd_simple.c
 */
 
+// segfault quand echo"test"
 char			**split_echo(char *str)
 {
 	int		i;

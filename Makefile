@@ -6,7 +6,7 @@
 #    By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/11/24 10:04:43 by yoginet      #+#   ##    ##    #+#        #
-#    Updated: 2018/08/28 14:49:55 by yoginet     ###    #+. /#+    ###.fr      #
+#    Updated: 2018/09/05 13:22:59 by yoginet     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -126,6 +126,7 @@ N_SRCS = 	main.c\
 			parsing/modifie_fd.c\
 			parsing/check_regex_classic.c\
 			parsing/good_op_next.c\
+			parsing/delete_bs.c\
 			debug.c\
 
 all: $(NAME)

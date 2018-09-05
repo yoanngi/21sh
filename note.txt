@@ -16,21 +16,12 @@ https://openclassrooms.com/forum/sujet/pipe-et-dup2-comment-faire-23270
 A faire:
 
 Encore quelques erreur sur le cd
-reste gestion du heredoc et <
-parsing dans un tableau normalement ok
+a check quand fusion: reste gestion du heredoc et <
 
-ls ; unsetenv PATH ; ls
-
-echo $OLDPWD $PWD ; cd /; echo $OLDPWD $PWD
-modifier les dollars apres les ;
+$MACHIN si n'existe pas remplacer par null
+segfault sur delete_bs
+segfault ou abort sur split_echo
 
 
-VICO:
 
-ls | xargs cat
-cat 21sh
-||||>>>>> pb termcaps ? >> voir avec kevin
-
-env TERM=pouet ./21sh
-Print msg error a mettre
-
+en train de modifier replace in line, deletebs
