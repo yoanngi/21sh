@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/04 14:43:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/04 14:35:24 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 10:51:58 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -248,6 +248,7 @@ int					check_regex_classic(t_struct *data, char **line);
 int					good_op_next(t_cmd **lst, char *str, int i);
 void				verifie_op(t_cmd **lst, char *str, int i);
 int					check_search_null(t_path **lst, char *str, int i, int j);
+int					clear_echo(char ***tabl);
 /*
  **	BUILTINS
  */
