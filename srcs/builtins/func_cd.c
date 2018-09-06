@@ -129,7 +129,12 @@ int				func_cd(t_struct *data, t_cmd *lst)
 	if (mode == 2)
 		pwd_replace(data, lst);
 	else
-		change_directory(data, lst, NULL);
+    {
+        if (lst->tab_cmd[1] == NULL)
+		    change_directory(data, lst, data->home);
+        else
+		    change_directory(data, lst, NULL);
+    }
 	ft_strdel(&data->pwd);
 	data->pwd = ft_return_pwd();
 	return (EXIT_SUCCESS);

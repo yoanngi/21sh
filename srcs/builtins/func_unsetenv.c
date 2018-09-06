@@ -45,7 +45,7 @@ static int		delete_in_env(t_struct **data, int i, int j)
 	new = NULL;
 	while ((*data)->env[j])
 		j++;
-	if (!(new = (char **)malloc(sizeof(char *) * (j - 1))))
+	if (!(new = (char **)malloc(sizeof(char *) * (j))))
 		return (1);
 	new[j - 1] = NULL;
 	j = 0;
@@ -92,13 +92,13 @@ int				func_unsetenv(t_struct **data, t_cmd *lst)
 	ft_strlen(lst->tab_cmd[1])) == 0) &&
 	verif_unset(*data, lst->tab_cmd[1], i) == 0)
 		{
+			delete_in_env(data, i, 0);
 			if (ft_strncmp(lst->tab_cmd[1], "PATH", 4) == 0)
 			{
 				(*data)->tab_hash = delete_tab_hash((*data)->tab_hash,
 	(*data)->sizemax);
 				(*data)->sizemax = 0;
 			}
-			delete_in_env(data, i, 0);
 			return (0);
 		}
 		i++;

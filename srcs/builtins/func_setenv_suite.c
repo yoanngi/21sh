@@ -46,15 +46,12 @@ int						check_if_path_modif(t_struct **data, t_cmd *lst)
 	{
 		(*data)->tab_hash = delete_tab_hash((*data)->tab_hash,
 				(*data)->sizemax);
-		if (ft_dir_exist(lst->tab_cmd[2]) == 1)
+		(*data)->sizemax = ft_load_path(data);
+		if ((*data)->sizemax == -1)
 		{
-			(*data)->sizemax = ft_load_path(data);
-			if ((*data)->sizemax == -1)
-			{
-				ft_putstr_fd("Error creation  table de hashage\n",
+			ft_putstr_fd("Error creation  table de hashage\n",
 		lst->stderr_cmd);
-				return (1);
-			}
+			return (1);
 		}
 	}
 	return (0);

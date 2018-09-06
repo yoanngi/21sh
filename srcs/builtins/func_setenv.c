@@ -36,7 +36,7 @@ static int		ft_check_error_setenv(t_cmd **lst)
 		}
 		i++;
 	}
-	if (i != 3)
+	if (i != 3 || ft_strstr((*lst)->tab_cmd[1], "=") != NULL)
 	{
 		ft_putstr_fd("setenv: Invalid format\n", (*lst)->stderr_cmd);
 		return (1);
@@ -59,6 +59,7 @@ static int		add_in_env(t_struct **data, t_cmd *lst)
 	i = ft_len_tab((*data)->env);
 	if (!(new = (char **)malloc(sizeof(char *) * (i + 2))))
 		return (1);
+    new[i + 1] = NULL;
 	i = 0;
 	while ((*data)->env[i])
 	{
@@ -118,7 +119,7 @@ int				func_setenv(t_struct **data, t_cmd *lst)
 	}
 	if (add_in_env(data, lst) == 1)
 	{
-		ft_putstr_fd("setenv: Error d'allocation\n", lst->stderr_cmd);
+		ft_putstr_fd("setenv: Error\n", lst->stderr_cmd);
 		return (1);
 	}
 	return (0);

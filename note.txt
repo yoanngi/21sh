@@ -16,7 +16,15 @@ https://openclassrooms.com/forum/sujet/pipe-et-dup2-comment-faire-23270
 A faire:
 
 Encore quelques erreur sur le cd
-a check quand fusion: reste gestion du heredoc et <
+A verifier, normalement ok
+
+a check quand fusion: reste gestion du heredoc
+
+error echo "test" > test
+Affiche "test" au lieu de test
+error > or >>
+
+Abort sur la commande ls ; touch test ; ls
 
 $MACHIN si n'existe pas remplacer par null
 segfault sur delete_bs
