@@ -1,0 +1,21 @@
+.bodycolor {
+    background-color: grey;
+}
+
+.header {
+    justify-content: center;
+}
+
+.header_img_r {
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    justify-content: right;
+}
+
+.header_img_l {
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    justify-content: left;
+}
