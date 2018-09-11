@@ -30,6 +30,7 @@ static int		ft_init_parsing(t_ins **new, char **line, t_struct **data)
 	if (ft_nefaitrien(line) == 1)
 	{
 		(*data)->code_erreur = 258;
+        ft_strdel(line);
 		return (1);
 	}
 	len = ft_strlen(*line);
