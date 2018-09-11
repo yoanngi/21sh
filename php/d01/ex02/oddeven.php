@@ -1,5 +1,7 @@
 #!/usr/bin/php
 
+
+// PAS OK
 <?php
 	echo "Entrez un nombre: ";
 	$line = fgets(STDIN);
