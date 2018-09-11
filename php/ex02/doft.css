@@ -2,10 +2,11 @@ body {
     background-color: grey;
     justify-content: center;
     text-align: center;
+    display: inline-block;
 }
 
 .head {
-    display: flex;
+    display: inline-block;
     background-color: #909090;
     width: 75%;
     padding: 100px;
@@ -15,6 +16,7 @@ body {
     border-bottom-left-radius: 25px;
 }
 .right {
+    display: inline-block;
     float: right;
     position: relative;
     margin-right: 1px;
@@ -22,6 +24,7 @@ body {
 }
 
 .left {
+    display: inline-block;
     float: left;
     position: relative;
     margin-left: 1px;
@@ -38,12 +41,14 @@ body {
 }
 
 .body2 {
+    display: inline-block;
     justify-content: center;
     text-align: center;
     display: flex;
 }
 .col_center {
     justify-content: center;
+    display: inline-block;
     background-color: #909090;
     width: auto;
     height: auto;
