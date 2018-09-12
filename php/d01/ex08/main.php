@@ -7,13 +7,19 @@
 
     $tab2 = array("1", "2", "3", "4");
 
+    echo "Tab non trier :\n";
     if (ft_is_sort($tab))
         echo "trier\n";
     else
         echo "non trier\n";
 
+    echo "Tab trier :\n";
     if (ft_is_sort($tab2))
+    {
         echo "trier\n";
+    }
     else
+    {
         echo "non trier\n";
+    }
 ?>
