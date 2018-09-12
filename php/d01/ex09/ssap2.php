@@ -17,28 +17,45 @@
         }
     }
 
-    if (count($argv) == 1) {
-        echo $argv[1] . "\n";
-        return ;
-    }
-
-    $i = 1;
-    while ($argv[$i]) {
-        if (strstr($argv[$i], " ") != FALSE) {
-            $tab = ft_split($argv[$i]);
-            $count = count($tab);
-            sort($tab);
-            unset($argv[$i]);
-            sort($argv);
-            $argv = array_merge($argv, $tab);
-            $i = 0;
+    function sort_one($argv) {
+        $i = 0;
+        while ($argv[$i]) {
+            if (strstr($argv[$i], " ") != FALSE) {
+                $tab = ft_split($argv[$i]);
+                sort($tab);
+                unset($argv[$i]);
+                sort($argv);
+                $argv = array_merge($argv, $tab);
+                $i = -1;
+            }
+            $i++;
         }
-        $i++;
+        return ($argv);
     }
 
-    $i = 1;
-    while ($argv[$i]) {
-        $i++;
+    function cmp($a, $b) {
+        $alpha = "abcdefghijklmnopqrstuvwxyz0123456789 !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+        $i = 0;
+        if (strlen($a) > strlen($b))
+            $len = strlen($a);
+        else
+            $len = strlen($b);
+        $a = strtolower($a);
+        $b = strtolower($b);
+        while ($i < $len && $a[$i] == $b[$i])
+            $i++;
+        if (stripos($alpha, $a[$i]) == stripos($alpha, $b[$i]))
+            return 0;
+        if (stripos($alpha, $a[$i]) > stripos($alpha, $b[$i]))
+            return 1;
+        else
+            return -1;
     }
-    print_tab($argv, 1);
+
+    unset($argv[0]);
+    $argv = array_filter($argv);
+    sort($argv);
+    $argv = sort_one($argv);
+    usort($argv, "cmp");
+    print_tab($argv, 0);
 ?>

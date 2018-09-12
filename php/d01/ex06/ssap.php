@@ -17,25 +17,26 @@
         }
     }
 
-    if (count($argv) == 1) {
-        echo $argv[1] . "\n";
-        return ;
+    function sort_one($argv) {
+        $i = 0;
+        while ($argv[$i]) {
+            if (strstr($argv[$i], " ") != FALSE) {
+                $tab = ft_split($argv[$i]);
+                sort($tab);
+                unset($argv[$i]);
+                sort($argv);
+                $argv = array_merge($argv, $tab);
+                $i = -1;
+            }
+            $i++;
+        }
+        return ($argv);
     }
 
-    $i = 1;
-    while ($argv[$i])
-    {
-        if (strstr($argv[$i], " ") != FALSE) {
-            $tab = ft_split($argv[$i]);
-            $count = count($tab);
-            sort($tab);
-            unset($argv[$i]);
-            sort($argv);
-            $argv = array_merge($argv, $tab);
-            $i = 0;
-        }
-        $i++;
-    }
+    unset($argv[0]);
+    $argv = array_filter($argv);
     sort($argv);
-    print_tab($argv, 1);
+    $argv = sort_one($argv);
+    sort($argv);
+    print_tab($argv, 0);
 ?>
