@@ -1,0 +1,288 @@
+/* **************************** BODY **************************** */
+
+.body_admin {
+    text-align: center;
+    justify-content: center;
+    background-color: #d9d9d9;
+    height: 50vw;
+
+}
+
+/* **************************** Header **************************** */
+
+.header_admin {
+    position: absolute;
+    top: 1vw;
+    text-align: center;
+    background-color: #006699;
+    left: 1vw;
+    right: 1vw;
+    height: 5vw;
+    width: 98vw;
+    font-size: 2vw;
+}
+
+.header_user {
+    position: absolute;
+    top: 8vw;
+    text-align: center;
+    left: 1vw;
+    right: 1vw;
+    height: 50vw;
+    width: 98vw;
+    font-size: 2vw;
+}
+
+.commande {
+    position: absolute;
+    top: 60vw;
+    text-align: center;
+    left: 1vw;
+    right: 1vw;
+    height: 10vw;
+    width: 98vw;
+    font-size: 2vw;
+}
+
+.admin_connect {
+    font-size: 2vw;
+    float: left;
+}
+
+.admin_info {
+    text-justify: center;
+    text-align: center;
+    font-size: 2vw;
+}
+
+.admin_logout {
+    font-size: 2vw;
+    float: right;
+}
+
+/* **************************** body **************************** */
+
+.body_admin {
+    justify-content: center;
+}
+
+.gallery {
+    margin-top: 10vw;
+    margin-bottom: 10vw;
+    justify-content: center;
+    margin: 5px;
+    border: 1px solid #ccc;
+    width: 25vw;
+}
+
+.center {
+    margin-top: 15vw;;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+
+.client {
+    float: left;
+    align-content: center;
+}
+
+.article {
+    float: right;
+    align-content: center;
+}
+
+/* **************************** Footer **************************** */
+
+.footer_admin {
+    position: absolute;
+    bottom: 1vw;
+    text-align: center;
+    background-color: #006699;
+    left: 1vw;
+    right: 1vw;
+    height: 5vw;
+    width: 98vw;
+}
+
+/* **************************** client **************************** */
+table
+{
+    width: 90vw;
+    border-collapse: collapse;
+}
+
+.tabvide {
+    justify-content: center;
+    text-align: center;
+}
+
+td, th
+{
+    border: 1px solid black;
+}
+
+.back {
+    text-align: center;
+    float: right;
+    margin-top: 8vw;
+    background-color: #006699;
+    left: 1vw;
+    right: 1vw;
+}
+
+.options_client {
+    justify-content: center;
+    position: absolute;
+    top: 10vw;
+}
+
+.actions_client {
+    justify-content: center;
+    border: 2px solid black;
+    padding: 10px;
+    border-bottom-right-radius: 8px 8px 8px 8px;
+    display: flex;
+    margin-top: 10vw;
+    top: 10vw;
+    height: auto;
+}
+
+.title {
+    justify-content: center;
+}
+
+.views_client {
+    justify-content: center;
+    position: absolute;
+    border: 2px solid black;
+    padding: 10px;
+    border-bottom-right-radius: 8px 8px 8px 8px;
+    margin-top: 1vw;
+    display: flex;
+    overflow: scroll;
+    height: auto;
+    margin-bottom: 5vw;
+}
+
+.views_commandes {
+    justify-content: center;
+    border: 2px solid black;
+    padding: 10px;
+    border-bottom-right-radius: 8px 8px 8px 8px;
+    margin-top: 1vw;
+    display: flex;
+    overflow: scroll;
+    height: auto;
+    margin-bottom: 5vw;
+}
+
+.form_client {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    margin-top: 1vw;
+}
+
+.msgerr {
+    position: absolute;
+    top: 10vw;
+    font-size: 3vw;
+    color: red;
+}
+
+.msgsuc {
+    position: absolute;
+    top: 10vw;
+    font-size: 3vw;
+    color: #4CAF50;
+}
+
+.detete {
+    height: 1%;
+    width: 1%;
+}
+
+.imgclient {
+    cursor: pointer;
+    width: 5vw;
+}
+
+/* **************************** index_admin **************************** */
+
+.body_index_admin {
+    background-color: #d9d9d9
+    justify-content: center;
+    text-align: center;
+}
+
+.access_reserved {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin-left: 20vw;
+    margin-right: 20vw;
+    margin-top: 10vw;
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=password], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.buy {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
