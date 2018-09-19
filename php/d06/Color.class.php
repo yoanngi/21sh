@@ -4,9 +4,9 @@ class Color {
     public $red = 0;
     public $green = 0;
     public $blue = 0;
-    public $verbose = FALSE;
+    static public $verbose = FALSE;
 
-    static function doc()
+    function doc()
     {
         return (file_get_contents('Color.doc.txt'));
     }
@@ -17,11 +17,14 @@ class Color {
         {
             // ?;
         }
-        if (array_key_exists($kwarg['red']) && array_key_exists($kwarg['green']) && array_key_exists($kwarg['blue']))
+        if (array_key_exists('red', $kwarg) && array_key_exists('green', $kwarg) && array_key_exists('blue', $kwarg))
         {
-            $this->$red = intval($kwarg['red']);
-            $this->$green = intval($kwarg['green']);
-            $this->$blue = intval($kwarg['blue']);
+            if ($kwarg['red'] != "" && $kwarg['green'] != "" && $kwarg['blue'] != "")
+            {
+                $this->$red = intval($kwarg['red']);
+                $this->$green = intval($kwarg['green']);
+                $this->$blue = intval($kwarg['blue']);
+            }
         }
         if (self::$verbose === True)
 			print('Color( red: '.sprintf("%3s",$this->red).', green: '.sprintf("%3s",$this->green).', blue: '.sprintf("%3s", $this->blue).' ) constructed.'.PHP_EOL);
@@ -40,20 +43,20 @@ class Color {
 
     function add ($param)
     {
-        $color = new Color($ret);
-        return ($color)
+        $color = new Color($param);
+        return ($color);
     }
 
     function sub ($param)
     {
-        $color = new Color();
-        return ($color)
+        $color = new Color($param);
+        return ($color);
     }
 
     function mult ($param)
     {
-        $color = new Color();
-        return ($color)
+        $color = new Color($param);
+        return ($color);
     }
 }
 ?>
