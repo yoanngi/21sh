@@ -15,14 +15,14 @@ class Color {
     {
         if (array_key_exists('rgb', $kwarg))
         {
-
+            // ?;
         }
-        else if ($kwarg['red'])
-            $this->$red = $kwarg['red'];
-        else if ($kwarg['green'])
-            $this->$red = $kwarg['red'];
-        else if ($kwarg['blue'])
-            $this->$red = $kwarg['red'];
+        if (array_key_exists($kwarg['red']) && array_key_exists($kwarg['green']) && array_key_exists($kwarg['blue']))
+        {
+            $this->$red = intval($kwarg['red']);
+            $this->$green = intval($kwarg['green']);
+            $this->$blue = intval($kwarg['blue']);
+        }
         if (self::$verbose === True)
 			print('Color( red: '.sprintf("%3s",$this->red).', green: '.sprintf("%3s",$this->green).', blue: '.sprintf("%3s", $this->blue).' ) constructed.'.PHP_EOL);
     }
@@ -35,24 +35,24 @@ class Color {
 
     function __toString()
     {
-
+        return ('Color( red: '.sprintf("%3s", $this->red).', green: '.sprintf("%3s", $this->green).', blue: '.sprintf("%3s", $this->blue).' ) destructed.'.PHP_EOL);
     }
 
-    function add ()
+    function add ($param)
     {
-        $color = ;
+        $color = new Color($ret);
         return ($color)
     }
 
-    function sub ()
+    function sub ($param)
     {
-        $color = ;
+        $color = new Color();
         return ($color)
     }
 
-    function mult ()
+    function mult ($param)
     {
-        $color = ;
+        $color = new Color();
         return ($color)
     }
 }
