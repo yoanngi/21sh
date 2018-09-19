@@ -8,50 +8,29 @@ class Color {
 
     static function doc()
     {
-        echo "<- Color ----------------------------------------------------------------------\n";
-        echo "The Color class handles RGB colors.\n\n";
-
-        echo "An instance can be contructed from either a RGB value:\n";
-        echo "new Color( array( 'rgb' => 12345 ) );\n\n";
-
-        echo "Or from distinct red, green, blue constitutives:\n";
-        echo "new Color( array( 'red' => 255, 'green' => 255, 'blue' => 255 ) );\n\n";
-
-        echo "Red, green, blue constitutives and RGB values are converted to intergers.\n";
-        echo "Negative or > to 255 color constitutives are left as is.\n";
-        echo "Any other use is undefined behaviour.\n\n";
-
-        echo "The class provides the following methods :\n\n";
-
-        echo "Color   add( Color \$rhs );\n";
-        echo "Adds each color constitutive and returns a new Color instance.\n\n";
-
-        echo "Color   sub( Color \$rhs );\n";
-        echo "Substracts each color constitutive and returns a new Color instance.\n\n";
-
-        echo "Color   mult( \$f );\n";
-        echo "Multiplies each color constitutive by factor \$f and returns a new Color\n";
-        echo "instance\n";
-        echo "---------------------------------------------------------------------- Color ->\n";
+        return (file_get_contents('Color.doc.txt'));
     }
 
     function __construct( array $kwarg )
     {
-        if ($kwarg['red'])
+        if (array_key_exists('rgb', $kwarg))
+        {
+
+        }
+        else if ($kwarg['red'])
             $this->$red = $kwarg['red'];
-        if ($kwarg['green'])
+        else if ($kwarg['green'])
             $this->$red = $kwarg['red'];
-        if ($kwarg['blue'])
+        else if ($kwarg['blue'])
             $this->$red = $kwarg['red'];
-        if ($verbose == TRUE)
-            echo "verbose TRUE\n";
+        if (self::$verbose === True)
+			print('Color( red: '.sprintf("%3s",$this->red).', green: '.sprintf("%3s",$this->green).', blue: '.sprintf("%3s", $this->blue).' ) constructed.'.PHP_EOL);
     }
 
     function __destruct()
     {
-        if ($verbose == TRUE)
-            echo "verbose TRUE\n";
-        return ;
+        if (self::$verbose === True)
+			print('Color( red: '.sprintf("%3s", $this->red).', green: '.sprintf("%3s", $this->green).', blue: '.sprintf("%3s", $this->blue).' ) destructed.'.PHP_EOL);
     }
 
     function __toString()
