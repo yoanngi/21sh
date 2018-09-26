@@ -22,12 +22,14 @@ int				what_is_op(char *str, int i)
 	int		ret;
 
 	ret = 0;
-	if (i + 1 > ft_strlen(str))
+	if (i + 1 > ft_strlen(str) || i == 0)
 		return (0);
-	if (str[i] == '>' && str[i + 1] == '>')
+	if (str[i - 1] == '>' && str[i] == '>')
 		ret = 3;
 	else
 		ret = 2;
+	printf("HEREEEEE ret = %d\n", ret);
+	printf("str[%d] = %c || str[%d] = %c\n", i - 1, str[i - 1], i, str[i]);
 	return (ret);
 }
 

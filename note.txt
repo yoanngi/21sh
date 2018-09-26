@@ -23,6 +23,7 @@ a check quand fusion: reste gestion du heredoc
 error echo "test" > test
 Affiche "test" au lieu de test
 error > or >>
+(search_redirection.c et good_tab_cmd.c)
 
 Abort sur la commande ls ; touch test ; ls
 

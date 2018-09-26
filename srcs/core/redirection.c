@@ -25,7 +25,7 @@ int			exec_redirection(t_path *file)
 	if (file->name == NULL)
 		return (-1);
 	if (file->s_or_d == 2)
-		fd = open(file->name, O_CREAT | O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP |
+		fd = open(file->name, O_CREAT | O_TRUNC | O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP |
 				S_IROTH);
 	else if (file->s_or_d == 3)
 		fd = open(file->name, O_CREAT | O_APPEND | O_WRONLY, S_IRUSR | S_IWUSR |
