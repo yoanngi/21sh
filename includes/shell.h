@@ -206,7 +206,7 @@ int					ft_process(t_cmd *data);
 int					ft_check_arg_invalid(t_struct *data, t_cmd *cmd);
 int                 fork_redirection(t_cmd *lst);
 int                 fork_heredoc(t_cmd *lst, int code);
-int                 exec_redirection(t_path *file);
+int                 exec_redirection(t_path *file, int op);
 int					ft_kill_process(t_cmd *start, int pid);
 int					cmd_suivante(t_ins *cpy, int code);
 int					exit_status(int status);

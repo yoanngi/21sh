@@ -15,6 +15,7 @@
 
 /*
 **  Search L'operateur (> ou >>)
+**	inutile ?
 */
 
 int				what_is_op(char *str, int i)

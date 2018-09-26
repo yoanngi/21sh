@@ -18,7 +18,7 @@ A faire:
 Encore quelques erreur sur le cd
 A verifier, normalement ok
 
-a check quand fusion: reste gestion du heredoc
+a check quand fusion: gestion du heredoc
 
 error echo "test" > test
 Affiche "test" au lieu de test

@@ -17,17 +17,17 @@
 **  Creer les differents fd et les retournes
 */
 
-int			exec_redirection(t_path *file)
+int			exec_redirection(t_path *file, int op)
 {
 	int		fd;
 
 	fd = 0;
 	if (file->name == NULL)
 		return (-1);
-	if (file->s_or_d == 2)
+	if (op == 2)
 		fd = open(file->name, O_CREAT | O_TRUNC | O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP |
 				S_IROTH);
-	else if (file->s_or_d == 3)
+	else if (op == 3)
 		fd = open(file->name, O_CREAT | O_APPEND | O_WRONLY, S_IRUSR | S_IWUSR |
 				S_IRGRP | S_IROTH);
 	if (fd == -1)
@@ -50,7 +50,7 @@ int			fork_redirection(t_cmd *lst)
 	lst_path = lst->pathname;
 	while (lst->pathname)
 	{
-		lst->pathname->fd = exec_redirection(lst->pathname);
+		lst->pathname->fd = exec_redirection(lst->pathname, lst->op_next);
 		lst->pathname = lst->pathname->next;
 	}
 	lst->pathname = lst_path;
