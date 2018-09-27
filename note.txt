@@ -17,20 +17,19 @@ A faire:
 
 Encore quelques erreur sur le cd
 A verifier, normalement ok
-
 a check quand fusion: gestion du heredoc
 
-error echo "test" > test
-Affiche "test" au lieu de test
-error > or >>
-(search_redirection.c et good_tab_cmd.c)
-
-Abort sur la commande ls ; touch test ; ls
-
+Segfault / double free .... :
+echo"test"
 $MACHIN si n'existe pas remplacer par null
 segfault sur delete_bs
 segfault ou abort sur split_echo
 
+Erreur std:
+error echo "test" > test
+Affiche "test" au lieu de test
+error > or >>
+(search_redirection.c et good_tab_cmd.c)
 
 
 en train de modifier replace in line, deletebs

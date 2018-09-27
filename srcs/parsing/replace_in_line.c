@@ -47,7 +47,7 @@ static int		insert_in_str(t_struct *data, char **str, int i)
 	// a delete ?
 	if (i > 0 && *str[i] == '$' && *str[i - 1] == '\\')
 	{
-		printf("HERE\n");
+		printf("(%s) HERE\n", __func__);
 		return (-1);
 	}
 	// end
@@ -74,7 +74,9 @@ static int		return_i_quote(char *tmp, int i, char c)
 	if (!tmp)
 		return (0);
 	while (tmp[i] != c)
+	{
 		i++;
+	}
 	return (i);
 }
 
@@ -111,7 +113,7 @@ int				replace_in_line(t_struct *data, char **line)
 	tmp = NULL;
 	ret = 0;
 	// test
-	printf("line = %s\n", *line);
+	printf("(%s) line = %s\n", __func__, *line);
 	if (line == NULL || ft_strlen(*line) < 1)
 	{
 		ft_strdel(line);

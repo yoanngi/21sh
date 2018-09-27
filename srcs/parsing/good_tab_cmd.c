@@ -29,8 +29,6 @@ int				what_is_op(char *str, int i)
 		ret = 3;
 	else
 		ret = 2;
-	printf("HEREEEEE ret = %d\n", ret);
-	printf("str[%d] = %c || str[%d] = %c\n", i - 1, str[i - 1], i, str[i]);
 	return (ret);
 }
 

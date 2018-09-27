@@ -88,7 +88,7 @@ static int		clear_bs_suite(char **line, int i)
 	if (tmp[i + 1] == '$')
 	{
 		// a voir
-		return (0);
+		//return (0);
 		// end
 		tmp[i] = '\"';
 		i++;
@@ -152,7 +152,7 @@ int				delete_bs(char **line)
 
 	tmp = NULL;
 	// a delete
-	printf("LINE = %s\n", *line);
+	printf("(%s) LINE = %s\n", __func__ ,*line);
 	if (!(*line))
 		return (1);
 	if (ft_strlen(*line) <= 1)
@@ -160,6 +160,7 @@ int				delete_bs(char **line)
 	if (ft_strstr(*line, "\\") == NULL)
 		return (0);
 	clear_bs(line, 0);
+	// a delete
 	printf("LINE = %s\n", *line);
 	return (0);
 }

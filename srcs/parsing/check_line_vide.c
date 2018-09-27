@@ -15,6 +15,14 @@
 
 static int	suite_vide(char *str, int i)
 {
+	while (str[i] == ' ' || str[i] == '\"' || str[i] == '\'')
+		i++;
+	if (i == ft_strlen(str))
+	{
+		basic_error(" ", " : command not found");
+		return (0);
+	}
+	i = 0;
 	while (str[i])
 	{
 		if (str[i] != ' ' && str[i] != ';')
