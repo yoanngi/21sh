@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   get_cursor_position.c                            .::    .:/ .      .::   */
+/*   free_tab.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/17 11:18:28 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/04 11:28:22 by volivry     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/09/05 18:09:05 by volivry      #+#   ##    ##    #+#       */
+/*   Updated: 2018/09/05 18:10:33 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../includes/libft.h"
 
-void	get_curs_pos(t_info *info)
+void	free_tab(char **table)
 {
-	char	pos[20];
-	char	*str;
-	int		i;
+	int	i;
 
 	i = 0;
-	str = "\033[6n";
-	ft_bzero(pos, 20);
-	ft_printf("%s", str);
-	read(0, pos, 20);
-	info->curs_y = ft_atoi(pos + 2);
-	while (pos[i] && pos[i] != 59)
+	if (!table)
+		return ;
+	while (table[i])
+	{
+		ft_strdel(&table[i]);
 		i++;
-	info->curs_x = ft_atoi(pos + i + 1);
+	}
+	free(table);
 }

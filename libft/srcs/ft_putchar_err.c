@@ -15,5 +15,5 @@
 
 int	ft_putchar_err(int c)
 {
-	return (write(2, &c, 1));
+	return (write(1, &c, 1));
 }

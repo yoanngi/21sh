@@ -3,123 +3,138 @@
 /*                                                              /             */
 /*   heredoc.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/08/28 14:42:03 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/30 10:02:01 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/09/26 16:51:46 by volivry      #+#   ##    ##    #+#       */
+/*   Updated: 2018/09/26 16:51:48 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-int				delete_tmp(char **file)
+static char	*get_hd_trigger(char *str)
 {
-	int		fd;
-	int		pid;
+	int		len;
+	int		i;
+	char	*tmp;
 
-	fd = 0;
-	pid = 0;
-	if ((fd = open(file[1], O_RDONLY)) < 0)
-		return (0);
-	close(fd);
-	if ((pid = fork()) < 0)
+	i =  0;
+	len = 0;
+	tmp = clean_before(str);
+	while (tmp[len] && tmp[len] != ' ')
+		len++;
+	if (!(g_info.h_d.trigger = malloc(len + 1)))
+		return (NULL);
+	while (i < len)
+	{
+		g_info.h_d.trigger[i] = tmp[i];
+		i++;
+	}
+	g_info.h_d.trigger[i] = 0;
+	clear_line(&g_info.h_d.trigger);
+	while (tmp[i] && tmp[i] == ' ')
+		i++;
+	ft_strdel (&str);
+	if (!(str = malloc(ft_strlen(tmp) - len + 1)))
+		return (NULL);
+	len = 0;
+	while (tmp[i])
+	{
+		str[len] = tmp[i];
+		i++;
+		len++;
+	}
+	str[len] = 0;
+	ft_strdel(&tmp);
+	return (str);
+}
+
+static char *get_hd_cmd()
+{
+	int		len;
+	int		i;
+	int		j;
+	char	*remain;
+
+	i = 0;
+	len = 0;
+	while (g_info.line[len] != '<' && g_info.line[len + 1] != '<')
+		len++;
+	if (last_char(g_info.line) == '<')
+	return (NULL);
+	if (!(g_info.h_d.cmd = malloc(len + 2)))
+		return (NULL);
+	while (i <= len)
+	{
+		g_info.h_d.cmd[i] = g_info.line[i];
+		i++;
+	}
+	g_info.h_d.cmd[i] = 0;
+	clear_line(&g_info.h_d.cmd);
+	if (!(remain = malloc(ft_strlen(g_info.line) - len + 2)))
+		return (NULL);
+	i += 2;
+	j = 0;
+	while (g_info.line[i])
+	{
+		remain[j] = g_info.line[i];
+		i++;
+		j++;
+	}
+	remain[j] = 0;
+	remain = ft_strdup(get_hd_trigger(remain));
+	return (remain);	
+}
+
+static int	hd_err(char *remain)
+{
+	if (!g_info.h_d.trigger || !ft_strcmp(g_info.h_d.trigger, "") ||
+	(g_info.line[0] == '<' && g_info.line[1] == '<'))
+	{
+		ft_putstr("21sh: parse error near \\n\n");	
+		ft_strdel(&g_info.line);
 		return (1);
-	if (pid == 0)
-		execve("/bin/rm", file, NULL);
-	else
-		wait(&pid);
+	}
+	if (ft_strstr(remain, "<<"))
+	{
+		ft_putstr("Parse error: multiple heredocs in the same command\n");
+		ft_strdel(&g_info.line);
+		return (1);
+	}
 	return (0);
 }
 
-static char		*return_path_heredoc(char *name)
+char *heredoc(void)
 {
-	char	*path;
-	char	*tmp;
+	char	*remain;
+	t_hist	*tmp;
 
-	path = NULL;
-	tmp = NULL;
-	if (!(path = ft_strnew(255)))
+	tmp = last_elem(g_info.history);
+	remain = get_hd_cmd();
+	if (hd_err(remain))
 		return (NULL);
-	getcwd(path, 255);
-	if (!(tmp = ft_strjoin(path, "/")))
-		return (NULL);
-	ft_strdel(&path);
-	clear_line(&name);
-	if (!(path = ft_strjoin(tmp, name)))
-		return (NULL);
-	return (name);
-}
-
-static int		heredoc_simple_exec(t_cmd *lst, int i)
-{
-	int		fd;
-	int		status;
-	char	*path;
-
-	path = NULL;
-	if (!(path = return_path_heredoc(lst->heredoc[i])))
-		return (1);
-	if ((fd = open(path, O_RDONLY)) < 0)
-		return (1);
-	ft_strdel(&path);
-	dup2(fd, lst->stdin_cmd);
-	close(fd);
-	status = execve(lst->rep, lst->tab_cmd, lst->env);
-	return (status);
-}
-
-static int		heredoc_exec(t_cmd *lst, char *file)
-{
-	int		i;
-	int		fd;
-	int		status;
-
-	i = 0;
-	status = 0;
-	if (file == NULL)
-		return (1);
-	if ((fd = open(file, O_CREAT | O_WRONLY | O_WRONLY, S_IRUSR
-	| S_IWUSR | S_IRGRP | S_IROTH)) < 0)
-		return (1);
-	while (lst->heredoc[i])
+	ft_strdel(&g_info.line);
+	change_prompt(&g_info, 4);
+	g_info.quoted = 4;
+	g_info.h_d.fill = remain ? ft_strdup(remain) :  NULL;
+	ft_strdel(&remain);
+	while (g_info.h_d.trigger && ft_strcmp(tmp->name, g_info.h_d.trigger))
 	{
-		write(fd, lst->heredoc[i], ft_strlen(lst->heredoc[i]));
-		write(fd, "\n", 2);
-		i++;
+		if (g_info.line)
+		{
+			g_info.h_d.fill = str_append(g_info.h_d.fill, "\n");
+			g_info.h_d.fill = str_append(g_info.h_d.fill, g_info.line);
+			ft_strdel(&g_info.line);
+		}
+		g_info.loop = 1;
+		line_edit(&g_info, tmp);
+		tmp = last_elem(g_info.history);
 	}
-	close(fd);
-	if ((fd = open(file, O_RDONLY)) < 0)
-		return (1);
-	dup2(fd, lst->stdin_cmd);
-	close(fd);
-	status = execve(lst->rep, lst->tab_cmd, lst->env);
-	return (status);
-}
-
-int				fork_heredoc(t_cmd *lst, int code)
-{
-	int		ret;
-	char	**delete;
-
-	delete = NULL;
-	ret = 0;
-	if (code == 1)
-	{
-		if (!(delete = (char **)malloc(sizeof(char *) * 3)))
-			return (1);
-		delete[0] = ft_strdup("rm");
-		delete[1] = ft_strdup("./.heredoc_42sh_tmp");
-		delete[2] = NULL;
-		delete_tmp(delete);
-		delete = ft_del_tab(delete);
-		return (0);
-	}
-	if (!(lst))
-		return (1);
-	if (lst->op_next == 4)
-		ret = heredoc_simple_exec(lst, 0);
-	else
-		ret = heredoc_exec(lst, "./.heredoc_42sh_tmp");
-	return (ret);
+	ft_strdel(&g_info.line);
+	g_info.loop = 0;
+	change_prompt(&g_info, 0);
+	g_info.quoted = 0;
+	remove_elem(tmp);
+	return (g_info.h_d.fill);
 }

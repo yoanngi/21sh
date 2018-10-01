@@ -38,12 +38,14 @@ N_SRCS = 	main.c\
 			core/redirection.c\
 			core/execute_builtins.c\
 			core/ft_check_arg_invalid.c\
+			core/heredoc.c\
+			core/hd_exec.c\
+			core/info_init_edit.c\
 			core/kill_process.c\
 			core/cmd_suivante.c\
 			core/exit_status.c\
 			core/wait_or_not.c\
 			core/redirection_fd.c\
-			core/heredoc.c\
 			init/ft_check_infos.c\
 			init/ft_delete_struct.c\
 			init/ft_init_builtins.c\
@@ -63,11 +65,26 @@ N_SRCS = 	main.c\
 			lib_termcaps/lst_utils2.c\
 			lib_termcaps/alt_keys.c\
 			lib_termcaps/add_del_insert.c\
+			lib_termcaps/add_del_insert2.c\
 			lib_termcaps/history.c\
 			lib_termcaps/end_quote.c\
 			lib_termcaps/prompt.c\
+			lib_termcaps/history2.c\
 			lib_termcaps/cut_copy_paste.c\
-			lib_termcaps/core_shell_termcaps.c\
+			lib_termcaps/signals2.c\
+			lib_termcaps/winsize.c\
+			lib_autocomp/arrows.c\
+			lib_autocomp/arrows2.c\
+			lib_autocomp/autocomp.c\
+			lib_autocomp/display.c\
+			lib_autocomp/get_info.c\
+			lib_autocomp/key_func.c\
+			lib_autocomp/ac_lst_utils.c\
+			lib_autocomp/ac_lst_utils2.c\
+			lib_autocomp/utils.c\
+			lib_autocomp/ac_parse_line.c\
+			lib_autocomp/ac_init_slct.c\
+			lib_autocomp/ac_init_slct2.c\
 			lib_shell/ascii_art.c\
 			lib_shell/ft_add_line.c\
 			lib_shell/ft_check_path.c\
@@ -144,6 +161,7 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)/lib_shell
 	@mkdir -p $(OBJ_PATH)/lib_termcaps
 	@mkdir -p $(OBJ_PATH)/builtins
+	@mkdir -p $(OBJ_PATH)/lib_autocomp
 	@mkdir -p $(OBJ_PATH)/parsing
 	@$(CC) -c $(FLAGS) $(INC) -o $@ $<
 	@echo -n █

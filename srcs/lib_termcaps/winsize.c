@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   get_cursor_position.c                            .::    .:/ .      .::   */
+/*   str_gestion.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/17 11:18:28 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/04 11:28:22 by volivry     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/06/19 14:41:34 by volivry      #+#   ##    ##    #+#       */
+/*   Updated: 2018/09/05 17:48:47 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	get_curs_pos(t_info *info)
+int		remaining_chars(t_info *info, t_hist *hist)
 {
-	char	pos[20];
-	char	*str;
-	int		i;
+	int	char_nb;
+	int	hist_len;
 
-	i = 0;
-	str = "\033[6n";
-	ft_bzero(pos, 20);
-	ft_printf("%s", str);
-	read(0, pos, 20);
-	info->curs_y = ft_atoi(pos + 2);
-	while (pos[i] && pos[i] != 59)
-		i++;
-	info->curs_x = ft_atoi(pos + i + 1);
+	hist_len = hist->name ? ft_strlen(hist->name) : 0;
+	char_nb = info->row_nb * info->col_nb;
+	return (char_nb - (hist_len + ft_strlen(info->prmpt)) - 1);
 }

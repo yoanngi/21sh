@@ -58,7 +58,7 @@ static char	**heredoc_simple(char *str, int i, int *j)
 	return (new);
 }
 
-static char	**heredoc(char *str, int i, int *j)
+static char	**heredoc_yg(char *str, int i, int *j)
 {
 	char	*tmp;
 	char	**new;
@@ -81,7 +81,7 @@ int			search_heredoc(t_cmd **lst, char *str, int i, int j)
 	if ((*lst)->op_next == 4)
 		(*lst)->heredoc = heredoc_simple(str, i, &j);
 	else if ((*lst)->op_next == 5)
-		(*lst)->heredoc = heredoc(str, i + 1, &j);
+		(*lst)->heredoc = heredoc_yg(str, i + 1, &j);
 	ft_strdel(&tmp);
 	return (j);
 }

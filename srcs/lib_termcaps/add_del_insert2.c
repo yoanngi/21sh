@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   get_cursor_position.c                            .::    .:/ .      .::   */
+/*   add_del_insert2.c                                .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/17 11:18:28 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/04 11:28:22 by volivry     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/09/06 14:11:26 by volivry      #+#   ##    ##    #+#       */
+/*   Updated: 2018/09/06 16:40:03 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	get_curs_pos(t_info *info)
+void	if_end(t_info *info, t_hist *tmp)
 {
-	char	pos[20];
-	char	*str;
-	int		i;
-
-	i = 0;
-	str = "\033[6n";
-	ft_bzero(pos, 20);
-	ft_printf("%s", str);
-	read(0, pos, 20);
-	info->curs_y = ft_atoi(pos + 2);
-	while (pos[i] && pos[i] != 59)
-		i++;
-	info->curs_x = ft_atoi(pos + i + 1);
+	if (tmp->name)
+		if (!((ft_strlen(tmp->name) + ft_strlen(info->prmpt)) % info->col_nb))
+		{
+			if (info->curs_y == info->row_nb)
+				info->orig_y--;
+			tputs(tgetstr("sf", NULL), 1, ft_putchar_err);
+			if (info->curs_in_str >= info->s_len)
+				get_x_back(info);
+		}
 }

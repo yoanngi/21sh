@@ -132,6 +132,8 @@ SRC_NAME =	ft_memset.c \
 			get_next_line.c \
 			get_next_line2.c \
 			get_line.c \
+			last_char.c \
+			free_tab.c \
 
 all: $(NAME)
 

@@ -179,6 +179,8 @@ int					ft_power(int nb, int pwr);
 char				*ft_itoa_base(intmax_t n, int base);
 int					ft_atoi_base(char *str, char *base);
 int					ft_iswhite(int c);
+char				last_char(char *str);
+void				free_tab(char **table);
 /*
 **	GNL
 */

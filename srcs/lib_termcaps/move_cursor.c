@@ -6,7 +6,7 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/17 11:18:44 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/26 14:29:31 by volivry     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 17:48:25 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,8 +40,7 @@ void	left_key(t_info *info)
 			info->curs_in_str--;
 		}
 	}
-	info->curs_x = CURS_X;
-	info->curs_y = CURS_Y;
+	get_curs_pos(info);
 }
 
 /*
@@ -54,8 +53,7 @@ void	left_key(t_info *info)
 
 void	right_key(t_info *info)
 {
-
-//	ft_printf("\n\n %d\n", info->curs_in_str);
+	get_curs_pos(info);
 	if (info->curs_in_str <= info->s_len)
 	{
 		if (info->curs_x < info->col_nb)
@@ -65,17 +63,14 @@ void	right_key(t_info *info)
 		}
 		else if (info->curs_x == info->col_nb)
 		{
-			tputs(tgetstr("sf", NULL), 0, ft_putchar_err);
-			while (info->curs_x > 1)
-			{
-				tputs(tgetstr("le", NULL), 0, ft_putchar_err);
-				info->curs_x--;
-			}
+			if (info->curs_y == info->row_nb)
+				info->orig_y--;
+			tputs(tgetstr("sf", NULL), 1, ft_putchar_err);
+			get_x_back(info);
 			info->curs_in_str++;
 		}
 	}
-	info->curs_x = CURS_X;
-	info->curs_y = CURS_Y;
+	get_curs_pos(info);
 }
 
 /*
@@ -85,11 +80,10 @@ void	right_key(t_info *info)
 void	home_key(t_info *info)
 {
 	tputs(tgetstr("vi", NULL), 1, ft_putchar_err);
-		while (info->curs_in_str > 1)
-			left_key(info);
-		info->curs_x = CURS_X;
-		info->curs_y = CURS_Y;
-		info->curs_in_str = 1;
+	while (info->curs_in_str > 1)
+		left_key(info);
+	get_curs_pos(info);
+	info->curs_in_str = 1;
 	tputs(tgetstr("ve", NULL), 1, ft_putchar_err);
 }
 
@@ -98,8 +92,20 @@ void	end_key(t_info *info)
 	tputs(tgetstr("vi", NULL), 1, ft_putchar_err);
 	while (info->curs_in_str <= info->s_len)
 		right_key(info);
-	info->curs_x = CURS_X;
-	info->curs_y = CURS_Y;
+	get_curs_pos(info);
 	info->curs_in_str = info->s_len + 1;
 	tputs(tgetstr("ve", NULL), 1, ft_putchar_err);
+}
+
+void	get_x_back(t_info *info)
+{
+	int	i;
+
+	get_curs_pos(info);
+	i = info->curs_x;
+	while (i > 1)
+	{
+		tputs(tgetstr("le", NULL), 1, ft_putchar_err);
+		i--;
+	}
 }

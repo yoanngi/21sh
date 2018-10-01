@@ -1,31 +1,43 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   get_cursor_position.c                            .::    .:/ .      .::   */
+/*   ac_init_slct2.c                                  .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/17 11:18:28 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/04 11:28:22 by volivry     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/09/28 14:21:33 by volivry      #+#   ##    ##    #+#       */
+/*   Updated: 2018/09/28 14:24:37 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	get_curs_pos(t_info *info)
+void	fill_commands(t_slct *root, t_info *info)
 {
-	char	pos[20];
-	char	*str;
-	int		i;
+	struct dirent	*dp;
+	DIR				*dirp;
+	char			**pathes;
+	char			*str;
+	int				i;
 
 	i = 0;
-	str = "\033[6n";
-	ft_bzero(pos, 20);
-	ft_printf("%s", str);
-	read(0, pos, 20);
-	info->curs_y = ft_atoi(pos + 2);
-	while (pos[i] && pos[i] != 59)
+	str = NULL;
+	dp = NULL;
+	str = getenv("PATH");
+	pathes = ft_strsplit(str, ':');
+	while (pathes[i])
+	{
+		if ((dirp = opendir(pathes[i])) != NULL)
+		{
+			while ((dp = readdir(dirp)) != NULL)
+				if (dp->d_name[0] != '.' &&
+						contains_letters(dp->d_name, info->letters))
+					ac_add_queue(root, dp);
+			closedir(dirp);
+		}
+		ft_strdel(&pathes[i]);
 		i++;
-	info->curs_x = ft_atoi(pos + i + 1);
+	}
+	free(pathes);
 }

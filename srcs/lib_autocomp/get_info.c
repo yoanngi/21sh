@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   get_cursor_position.c                            .::    .:/ .      .::   */
+/*   get_info.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/17 11:18:28 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/04 11:28:22 by volivry     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/30 12:07:02 by volivry      #+#   ##    ##    #+#       */
+/*   Updated: 2018/08/27 16:49:27 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	get_curs_pos(t_info *info)
+void	ac_get_info(t_slct *slct, t_info *info)
 {
-	char	pos[20];
-	char	*str;
-	int		i;
+	t_slct	*tmp;
 
-	i = 0;
-	str = "\033[6n";
-	ft_bzero(pos, 20);
-	ft_printf("%s", str);
-	read(0, pos, 20);
-	info->curs_y = ft_atoi(pos + 2);
-	while (pos[i] && pos[i] != 59)
-		i++;
-	info->curs_x = ft_atoi(pos + i + 1);
+	tmp = NULL;
+	if (slct)
+	{
+		tmp = ac_first_elem(slct);
+		while (tmp != slct)
+		{
+			if (tmp->len > info->max_len)
+				info->max_len = tmp->len;
+			info->nb_elem++;
+			tmp = tmp->next;
+		}
+	}
 }

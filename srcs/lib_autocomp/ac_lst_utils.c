@@ -5,24 +5,29 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/06/27 10:25:07 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 17:48:22 by volivry     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/28 14:10:10 by volivry      #+#   ##    ##    #+#       */
+/*   Updated: 2018/08/27 11:55:12 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	add_queue(t_hist *elem)
+void	ac_add_after_lst(t_slct *elem, struct dirent *dp)
 {
-	t_hist	*new_elem;
+	t_slct	*new_elem;
 
 	new_elem = NULL;
-	if ((new_elem = (t_hist*)malloc(sizeof(*new_elem))))
+	if ((new_elem = (t_slct*)malloc(sizeof(*new_elem))))
 	{
-		new_elem->name = NULL;
-		new_elem->backup = NULL;
+		new_elem->name = ft_strdup(dp->d_name);
+		new_elem->len = ft_strlen(dp->d_name);
+		new_elem->is_exe = is_exe(new_elem->name);
+		new_elem->is_dir = dp->d_type == DT_DIR ? 1 : 0;
+		if (new_elem->is_dir || new_elem->is_exe)
+			new_elem->len++;
 		new_elem->current = 0;
+		new_elem->index = 0;
 		new_elem->prev = elem;
 		new_elem->next = elem->next;
 		elem->next->prev = new_elem;
@@ -30,16 +35,23 @@ void	add_queue(t_hist *elem)
 	}
 }
 
-void	add_head(t_hist *elem)
+void	ac_add_before_lst(t_slct *elem, struct dirent *dp)
 {
-	t_hist	*new_elem;
+	t_slct	*new_elem;
+	int		i;
 
 	new_elem = NULL;
-	if ((new_elem = (t_hist*)malloc(sizeof(*new_elem))))
+	if ((new_elem = (t_slct*)malloc(sizeof(*new_elem))))
 	{
-		new_elem->name = NULL;
-		new_elem->backup = NULL;
-		new_elem->current = 1;
+		new_elem->name = ft_strdup(dp->d_name);
+		new_elem->len = ft_strlen(dp->d_name);
+		i = is_exe(new_elem->name);
+		new_elem->is_exe = i;
+		new_elem->is_dir = dp->d_type == DT_DIR ? 1 : 0;
+		if (new_elem->is_dir || new_elem->is_exe)
+			new_elem->len++;
+		new_elem->current = 0;
+		new_elem->index = 0;
 		new_elem->prev = elem->prev;
 		new_elem->next = elem;
 		elem->prev->next = new_elem;
@@ -47,12 +59,19 @@ void	add_head(t_hist *elem)
 	}
 }
 
-void	remove_elem(t_hist *elem)
+void	ac_add_queue(t_slct *root, struct dirent *dp)
+{
+	ac_add_before_lst(root, dp);
+}
+
+void	ac_add_head(t_slct *root, struct dirent *dp)
+{
+	ac_add_after_lst(root, dp);
+}
+
+void	ac_remove_elem(t_slct *elem)
 {
 	elem->prev->next = elem->next;
 	elem->next->prev = elem->prev;
-	if (elem->name)
-		ft_strdel(&elem->name);
-	if (elem->backup)
-		ft_strdel(&elem->backup);
+	ft_strdel(&elem->name);
 }

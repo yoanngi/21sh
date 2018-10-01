@@ -13,6 +13,7 @@
 
 #include "../../includes/shell.h"
 
+
 /*
 **	parse_line : Parse la line et la convertit en liste chainer
 **	Execute la / les commandes
@@ -34,7 +35,7 @@ static t_ins		*what_next_link(t_ins *lst, int code)
 	return (NULL);
 }
 
-static int			parse_line(t_struct *data, char **line)
+int					parse_line(t_struct *data, char **line)
 {
 	int		ret;
 	t_ins	*cpy;
@@ -89,25 +90,21 @@ void				core_shell(t_struct *data)
 	while (quit == 0)
 	{
 		line_edit(&g_info, tmp);
+		g_data->is_executing = 1;
 		if (g_info.line != NULL && quit == 0)
 		{
-			if (g_info.quoted)
-			{
-				full_line = str_append(full_line, g_info.line);
-				full_line = str_append(full_line, "\n");
-				ft_strdel(&(g_info.line));
-			}
-			else
-			{
-				full_line = str_append(full_line, g_info.line);
-				ft_strdel(&(g_info.line));
-				default_term_mode(&g_info);
-				delete_bs(&(full_line));
-				quit = parse_line(data, &(full_line));
-				ft_strdel(&full_line);
-			}
+			full_line = quoted_loops(full_line, data, &quit);
+			ft_strdel(&(g_info.line));
 		}
 		reinit_info(&g_info);
 	}
+	if (full_line)
+		ft_strdel(&full_line);
+	if (g_info.line)
+		ft_strdel(&g_info.line);
+	free_hist(g_info.history);
+	if (g_info.copy)
+		ft_strdel(&g_info.copy);
+	ft_strdel(&g_info.prmpt);
 	default_term_mode(&g_info);
 }

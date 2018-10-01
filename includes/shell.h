@@ -186,6 +186,7 @@ typedef struct		s_struct
 	int				code_erreur;
 	int				sizemax;
 	int				pid;
+	int				is_executing;
 	t_ins			*commandes;
 }					t_struct;
 
@@ -213,6 +214,7 @@ int					exit_status(int status);
 int					wait_or_not(int *status, pid_t pid, t_cmd *start);
 int					redirection_fd(t_cmd *data);
 int					delete_tmp(char **file);
+int					parse_line(t_struct *data, char **line);
 /*
 **	PARSING
 */
@@ -342,6 +344,13 @@ void				print_debug(t_cmd **data, int code);
 typedef struct winsize t_wndw;
 typedef struct termios t_termios;
 
+typedef struct		s_here_d
+{
+	char			*cmd;
+	char			*trigger;
+	char			*fill;
+}					t_here_d;
+
 typedef struct		s_hist
 {
 	char			*name;
@@ -367,16 +376,25 @@ typedef struct		s_info
 	t_hist			*history;
 	t_wndw			wndw;
 	t_termios		term;
+	char			*letters;
+	int				nb_elem;
+	int				max_len;
+	int				loop;
+	t_here_d		h_d;
 }					t_info;
 
 t_info				g_info;
 
+char 				*heredoc(void);
 void				default_term_mode(t_info *info);
+void				reinit_info(t_info *info);
 void				raw_term_mode(t_info *info);
-void				get_key(int *loop, t_info *info, t_hist *tmp);
+void				get_key(t_info *info, t_hist *tmp);
 t_info				*memo_info(t_info *info, int mode);
-int					get_curs_pos(int mode, t_info *info);
+void				get_curs_pos(t_info *info);
 void				get_signals(void);
+void				cursor_start(t_info *info);
+void				rc_key(t_info *info, t_hist *tmp);
 void				left_key(t_info *info);
 void				right_key(t_info *info);
 void				add_c_in_str(t_info *info, char c, t_hist *tmp);
@@ -398,15 +416,70 @@ void				alt_right(t_info *info, t_hist *tmp);
 void				alt_left(t_info *info, t_hist *tmp);
 void				up_key(t_info *info, t_hist *tmp);
 void				down_key(t_info *info, t_hist *tmp);
+void				ctrl_d(t_info *info, t_hist *tmp);
 void				change_prompt(t_info *info, int mode);
 void				print_prompt(t_info *info);
 void				fill_history(t_info *info, t_hist *tmp);
 void				toggle_quote(t_info *info);
 void				line_edit(t_info *info, t_hist *tmp);
 void				cut_n_cpy(t_info *info, char *buff, t_hist *tmp);
+void				get_x_back(t_info *info);
+int					remaining_chars(t_info *info, t_hist *hist);
+void				free_hist(t_hist *lst);
+void				ctrl_c(int sig);
+void				if_end(t_info *info, t_hist *tmp);
+char*				quoted_loops(char *full_line, t_struct *data, int *quit);
+void			init_info(t_info *info);
+
+/*
+** LIB_AUTOCOMP
+*/
+
+typedef struct		s_slct
+{
+	int				current;
+	int				len;
+	int				is_dir;
+	int				is_exe;
+	char			*name;
+	int				index;
+	struct s_slct	*next;
+	struct s_slct	*prev;
+
+}					t_slct;
+
+void				autocomp(t_info *info, t_hist *hist);
+void				ac_get_info(t_slct *slct, t_info *info);
+void				ac_add_after_lst(t_slct *elem, struct dirent *dp);
+void				ac_add_before_lst(t_slct *elem, struct dirent *dp);
+void				ac_add_queue(t_slct *root, struct dirent *dp);
+void				ac_add_head(t_slct *root, struct dirent *dp);
+void				ac_remove_elem(t_slct *elem);
+t_slct				*root_slct(void);
+t_slct				*init_slct(char *line, t_info *info, t_hist *hist);
+t_slct				*ac_first_elem(t_slct *root);
+t_slct				*ac_last_elem(t_slct *root);
+void				free_slct(t_slct *lst, t_info *info);
 void				init_info(t_info *info);
-void				reinit_info(t_info *info);
-void				line_edit(t_info *info, t_hist *tmp);
+void				fill_commands(t_slct *root, t_info *info);
+void				ac_right_key(t_info *info, t_slct *slct, t_hist *hist);
+void				ac_left_key(t_info *info, t_slct *slct, t_hist *hist);
+void				ac_up_key(t_info *info, t_slct *slct, t_hist *hist);
+void				ac_down_key(t_info *info, t_slct *slct, t_hist *hist);
+void				ac_tab_key(t_info *info, t_slct *slct, t_hist *hist);
+void				key_input(t_info *info, t_slct *slct, int *loop, t_hist *hist);
+void				ac_print_arg(t_slct *slct, t_info *info);
+void				display(t_info *info, t_slct *slct);
+void				update_index(t_slct *root);
+void				reset_screen(t_info *info);
+void				restore_curs(t_hist *hist, t_info *info, t_slct *slct);
+int					get_row_number(t_info *info);
+int					is_exe(char *name);
+void				add_slct(t_slct *slct, t_info *info);
+void				erase_prev(t_info *info, t_hist *hist);
+int					slct_current(t_slct *slct,t_info * info, t_hist *hist);
+char				*get_last_word(char *line, t_info *info);
+int					contains_letters(char *name, char *letters);
 
 /*
 **	END

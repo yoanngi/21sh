@@ -6,28 +6,32 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/25 13:50:09 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/11 13:41:04 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 17:47:51 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-static void		copy_end(t_info *info, t_hist *tmp)
+static void	copy_end(t_info *info, t_hist *tmp)
 {
 	int		curs_pos;
 	char	*tmp_str;
 	int		i;
 
-	i = -1;
+	i = 0;
 	tmp_str = NULL;
-	curs_pos = info->curs_in_str - 2;
+	curs_pos = info->curs_in_str - 1;
 	if (info->curs_in_str <= info->s_len)
 	{
-		if (!(tmp_str = malloc(ft_strlen(tmp->name) - curs_pos + 1)))
+		if (!(tmp_str = malloc(ft_strlen(tmp->name) - curs_pos + 2)))
 			exit(0);
-		while (curs_pos < ft_strlen(tmp->name))
-			tmp_str[i++] = tmp->name[curs_pos++];
+		while (curs_pos < ft_strlen(tmp->name) + 1)
+		{
+			tmp_str[i] = tmp->name[curs_pos];
+			i++;
+			curs_pos++;
+		}
 		tmp_str[i] = 0;
 		if (tmp_str)
 			if (info->copy)
@@ -37,7 +41,7 @@ static void		copy_end(t_info *info, t_hist *tmp)
 	}
 }
 
-static void		copy_beginning(t_info *info, t_hist *tmp)
+static void	copy_beginning(t_info *info, t_hist *tmp)
 {
 	int		curs_pos;
 	char	*tmp_str;
@@ -60,7 +64,7 @@ static void		copy_beginning(t_info *info, t_hist *tmp)
 	}
 }
 
-static void		cut_end(t_info *info, t_hist *tmp)
+static void	cut_end(t_info *info, t_hist *tmp)
 {
 	int		curs_pos;
 
@@ -71,21 +75,19 @@ static void		cut_end(t_info *info, t_hist *tmp)
 		del_char(info, tmp);
 }
 
-static void		cut_beginning(t_info *info, t_hist *tmp)
+static void	cut_beginning(t_info *info, t_hist *tmp)
 {
-	int		curs_pos;
-
-	curs_pos = info->curs_in_str;
+	int	i;
 	copy_beginning(info, tmp);
-	home_key(info);
-	while (info->curs_in_str < curs_pos)
+	i = ft_strlen(info->copy) + 1;
+	while (i)
 	{
 		del_char(info, tmp);
-		curs_pos--;
+		i--;
 	}
 }
 
-void			cut_n_cpy(t_info *info, char *buff, t_hist *tmp)
+void		cut_n_cpy(t_info *info, char *buff, t_hist *tmp)
 {
 	int	i;
 

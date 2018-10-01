@@ -6,26 +6,29 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/27 10:51:34 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/24 11:30:50 by volivry     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/06 17:18:39 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	insert_char(char c, t_info *info, t_hist *tmp)
+void		insert_char(char c, t_info *info, t_hist *tmp)
 {
 	int		i;
 
 	i = info->curs_in_str - 1;
+	if (!remaining_chars(info, tmp))
+	{
+		tputs(tgetstr("bl", NULL), 1, ft_putchar_err);
+		return ;
+	}
 	tputs(tgetstr("sc", NULL), 1, ft_putchar_err);
 	tputs(tgetstr("cd", NULL), 1, ft_putchar_err);
 	add_c_in_str(info, c, tmp);
 	ft_putchar(c);
-	tputs(tgetstr("vi", NULL), 1, ft_putchar_err);
 	while (i++ < info->s_len)
 		ft_putchar(tmp->name[i]);
-	tputs(tgetstr("ve", NULL), 1, ft_putchar_err);
 	tputs(tgetstr("rc", NULL), 1, ft_putchar_err);
 	right_key(info);
 	info->s_len++;
@@ -36,29 +39,34 @@ void	insert_char(char c, t_info *info, t_hist *tmp)
 		tputs(tgetstr("up", NULL), 1, ft_putchar_err);
 		info->orig_y--;
 	}
+	get_curs_pos(info);
 }
 
-void	add_char(char c, t_info *info, t_hist *tmp)
+void		add_char(char c, t_info *info, t_hist *tmp)
 {
 	char	chr[2];
 
 	chr[0] = c;
 	chr[1] = '\0';
+	if (!remaining_chars(info, tmp))
+	{
+		tputs(tgetstr("bl", NULL), 1, ft_putchar_err);
+		return ;
+	}
 	tmp->name = !tmp->name ? ft_strdup(chr) : str_append(tmp->name, chr);
 	ft_putchar(c);
-	info->curs_x = CURS_X;
-	info->curs_y = CURS_Y;
+	get_curs_pos(info);
 	info->curs_in_str++;
 	info->s_len++;
-	if (info->curs_y == info->row_nb && info->curs_x == 2)
-		info->orig_y--;
+	if_end(info, tmp);
 }
 
-void	del_char(t_info *info, t_hist *tmp)
+void		del_char(t_info *info, t_hist *tmp)
 {
 	int	i;
 
-	if (info->s_len && (info->curs_x > 1 || info->curs_y > info->orig_y))
+	if (info->s_len && (info->curs_x > 1 || info->curs_y > info->orig_y)
+			&& info->curs_in_str > 1)
 	{
 		left_key(info);
 		i = info->curs_in_str - 2;
@@ -74,7 +82,7 @@ void	del_char(t_info *info, t_hist *tmp)
 	}
 }
 
-void	add_c_in_str(t_info *info, char c, t_hist *tmp)
+void		add_c_in_str(t_info *info, char c, t_hist *tmp)
 {
 	char	*str;
 	int		i;
@@ -101,7 +109,7 @@ void	add_c_in_str(t_info *info, char c, t_hist *tmp)
 	ft_strdel(&str);
 }
 
-void	del_c_in_str(t_info *info, t_hist *tmp)
+void		del_c_in_str(t_info *info, t_hist *tmp)
 {
 	char	*str;
 	int		i;

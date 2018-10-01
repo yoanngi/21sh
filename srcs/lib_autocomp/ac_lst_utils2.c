@@ -6,29 +6,30 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/29 13:57:56 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/04 17:43:31 by volivry     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/28 17:13:35 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-t_hist	*root_hist(void)
+t_slct	*root_slct(void)
 {
-	t_hist	*lst;
+	t_slct	*lst;
 
 	lst = NULL;
 	if (!(lst = malloc(sizeof(*lst))))
 		return (NULL);
+	lst->current = 1;
+	lst->len = 0;
+	lst->index = 0;
 	lst->name = NULL;
-	lst->backup = NULL;
-	lst->current = 0;
 	lst->next = lst;
 	lst->prev = lst;
 	return (lst);
 }
 
-t_hist	*first_elem(t_hist *root)
+t_slct	*ac_first_elem(t_slct *root)
 {
 	if (root->next != root)
 		return (root->next);
@@ -36,7 +37,7 @@ t_hist	*first_elem(t_hist *root)
 		return (NULL);
 }
 
-t_hist	*last_elem(t_hist *root)
+t_slct	*ac_last_elem(t_slct *root)
 {
 	if (root->prev != root)
 		return (root->prev);
@@ -44,34 +45,14 @@ t_hist	*last_elem(t_hist *root)
 		return (NULL);
 }
 
-void	init_current(t_hist *history)
+void	update_index(t_slct *root)
 {
-	t_hist	*tmp;
+	t_slct	*tmp;
 
-	tmp = first_elem(history);
-	while (tmp->next != history)
+	tmp = ac_first_elem(root);
+	while (tmp != root)
 	{
-		tmp->current = 0;
+		tmp->index = tmp->prev->index + 1;
 		tmp = tmp->next;
 	}
-	tmp->current = 1;
-}
-
-void	free_hist(t_hist *lst)
-{
-	t_hist	*tmp;
-	t_hist	*tmp2;
-
-	tmp = lst->next;
-	if (lst)
-	{
-		while (tmp != lst)
-		{
-			tmp2 = tmp->next;
-			remove_elem(tmp);
-			ft_memdel((void**)&tmp);
-			tmp = tmp2;
-		}
-	}
-	ft_memdel((void**)&lst);
 }
