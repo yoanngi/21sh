@@ -59,12 +59,6 @@ int					parse_line(t_struct *data, char **line)
 			}
 			data->code_erreur = ret;
 		}
-		// A DETETE **********************************************************
-		//ft_putstr_fd(GREEN, 2);
-		//ft_printf("******* repertoire = %s\n", data->pwd);
-		//ft_printf("******* Valeur de retour (data->code_erreur) = %d\n", data->code_erreur);
-		//ft_putstr_fd(RESET, 2);
-		// *******************************************************************
 		cpy = what_next_link(cpy, data->code_erreur);
 	}
 	data->commandes = clear_ins(data->commandes);
@@ -90,7 +84,6 @@ void				core_shell(t_struct *data)
 	while (quit == 0)
 	{
 		line_edit(&g_info, tmp);
-		g_data->is_executing = 1;
 		if (g_info.line != NULL && quit == 0)
 		{
 			full_line = quoted_loops(full_line, data, &quit);

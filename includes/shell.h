@@ -119,6 +119,7 @@ typedef struct		s_cmd
 	int				stderr_cmd;
 	int				pid;
     int             bad_fd;
+	char			*line;
 	struct s_path	*pathname;
 	struct s_cmd	*next;
 }					t_cmd;
@@ -334,6 +335,9 @@ char				*ft_return_pwd(void);
 int					len_list(t_cmd *lst);
 int					resize_str(char **str, int len);
 int					replace_line(char **line, char *str);
+char				*insert_in_line(char *str, int i, char *insert);
+int					echap_quote(char *str, int i, int opt);
+int         		increase_tab(char ***tabl);
 /*
 **	DEBUG
 */

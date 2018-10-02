@@ -32,6 +32,7 @@ t_cmd			*ft_init_cmd(void)
 	new->bad_fd = 0;
 	new->pid = 0;
 	new->env = NULL;
+	new->line = NULL;
 	new->next = NULL;
 	return (new);
 }
@@ -48,6 +49,7 @@ t_cmd			*clear_cmd(t_cmd *start)
 	while (clear)
 	{
 		ft_strdel(&clear->rep);
+		ft_strdel(&clear->line);
 		clear->tab_cmd = ft_del_tab(clear->tab_cmd);
 		clear->heredoc = ft_del_tab(clear->heredoc);
 		clear_pathname(&clear->pathname);

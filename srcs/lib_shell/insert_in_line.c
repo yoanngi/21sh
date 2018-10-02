@@ -1,45 +1,40 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   replace_in_line.c                                .::    .:/ .      .::   */
+/*   insert_in_line.c                                 .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/08/22 11:40:00 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 16:11:52 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/10/02 11:18:47 by yoginet      #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/02 11:18:53 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-/*
-**  remplace ~ et $ dans line
-**	Appeler dans check_validity
-*/
-
-static char		*replace_suite(t_struct *data, char *line)
-{
-	return (NULL);
-}
-
-int				replace_in_line(t_struct *data, char **line)
+char	*insert_in_line(char *str, int i, char *insert)
 {
 	char	*tmp;
+	char	*tmp2;
+	char	*tmp3;
 
 	tmp = NULL;
-	if (*line == NULL || ft_strlen(*line) < 1)
-		return (1);
-	if (ft_strstr(*line, "~") == NULL || ft_strstr(*line, "$") == NULL)
-		return (0);
-	if (!(tmp = ft_strdup(*line)))
-		return (1);
-	tmp = replace_suite(data, *line);
-	if (tmp != NULL)
+	tmp2 = NULL;
+	tmp3 = NULL;
+	if (!(str))
+		return (NULL);
+	if (!(tmp = ft_strsub(str, 0, i)))
+		return (NULL);
+	if (!(tmp2 = ft_strsub(str, i + 1, ft_strlen(str) - (i + 1))))
 	{
-		ft_strdel(line);
-		*line = ft_strdup(tmp);
+		ft_strdel(&tmp);
+		return (NULL);
 	}
+	tmp3 = ft_strjoin(tmp, insert);
 	ft_strdel(&tmp);
-	return (0);
+	tmp = ft_strjoin(tmp3, tmp2);
+	ft_strdel(&tmp2);
+	ft_strdel(&tmp3);
+	return (tmp);
 }

@@ -78,6 +78,8 @@ t_ins			*ft_split_commandes(char **line, t_struct *data)
 	{
 		tmp = ft_strdup(cpy->str);
 		cpy->cmd = ft_split_cmd(tmp, data);
+		if (cpy->cmd != NULL)
+			cpy->cmd->line = ft_strdup(*line);
 		cpy = cpy->next;
 		ft_strdel(&tmp);
 	}

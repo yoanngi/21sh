@@ -105,6 +105,9 @@ N_SRCS = 	main.c\
 			lib_shell/resize_str.c\
 			lib_shell/ft_replace_word.c\
 			lib_shell/replace_line.c\
+			lib_shell/insert_in_line.c\
+			lib_shell/echap_quote.c\
+			lib_shell/increase_tab.c\
 			builtins/good_func.c\
 			builtins/func_cd.c\
 			builtins/func_echo.c\
