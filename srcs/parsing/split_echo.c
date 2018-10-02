@@ -45,23 +45,19 @@ static int	check_split_echo(char ***tabl, int index)
 	i = 0;
 	t = index + 1;
 	tmp = NULL;
-	while ((*tabl)[index][i])
+	debug(tabl);
+	i = echap_quote((*tabl)[index], i, 0);
+	if (i == 0)
+		i = echap_word((*tabl)[index], i);
+	if (i + 1 < ft_strlen((*tabl)[index]))
 	{
-		debug(tabl);
-		i = echap_quote((*tabl)[index], i, 0);
-		if (i == 0)
-			i = echap_word((*tabl)[index], i);
-		if (i + 1 < ft_strlen((*tabl)[index]))
-		{
-			increase_tab(tabl);
-			tmp = ft_strsub((*tabl)[index], 0, i);
-			(*tabl)[t] = ft_strsub((*tabl)[index], i + 1, ft_strlen((*tabl)[index]) - (i + 1));
-			ft_strdel(&(*tabl)[index]);
-			(*tabl)[index] = ft_strdup(tmp);
-			ft_strdel(&tmp);
-			check_split_echo(tabl, index + 1);
-		}
-		i++;
+		increase_tab(tabl);
+		tmp = ft_strsub((*tabl)[index], 0, i);
+		(*tabl)[t] = ft_strsub((*tabl)[index], i + 1, ft_strlen((*tabl)[index]) - (i + 1));
+		ft_strdel(&(*tabl)[index]);
+		(*tabl)[index] = ft_strdup(tmp);
+		ft_strdel(&tmp);
+		check_split_echo(tabl, index + 1);
 	}
 	return (0);
 }
