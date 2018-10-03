@@ -18,6 +18,21 @@
 **	Appeler dans check_validity
 */
 
+static int		return_compt(char *str, int j)
+{
+	int		compt;
+
+	compt = 0;
+	if (str == NULL)
+		return (0);
+	while (str[j] > 64 && str[j] < 91)
+	{
+		j++;
+		compt++;
+	}
+	return (compt);
+}
+
 static char		*return_dol(t_struct *data, char *str, int i)
 {
 	char	*dol;
@@ -31,12 +46,17 @@ static char		*return_dol(t_struct *data, char *str, int i)
 	ret = NULL;
 	j = i;
 	compt = 0;
-	while (str[j] > 64 && str[j] < 91)
-		compt++;
+	j++;
+	compt = return_compt(str, j);
 	tmp = ft_strsub(str, i, compt + 1);
+	j = ft_strlen(tmp) - 1;
 	dol = ft_return_dollar(data, tmp, compt + 1);
 	ret = insert_in_line(str, i, dol);
-	return (ret);
+	ft_strdel(&dol);
+	dol = ft_strsub(ret, 0, ft_strlen(ret) - j);
+	ft_strdel(&ret);
+	ft_strdel(&tmp);
+	return (dol);
 }
 
 static char		*replace_suite(t_struct *data, char **str)
@@ -77,7 +97,7 @@ int				replace_in_line(t_struct *data, char **line)
 		return (1);
 	if (ft_strlen(*line) < 1)
 		return (1);
-	if (ft_strstr(*line, "~") == NULL || ft_strstr(*line, "$") == NULL)
+	if (ft_strstr(*line, "~") == NULL && ft_strstr(*line, "$") == NULL)
 		return (0);
 	if (!(tmp = ft_strdup(*line)))
 		return (1);
@@ -88,5 +108,6 @@ int				replace_in_line(t_struct *data, char **line)
 		*line = ft_strdup(tmp);
 	}
 	ft_strdel(&tmp);
+	delete_back_slash(line);
 	return (0);
 }

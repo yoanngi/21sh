@@ -13,26 +13,19 @@
 
 #include "../../includes/shell.h"
 
-
-static void	debug(char ***tabl)
-{
-	int		i;
-
-	i = 0;
-	//return ;
-	printf("***********************************\n");
-	while ((*tabl)[i])
-	{
-		printf("tabl[%d] = %s\n", i, (*tabl)[i]);
-		i++;
-	}
-	printf("***********************************\n\n");
-}
-
 static int	echap_word(char *str, int i)
 {
-	while (str[i] && (str[i] != ' ' || str[i] != '\t'))
+	if (str[i] == ' ' || str[i] == '\t')
+	{
+		while (str[i] == ' ' || str[i] == '\t')
+			i++;
+	}
+	while (str[i])
+	{
+		if (str[i] == ' ' || str[i] == '\t')
+			return (i);
 		i++;
+	}
 	return (i);
 }
 
@@ -40,12 +33,13 @@ static int	check_split_echo(char ***tabl, int index)
 {
 	int 	i;
 	int 	t;
+	int		len;
 	char	*tmp;
 
 	i = 0;
 	t = index + 1;
+	len = 0;
 	tmp = NULL;
-	debug(tabl);
 	i = echap_quote((*tabl)[index], i, 0);
 	if (i == 0)
 		i = echap_word((*tabl)[index], i);
@@ -53,7 +47,9 @@ static int	check_split_echo(char ***tabl, int index)
 	{
 		increase_tab(tabl);
 		tmp = ft_strsub((*tabl)[index], 0, i);
-		(*tabl)[t] = ft_strsub((*tabl)[index], i + 1, ft_strlen((*tabl)[index]) - (i + 1));
+		len = ft_strlen((*tabl)[index]);
+		(*tabl)[t] = ft_strsub((*tabl)[index], i + 1, len - (i + 1));
+		clear_line(&(*tabl)[t]);
 		ft_strdel(&(*tabl)[index]);
 		(*tabl)[index] = ft_strdup(tmp);
 		ft_strdel(&tmp);
@@ -68,12 +64,10 @@ static int	check_split_echo(char ***tabl, int index)
 
 char		**split_echo(char *str)
 {
-	int ret;
-	char **new;
-	char **tmp;
+	int 	ret;
+	char	**new;
 
 	new = NULL;
-	tmp = NULL;
 	ret = 0;
 	if (ft_strstr(str, "\"") == NULL && ft_strstr(str, "\'") == NULL)
 	{

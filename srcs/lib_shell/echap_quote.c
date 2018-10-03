@@ -22,6 +22,8 @@ static int	echap_back_slash(char *str, int i)
 	if (str[i] == '\\')
 	{
 		i++;
+		if (str[i] == '\\')
+			return (i);
 		while (str[i] && (str[i] != ' ' || str[i] != '\t'))
 			i++;
 	}

@@ -27,9 +27,9 @@ int			increase_tab(char ***tabl)
 	size = ft_len_tab((*tabl));
 	i = 0;
 	cpy = ft_duplicate_tab((*tabl));
-	(*tabl) = ft_del_tab((*tabl));
+	(*tabl) = ft_del_tab(*tabl);
 	(*tabl) = (char **)malloc(sizeof(char *) * (size + 2));
-	while (i < (size + 2))
+	while (i != (size + 1))
 	{
 		if (cpy[i] != NULL)
 			(*tabl)[i] = ft_strdup(cpy[i]);
@@ -37,6 +37,7 @@ int			increase_tab(char ***tabl)
 			(*tabl)[i] = NULL;
 		i++;
 	}
+	(*tabl)[size + 1] = NULL;
 	cpy = ft_del_tab(cpy);
 	return (0);
 }

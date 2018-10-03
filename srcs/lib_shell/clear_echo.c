@@ -1,30 +1,17 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   split_echo_suite.c                               .::    .:/ .      .::   */
+/*   clear_echo.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/08/21 10:49:44 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 11:05:07 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/10/03 11:45:16 by yoginet      #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/03 11:45:18 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
-
-int			resize_str_echo(char **str, int start, int len)
-{
-	char	*tmp;
-
-	tmp = NULL;
-	if (!(tmp = ft_strdup(*str)))
-		return (1);
-	ft_strdel(str);
-	*str = ft_strsub(tmp, start, len);
-	ft_strdel(&tmp);
-	return (0);
-}
 
 static int	check_line_echo(char **str)
 {

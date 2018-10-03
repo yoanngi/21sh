@@ -246,13 +246,10 @@ void				print_msg_error(char *str, int i);
 void				clear_string(char **str, int deleted, int opt);
 int 				search_fd(char *str, int i);
 int 				modifie_fd(t_cmd **lst, char *str, int start);
-int					resize_str_echo(char **str, int start, int len);
 int					check_regex_classic(t_struct *data, char **line);
 int					good_op_next(t_cmd **lst, char *str, int i);
 void				verifie_op(t_cmd **lst, char *str, int i);
 int					check_search_null(t_path **lst, char *str, int i, int j);
-int					clear_echo(char ***tabl);
-int					delete_bs(char **line);
 /*
  **	BUILTINS
  */
@@ -338,6 +335,8 @@ int					replace_line(char **line, char *str);
 char				*insert_in_line(char *str, int i, char *insert);
 int					echap_quote(char *str, int i, int opt);
 int         		increase_tab(char ***tabl);
+int					clear_echo(char ***tabl);
+int         		delete_back_slash(char **line);
 /*
 **	DEBUG
 */
