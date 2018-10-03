@@ -57,6 +57,33 @@ static char	**heredoc_simple(char *str, int i, int *j)
 	ft_strdel(&tmp);
 	return (new);
 }
+/*
+static int	clear_heredoc(char **str)
+{
+	char	*tmp;
+	int		i;
+
+	tmp = NULL;
+	i = 0;
+	if (!(*str))
+		return (1);
+	if (!(tmp = ft_strdup(*str)))
+		return (1);
+	while (i != ft_strlen(tmp))
+	{
+		if (tmp[i] == '<' && tmp[i + i] == '<')
+		{
+			printf("HEEEEEEEEEEEEEEEERE\n");
+			ft_strdel(str);
+			*str = ft_strsub(tmp, i + 1, ft_strlen(tmp) - (i + 1));
+			ft_strdel(&tmp);
+			return (0);
+		}
+		i++;
+	}
+	ft_strdel(&tmp);
+	return (0);
+}*/
 
 int			search_heredoc(t_cmd **lst, char *str, int i, int j)
 {
@@ -71,8 +98,12 @@ int			search_heredoc(t_cmd **lst, char *str, int i, int j)
 	{
 		(*lst)->line = ft_strdup(str);
 		(*lst)->heredoc_str = heredoc();
-		ft_printf("Ret HD: %s\n", (*lst)->heredoc_str);
+		printf("LAAAAAAAAAAAAAA-> %s\n", (*lst)->heredoc_str);
+		//clear_heredoc(&(*lst)->heredoc_str);
 	}
+	change_prompt(&g_info, 0);
+/*	if (g_info.h_d.fill)
+		ft_strdel(&g_info.h_d.fill);*/
 	ft_strdel(&(*lst)->line);
 	ft_strdel(&tmp);
 	return (j);
