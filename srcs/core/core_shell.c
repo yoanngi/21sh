@@ -41,6 +41,7 @@ int					parse_line(t_struct *data, char **line)
 	t_ins	*cpy;
 
 	ret = 0;
+	printf("line = %s\n", *line);
 	if (ft_check_line_vide(*line, &data) == 0)
 		return (0);
 	data->commandes = ft_split_commandes(line, data);
@@ -59,6 +60,12 @@ int					parse_line(t_struct *data, char **line)
 			}
 			data->code_erreur = ret;
 		}
+		// A DETETE **********************************************************
+		//ft_putstr_fd(GREEN, 2);
+		//ft_printf("******* repertoire = %s\n", data->pwd);
+		//ft_printf("******* Valeur de retour (data->code_erreur) = %d\n", data->code_erreur);
+		//ft_putstr_fd(RESET, 2);
+		// *******************************************************************
 		cpy = what_next_link(cpy, data->code_erreur);
 	}
 	data->commandes = clear_ins(data->commandes);

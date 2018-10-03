@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/04 14:43:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 13:22:31 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/03 14:50:41 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -112,6 +112,7 @@ typedef struct		s_cmd
 	char			**env;
 	char			**tab_cmd;
 	char			**heredoc;
+	char			*heredoc_str;
 	char			*rep;
 	int				op_next;
 	int				stdin_cmd;
@@ -432,7 +433,7 @@ void				free_hist(t_hist *lst);
 void				ctrl_c(int sig);
 void				if_end(t_info *info, t_hist *tmp);
 char*				quoted_loops(char *full_line, t_struct *data, int *quit);
-void			init_info(t_info *info);
+void				init_info(t_info *info);
 
 /*
 ** LIB_AUTOCOMP

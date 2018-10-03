@@ -58,19 +58,6 @@ static char	**heredoc_simple(char *str, int i, int *j)
 	return (new);
 }
 
-static char	**heredoc_yg(char *str, int i, int *j)
-{
-	char	*tmp;
-	char	**new;
-
-	tmp = NULL;
-	new = NULL;
-	*j = ft_return_heredoc(str, &tmp, i, 2);
-	new = ft_strsplit(tmp, ' ');
-	ft_strdel(&tmp);
-	return (new);
-}
-
 int			search_heredoc(t_cmd **lst, char *str, int i, int j)
 {
 	char	*tmp;
@@ -81,7 +68,12 @@ int			search_heredoc(t_cmd **lst, char *str, int i, int j)
 	if ((*lst)->op_next == 4)
 		(*lst)->heredoc = heredoc_simple(str, i, &j);
 	else if ((*lst)->op_next == 5)
-		(*lst)->heredoc = heredoc_yg(str, i + 1, &j);
+	{
+		(*lst)->line = ft_strdup(str);
+		(*lst)->heredoc_str = heredoc();
+		ft_printf("Ret HD: %s\n", (*lst)->heredoc_str);
+	}
+	ft_strdel(&(*lst)->line);
 	ft_strdel(&tmp);
 	return (j);
 }
