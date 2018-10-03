@@ -113,6 +113,8 @@ int				check_link(t_cmd *lst)
 **	Check validity of lst && replace $ and ~
 */
 
+// a verif
+
 int				check_validity(t_cmd **lst, t_struct *data)
 {
 	t_cmd	*start;
@@ -123,8 +125,6 @@ int				check_validity(t_cmd **lst, t_struct *data)
 	if (check_lst_special(data, &start, 0) == 1)
 		return (1);
 	start = *lst;
-	// a DELETE
-	printf("%s\n", __func__);
 	while (start)
 	{
 		if (check_link(start) != 0)

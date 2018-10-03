@@ -41,7 +41,6 @@ int					parse_line(t_struct *data, char **line)
 	t_ins	*cpy;
 
 	ret = 0;
-	printf("line = %s\n", *line);
 	if (ft_check_line_vide(*line, &data) == 0)
 		return (0);
 	data->commandes = ft_split_commandes(line, data);
@@ -49,7 +48,7 @@ int					parse_line(t_struct *data, char **line)
 	while (cpy)
 	{
 		// a delete (print_debug)
-		print_debug(&cpy->cmd, cpy->code);
+		//print_debug(&cpy->cmd, cpy->code);
 		if (ft_check_arg_invalid(data, cpy->cmd) == 0)
 		{
 			ret = execute_commandes(data, cpy->cmd);

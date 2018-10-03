@@ -131,6 +131,7 @@ char *heredoc(void)
 	if (hd_err(remain))
 	{
 		change_prompt(&g_info, 0);
+		g_info.quoted = 0;
 		return (NULL);
 	}
 	change_prompt(&g_info, 4);
@@ -150,6 +151,5 @@ char *heredoc(void)
 		line_edit(&g_info, tmp);
 	}
 	quit_hd();
-	ft_printf("ret: %s\n", g_info.h_d.fill);
 	return (g_info.h_d.fill);
 }

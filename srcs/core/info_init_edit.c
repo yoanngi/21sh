@@ -32,9 +32,9 @@ void			init_info(t_info *info)
 	info->loop = 1;
 	info->max_len = 0;
 	info->nb_elem = 0;
-	info->h_d.cmd =  NULL;
-	info->h_d.trigger =  NULL;
-	info->h_d.fill =  NULL;
+	info->h_d.cmd = NULL;
+	info->h_d.trigger = NULL;
+	info->h_d.fill = NULL;
 }
 
 void			reinit_info(t_info *info)
@@ -96,8 +96,6 @@ char			*quoted_loops(char *full_line, t_struct *data, int *quit)
 		full_line = str_append(full_line, g_info.line);
 		g_info.quoted = 0;
 	}
-/*	else if (g_info.quoted == 4)
-		full_line = hd_case(quit, full_line, data);*/
 	else
 	{
 		full_line = str_append(full_line, g_info.line);
