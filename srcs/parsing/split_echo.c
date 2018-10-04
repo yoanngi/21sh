@@ -31,8 +31,8 @@ static int	echap_word(char *str, int i)
 
 static int	check_split_echo(char ***tabl, int index)
 {
-	int 	i;
-	int 	t;
+	int		i;
+	int		t;
 	int		len;
 	char	*tmp;
 
@@ -64,7 +64,7 @@ static int	check_split_echo(char ***tabl, int index)
 
 char		**split_echo(char *str)
 {
-	int 	ret;
+	int		ret;
 	char	**new;
 
 	new = NULL;

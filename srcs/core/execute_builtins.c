@@ -26,10 +26,10 @@ int			execute_builtins(t_struct *mystruct, t_cmd *lst, int pipe_fd[2],
 		if (ft_strcmp(lst->tab_cmd[0], mystruct->builtins[i]) == 0)
 		{
 			if (lst->pathname != NULL)
-            {
-                clear_echo(&lst->tab_cmd);
+			{
+				clear_echo(&lst->tab_cmd);
 				return (fork_redirection(lst));
-            }
+			}
 			dup2(*fd_in, lst->stdin_cmd) == -1 ?
 	basic_error("dup2", "failled") : 0;
 			dup2(pipe_fd[1], lst->stdout_cmd) == -1 ?

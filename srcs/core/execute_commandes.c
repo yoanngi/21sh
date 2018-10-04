@@ -42,7 +42,8 @@ static int		exec_pipe_child(t_struct *mystruct, t_cmd *lst, int pipe_fd[2],
 **	boucle sur la liste chainer des commandes et fork
 */
 
-static int		exec_cmd_recur(t_struct *mystruct, t_cmd *data, int fd_in, t_cmd *start)
+static int		exec_cmd_recur(t_struct *mystruct, t_cmd *data, int fd_in,
+	t_cmd *start)
 {
 	pid_t	pid;
 	int		pipe_fd[2];

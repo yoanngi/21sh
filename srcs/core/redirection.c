@@ -25,11 +25,12 @@ int			exec_redirection(t_path *file, int op)
 	if (file->name == NULL)
 		return (-1);
 	if (op == 2)
-		fd = open(file->name, O_CREAT | O_TRUNC | O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP |
+		fd = open(file->name, O_CREAT | O_TRUNC | O_WRONLY, S_IRUSR |
+	S_IWUSR | S_IRGRP |
 				S_IROTH);
 	else if (op == 3)
-		fd = open(file->name, O_CREAT | O_APPEND | O_WRONLY, S_IRUSR | S_IWUSR |
-				S_IRGRP | S_IROTH);
+		fd = open(file->name, O_CREAT | O_APPEND | O_WRONLY, S_IRUSR |
+	S_IWUSR | S_IRGRP | S_IROTH);
 	if (fd == -1)
 		exit(EXIT_FAILURE);
 	dup2(fd, file->redir_fd) == -1 ? basic_error("dup2", "failled") : 0;

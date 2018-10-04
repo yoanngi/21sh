@@ -18,9 +18,9 @@
 **	~ // - // $ > traiter dans parsing
 */
 
-static int		actualise_env(t_struct *data, char *newpath)
+static int	actualise_env(t_struct *data, char *newpath)
 {
-	int		i;
+	int i;
 
 	i = 0;
 	ft_strdel(&data->oldpwd);
@@ -44,7 +44,7 @@ static int		actualise_env(t_struct *data, char *newpath)
 	return (0);
 }
 
-static int		change_directory(t_struct *data, t_cmd *lst, char *newpath)
+static int	change_directory(t_struct *data, t_cmd *lst, char *newpath)
 {
 	if (newpath != NULL)
 	{
@@ -71,7 +71,7 @@ static int		change_directory(t_struct *data, t_cmd *lst, char *newpath)
 	return (0);
 }
 
-static int		pwd_replace(t_struct *data, t_cmd *lst)
+static int	pwd_replace(t_struct *data, t_cmd *lst)
 {
 	char	*pwd;
 	char	*tmp;
@@ -100,9 +100,9 @@ static int		pwd_replace(t_struct *data, t_cmd *lst)
 	return (0);
 }
 
-static int		check_error_cd(char **tabargv)
+static int	check_error_cd(char **tabargv)
 {
-	int		i;
+	int i;
 
 	i = 0;
 	while (tabargv[i])
@@ -117,9 +117,9 @@ static int		check_error_cd(char **tabargv)
 	return (EXIT_SUCCESS);
 }
 
-int				func_cd(t_struct *data, t_cmd *lst)
+int			func_cd(t_struct *data, t_cmd *lst)
 {
-	int		mode;
+	int mode;
 
 	mode = 0;
 	if (!data || !lst)
@@ -129,12 +129,12 @@ int				func_cd(t_struct *data, t_cmd *lst)
 	if (mode == 2)
 		pwd_replace(data, lst);
 	else
-    {
-        if (lst->tab_cmd[1] == NULL)
-		    change_directory(data, lst, data->home);
-        else
-		    change_directory(data, lst, NULL);
-    }
+	{
+		if (lst->tab_cmd[1] == NULL)
+			change_directory(data, lst, data->home);
+		else
+			change_directory(data, lst, NULL);
+	}
 	ft_strdel(&data->pwd);
 	data->pwd = ft_return_pwd();
 	return (EXIT_SUCCESS);

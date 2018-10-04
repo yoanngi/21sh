@@ -13,13 +13,13 @@
 
 #include "../../includes/shell.h"
 
-static char	*get_hd_trigger(char *str)
+static char		*get_hd_trigger(char *str)
 {
 	int		len;
 	int		i;
 	char	*tmp;
 
-	i =  0;
+	i = 0;
 	len = 0;
 	tmp = clean_before(str);
 	while (tmp[len] && tmp[len] != ' ')
@@ -35,7 +35,7 @@ static char	*get_hd_trigger(char *str)
 	clear_line(&g_info.h_d.trigger);
 	while (tmp[i] && tmp[i] == ' ')
 		i++;
-	ft_strdel (&str);
+	ft_strdel(&str);
 	if (!(str = malloc(ft_strlen(tmp) - len + 1)))
 		return (NULL);
 	len = 0;
@@ -50,7 +50,7 @@ static char	*get_hd_trigger(char *str)
 	return (str);
 }
 
-static char *get_hd_cmd()
+static char 	*get_hd_cmd()
 {
 	int		len;
 	int		i;
@@ -62,7 +62,7 @@ static char *get_hd_cmd()
 	while (g_info.line[len] != '<' && g_info.line[len + 1] != '<')
 		len++;
 	if (last_char(g_info.line) == '<')
-	return (NULL);
+		return (NULL);
 	if (!(g_info.h_d.cmd = malloc(len + 2)))
 		return (NULL);
 	while (i <= len)
@@ -84,7 +84,7 @@ static char *get_hd_cmd()
 	}
 	remain[j] = 0;
 	remain = ft_strdup(get_hd_trigger(remain));
-	return (remain);	
+	return (remain);
 }
 
 static int	hd_err(char *remain)
@@ -92,7 +92,7 @@ static int	hd_err(char *remain)
 	if (!g_info.h_d.trigger || !ft_strcmp(g_info.h_d.trigger, "") ||
 	(g_info.line[0] == '<' && g_info.line[1] == '<'))
 	{
-		ft_putstr("21sh: parse error near \\n\n");	
+		ft_putstr("21sh: parse error near \\n\n");
 		ft_strdel(&g_info.line);
 		return (1);
 	}
@@ -105,7 +105,7 @@ static int	hd_err(char *remain)
 	return (0);
 }
 
-static void	quit_hd(void)
+static void		quit_hd(void)
 {
 	t_hist *tmp;
 
@@ -119,7 +119,7 @@ static void	quit_hd(void)
 	remove_elem(tmp);
 }
 
-char *heredoc(void)
+char			*heredoc(void)
 {
 	char	*remain;
 	t_hist	*tmp;

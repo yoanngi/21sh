@@ -83,7 +83,7 @@ static int		ft_fd_next(char *str, int i, int *fd_next)
 		*fd_next = open("/dev/null", O_RDWR);
 		return (2);
 	}
-	while(str[i + 1] == ' ' || str[i + 1] == '\t')
+	while (str[i + 1] == ' ' || str[i + 1] == '\t')
 	{
 		i++;
 		add++;
