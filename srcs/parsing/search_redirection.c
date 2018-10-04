@@ -42,32 +42,31 @@ static char			**insert_option_cmd(char **tab_cmd, char **new_tab,
 	return (new);
 }
 
-static int			return_name_suite(t_cmd **lst, char **new, char **tmp,
-		char **tab_tmp)
+static int			return_name_suite(t_cmd **lst, char **new, char **tab_tmp)
 {
-	char **tmp2;
+	char	*tmp;
+	char	**tmp2;
 
 	tmp2 = NULL;
-	*tmp = ft_strsub(*new, 0, ft_strlen(tab_tmp[0]));
+	tmp = ft_strsub(*new, 0, ft_strlen(tab_tmp[0]));
 	ft_strdel(new);
-	*new = ft_strdup(*tmp);
-	ft_strdel(tmp);
+	*new = ft_strdup(tmp);
+	ft_strdel(&tmp);
 	if (!(tmp2 = insert_option_cmd((*lst)->tab_cmd, tab_tmp, 0, 0)))
 		return (1);
 	(*lst)->tab_cmd = ft_del_tab((*lst)->tab_cmd);
 	(*lst)->tab_cmd = ft_duplicate_tab(tmp2);
 	tmp2 = ft_del_tab(tmp2);
+	ft_strdel(&tmp);
 	return (0);
 }
 
 static char			*return_name(t_cmd **lst, char *str, int start, int end)
 {
 	char	*new;
-	char	*tmp;
 	char	**tab_tmp;
 
 	new = NULL;
-	tmp = NULL;
 	tab_tmp = NULL;
 	if (str[start] == '&')
 		start += modifie_fd(lst, str, start);
@@ -79,17 +78,11 @@ static char			*return_name(t_cmd **lst, char *str, int start, int end)
 		new = ft_strsub(str, start, (end - start - 2));
 	else
 		new = ft_strsub(str, start, (end - start));
-	if (new == NULL)
+	if (check_new(&new) == 1)
 		return (NULL);
-	clear_line(&new);
-	if (ft_strlen(new) == 0)
-	{
-		ft_strdel(&new);
-		return (NULL);
-	}
 	tab_tmp = ft_strsplit(new, ' ');
 	if (ft_len_tab(tab_tmp) > 1)
-		return_name_suite(lst, &new, &tmp, tab_tmp);
+		return_name_suite(lst, &new, tab_tmp);
 	tab_tmp = ft_del_tab(tab_tmp);
 	return (new);
 }

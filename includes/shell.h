@@ -248,6 +248,7 @@ int					check_regex_classic(t_struct *data, char **line);
 int					good_op_next(t_cmd **lst, char *str, int i);
 void				verifie_op(t_cmd **lst, char *str, int i);
 int					check_search_null(t_path **lst, char *str, int i, int j);
+int					check_new(char **new);
 /*
 **	BUILTINS
 */

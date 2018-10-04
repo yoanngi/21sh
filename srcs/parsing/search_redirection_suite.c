@@ -40,3 +40,16 @@ int		check_search_null(t_path **lst, char *str, int i, int j)
 	}
 	return (i);
 }
+
+int		check_new(char **new)
+{
+	if (*new == NULL)
+		return (1);
+	clear_line(new);
+	if (ft_strlen(*new) == 0)
+	{
+		ft_strdel(new);
+		return (1);
+	}
+	return (0);
+}
