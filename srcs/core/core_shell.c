@@ -96,10 +96,11 @@ void				core_shell(t_struct *data)
 	while (quit == 0)
 	{
 		line_edit(&g_info, tmp);
-		if (g_info.line != NULL && quit == 0)
+		if (quit == 0)
 		{
 			full_line = quoted_loops(full_line, data, &quit);
-			ft_strdel(&(g_info.line));
+			if (g_info.line)
+				ft_strdel(&(g_info.line));
 		}
 		reinit_info(&g_info);
 	}

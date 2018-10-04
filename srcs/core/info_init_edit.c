@@ -78,10 +78,13 @@ char			*quoted_loops(char *full_line, t_struct *data, int *quit)
 	{
 		g_info.line[ft_strlen(g_info.line) - 1] = 0;
 		full_line = str_append(full_line, g_info.line);
+		reinit_info(&g_info);
 		g_info.quoted = 0;
 	}
 	else
 	{
+
+		ft_printf("line: %s\n", full_line);
 		full_line = str_append(full_line, g_info.line);
 		default_term_mode(&g_info);
 		g_data->is_executing = 1;
