@@ -50,7 +50,7 @@ static char		*get_hd_trigger(char *str)
 	return (str);
 }
 
-static char 	*get_hd_cmd(void)
+static char 	*get_hd_cmd(char *str)
 {
 	int		len;
 	int		i;
@@ -59,26 +59,26 @@ static char 	*get_hd_cmd(void)
 
 	i = 0;
 	len = 0;
-	while (g_info.line[len] != '<' && g_info.line[len + 1] != '<')
+	while (str[len] != '<' && str[len + 1] != '<')
 		len++;
-	if (last_char(g_info.line) == '<')
+	if (last_char(str) == '<')
 		return (NULL);
 	if (!(g_info.h_d.cmd = malloc(len + 2)))
 		return (NULL);
 	while (i <= len)
 	{
-		g_info.h_d.cmd[i] = g_info.line[i];
+		g_info.h_d.cmd[i] = str[i];
 		i++;
 	}
 	g_info.h_d.cmd[i] = 0;
 	clear_line(&g_info.h_d.cmd);
-	if (!(remain = malloc(ft_strlen(g_info.line) - len + 2)))
+	if (!(remain = malloc(ft_strlen(str) - len + 2)))
 		return (NULL);
 	i += 2;
 	j = 0;
-	while (g_info.line[i])
+	while (str[i])
 	{
-		remain[j] = g_info.line[i];
+		remain[j] = str[i];
 		i++;
 		j++;
 	}
@@ -87,19 +87,19 @@ static char 	*get_hd_cmd(void)
 	return (remain);
 }
 
-static int		hd_err(char *remain)
+static int		hd_err(char *remain, char *str)
 {
 	if (!g_info.h_d.trigger || !ft_strcmp(g_info.h_d.trigger, "") ||
-	(g_info.line[0] == '<' && g_info.line[1] == '<'))
+	(str[0] == '<' && str[1] == '<'))
 	{
 		ft_putstr("21sh: parse error near \\n\n");
-		ft_strdel(&g_info.line);
+		ft_strdel(&str);
 		return (1);
 	}
 	if (ft_strstr(remain, "<<"))
 	{
 		ft_putstr("Parse error: multiple heredocs in the same command\n");
-		ft_strdel(&g_info.line);
+		ft_strdel(&str);
 		return (1);
 	}
 	return (0);
@@ -112,23 +112,24 @@ static void		quit_hd(void)
 	tmp = last_elem(g_info.history);
 	ft_strdel(&g_info.h_d.cmd);
 	ft_strdel(&g_info.h_d.trigger);
-	ft_strdel(&g_info.line);
+	if (g_info.line)
+		ft_strdel(&g_info.line);
 	g_info.loop = 0;
 	change_prompt(&g_info, 0);
 	g_info.quoted = 0;
 	remove_elem(tmp);
 }
 
-char			*heredoc(void)
+char			*heredoc(char *str)
 {
 	char	*remain;
 	t_hist	*tmp;
 	int		first_round;
-
 	first_round = 1;
+
 	tmp = last_elem(g_info.history);
-	remain = get_hd_cmd();
-	if (hd_err(remain))
+	remain = get_hd_cmd(str);
+	if (hd_err(remain, str))
 	{
 		change_prompt(&g_info, 0);
 		g_info.quoted = 0;
@@ -139,7 +140,7 @@ char			*heredoc(void)
 	g_info.h_d.fill = remain ? ft_strdup(remain) : NULL;
 	ft_strdel(&remain);
 	fill_history(&g_info, tmp);
-	while (g_info.h_d.trigger && ft_strcmp(g_info.line, g_info.h_d.trigger))
+	while (g_info.h_d.trigger && (!g_info.line || ft_strcmp(g_info.line, g_info.h_d.trigger)))
 	{
 		if (g_info.line && !first_round)
 		{

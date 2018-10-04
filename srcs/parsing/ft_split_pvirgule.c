@@ -13,51 +13,6 @@
 
 #include "../../includes/shell.h"
 
-static int		ft_check_vir(t_ins **lst, char **line)
-{
-	if (ft_strstr(*line, ";") == NULL && ft_strstr(*line, "&&") == NULL
-	&& ft_strstr(*line, "||") == NULL)
-	{
-		(*lst)->str = ft_strdup(*line);
-		ft_strdel(line);
-		return (0);
-	}
-	return (1);
-}
-
-static int		resize_line(char **str, int i, t_ins **lst)
-{
-	char	*tmp;
-
-	(void)lst;
-	tmp = NULL;
-	if (!(*str))
-		return (1);
-	if (i == ft_strlen(*str))
-	{
-		ft_strdel(str);
-		return (0);
-	}
-	tmp = ft_strdup(*str);
-	ft_strdel(str);
-	*str = ft_strsub(tmp, i + 1, ft_strlen(tmp) - (i + 1));
-	ft_strdel(&tmp);
-	return (0);
-}
-
-static int		add_code(t_ins *lst, char *str, int i)
-{
-	if (!lst || !str)
-		return (1);
-	if (str[i] == ';')
-		lst->code = 0;
-	if (str[i] == '&')
-		lst->code = 7;
-	if (str[i] == '|')
-		lst->code = 8;
-	return (0);
-}
-
 static int		ft_split_pvir_suite(char **line, int i, t_ins **lst)
 {
 	char	*tmp;

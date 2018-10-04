@@ -223,6 +223,9 @@ int					parse_line(t_struct *data, char **line, int ret);
 */
 t_ins				*ft_split_commandes(char **line, t_struct *data);
 t_ins				*ft_split_pvirgule(char **line, t_ins *lst, int i, int quote);
+int		ft_check_vir(t_ins **lst, char **line);
+int		resize_line(char **str, int i, t_ins **lst);
+int		add_code(t_ins *lst, char *str, int i);
 t_cmd				*ft_split_cmd(char *str, t_struct *data);
 int					clear_line(char **line);
 char				*clean_before(char *str);
@@ -390,7 +393,7 @@ typedef struct		s_info
 
 t_info				g_info;
 
-char 				*heredoc(void);
+char 				*heredoc(char *str);
 void				default_term_mode(t_info *info);
 void				reinit_info(t_info *info);
 void				raw_term_mode(t_info *info);

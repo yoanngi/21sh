@@ -13,29 +13,6 @@
 
 #include "../../includes/shell.h"
 
-static int		replace_order(char ***tabl, int i)
-{
-	ft_strdel(&(*tabl)[i]);
-	if ((*tabl)[i + 1] != NULL)
-		(*tabl)[i] = ft_strdup((*tabl)[i + 1]);
-	i++;
-	while ((*tabl)[i])
-	{
-		if ((*tabl)[i + 1] != NULL)
-		{
-			ft_strdel(&(*tabl)[i]);
-			(*tabl)[i] = ft_strdup((*tabl)[i + 1]);
-		}
-		else
-		{
-			ft_strdel(&(*tabl)[i]);
-			return (0);
-		}
-		i++;
-	}
-	return (0);
-}
-
 /*
 **	Replace special char in tab and check access for redirection
 */
@@ -62,12 +39,8 @@ static int		check_file_redir(t_struct *data, t_path *start)
 	return (0);
 }
 
-// probleme Here
-// pk replace_order ?
-
 static int		check_lst_special(t_struct *data, t_cmd **lst, int i)
 {
-	int		quit;
 	t_path	*start;
 
 	start = NULL;
@@ -76,16 +49,9 @@ static int		check_lst_special(t_struct *data, t_cmd **lst, int i)
 	while (*lst)
 	{
 		i = 0;
-		quit = 0;
 		while ((*lst)->tab_cmd[i])
 		{
-			quit = replace_in_line(data, &(*lst)->tab_cmd[i]);
-			if (quit == -1)
-			{
-				replace_order(&(*lst)->tab_cmd, i);
-				i = 0;
-				quit = 0;
-			}
+			replace_in_line(data, &(*lst)->tab_cmd[i]);
 			i++;
 		}
 		start = (*lst)->pathname;
@@ -112,8 +78,6 @@ int				check_link(t_cmd *lst)
 /*
 **	Check validity of lst && replace $ and ~
 */
-
-// a verif
 
 int				check_validity(t_cmd **lst, t_struct *data)
 {

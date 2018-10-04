@@ -124,6 +124,7 @@ N_SRCS = 	main.c\
 			builtins/func_history.c\
 			parsing/ft_split_commandes.c\
 			parsing/ft_split_pvirgule.c\
+			parsing/ft_split_pvirgule_suite.c\
 			parsing/ft_split_cmd.c\
 			parsing/chose_rep.c\
 			parsing/epur_line.c\

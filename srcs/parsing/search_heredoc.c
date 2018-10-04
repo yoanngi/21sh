@@ -127,7 +127,7 @@ int			search_heredoc(t_cmd **lst, char *str, int i, int j)
 	else if ((*lst)->op_next == 5)
 	{
 		(*lst)->line = ft_strdup(str);
-		(*lst)->heredoc_str = heredoc();
+		(*lst)->heredoc_str = heredoc((*lst)->line);
 		j = len_heredoc(str, 0);
 		if (j < ft_strlen(str))
 			add_params(lst, str, j);
