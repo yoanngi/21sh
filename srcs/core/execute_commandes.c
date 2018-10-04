@@ -42,6 +42,17 @@ static int		exec_pipe_child(t_struct *mystruct, t_cmd *lst, int pipe_fd[2],
 **	boucle sur la liste chainer des commandes et fork
 */
 
+static int		pipe_child_norm(t_struct *mystruct, t_cmd *data, int pipe_fd[2],
+	int *fd_in)
+{
+	if (exec_pipe_child(mystruct, data, pipe_fd, fd_in) == -1)
+	{
+		basic_error(data->tab_cmd[0], ": command not found");
+		exit(EXIT_FAILURE);
+	}
+	return (0);
+}
+
 static int		exec_cmd_recur(t_struct *mystruct, t_cmd *data, int fd_in,
 	t_cmd *start)
 {
@@ -56,13 +67,7 @@ static int		exec_cmd_recur(t_struct *mystruct, t_cmd *data, int fd_in,
 		if ((pid = fork()) == -1)
 			exit(EXIT_FAILURE);
 		if (pid == 0)
-		{
-			if (exec_pipe_child(mystruct, data, pipe_fd, &fd_in) == -1)
-			{
-				basic_error(data->tab_cmd[0], ": command not found");
-				exit(EXIT_FAILURE);
-			}
-		}
+			pipe_child_norm(mystruct, data, pipe_fd, &fd_in);
 		else
 		{
 			data->pid = pid;

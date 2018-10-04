@@ -144,10 +144,10 @@ typedef struct		s_ins
 typedef struct		s_path
 {
 	char			*name;
-    int             s_or_d;
-    int             redir_fd;
-    int             fd;
-    int             pid;
+    int				s_or_d;
+    int				redir_fd;
+    int				fd;
+    int				pid;
 	struct s_path	*next;
 }					t_path;
 
@@ -201,22 +201,23 @@ t_struct			*g_data;
  */
 void				core_shell(t_struct *data);
 int					execute_commandes(t_struct *mystruct, t_cmd *data);
-int					execute_builtins(t_struct *mystruct, t_cmd *data, int pipe_fd[2], int *fd_in);
+int					execute_builtins(t_struct *mystruct, t_cmd *data,
+	int pipe_fd[2], int *fd_in);
 int					execute_builtins_light(t_struct *mystruct, t_cmd *data);
 int					exec_pipe(t_struct *data);
 int					exec_pipe_suite(t_struct *data);
 int					ft_process(t_cmd *data);
 int					ft_check_arg_invalid(t_struct *data, t_cmd *cmd);
-int                 fork_redirection(t_cmd *lst);
-int                 fork_heredoc(t_cmd *lst, int code);
-int                 exec_redirection(t_path *file, int op);
+int					fork_redirection(t_cmd *lst);
+int					fork_heredoc(t_cmd *lst, int code);
+int					exec_redirection(t_path *file, int op);
 int					ft_kill_process(t_cmd *start, int pid);
 int					cmd_suivante(t_ins *cpy, int code);
 int					exit_status(int status);
 int					wait_or_not(int *status, pid_t pid, t_cmd *start);
 int					redirection_fd(t_cmd *data);
 int					delete_tmp(char **file);
-int					parse_line(t_struct *data, char **line);
+int					parse_line(t_struct *data, char **line, int ret);
 /*
 **	PARSING
 */
