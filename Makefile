@@ -39,6 +39,7 @@ N_SRCS = 	main.c\
 			core/execute_builtins.c\
 			core/ft_check_arg_invalid.c\
 			core/heredoc.c\
+			core/heredoc2.c\
 			core/hd_exec.c\
 			core/info_init_edit.c\
 			core/kill_process.c\

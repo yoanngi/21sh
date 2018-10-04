@@ -83,12 +83,11 @@ char			*quoted_loops(char *full_line, t_struct *data, int *quit)
 	}
 	else
 	{
-
-		ft_printf("line: %s\n", full_line);
 		full_line = str_append(full_line, g_info.line);
 		default_term_mode(&g_info);
 		g_data->is_executing = 1;
-		*quit = parse_line(data, &(full_line), 0);
+		if (full_line)
+			*quit = parse_line(data, &(full_line), 0);
 	}
 	return (full_line);
 }

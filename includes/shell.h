@@ -394,6 +394,7 @@ typedef struct		s_info
 t_info				g_info;
 
 char 				*heredoc(char *str);
+char				*get_hd_trigger(char *str);
 void				default_term_mode(t_info *info);
 void				reinit_info(t_info *info);
 void				raw_term_mode(t_info *info);

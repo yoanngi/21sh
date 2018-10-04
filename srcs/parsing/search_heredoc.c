@@ -98,14 +98,14 @@ int			search_heredoc(t_cmd **lst, char *str, int i, int j)
 		(*lst)->heredoc = heredoc_simple(str, i, &j);
 	else if ((*lst)->op_next == 5)
 	{
-		(*lst)->line = ft_strdup(str);
-		(*lst)->heredoc_str = heredoc((*lst)->line);
+		(*lst)->heredoc_str = heredoc(str);
+		ft_printf("retour: %s\n", (*lst)->heredoc_str);
 		j = start_heredoc_opt(str, 0);
 		end = end_heredoc_opt(str, j);
 		if (j < ft_strlen(str))
 			add_params(lst, str, j, end);
 	}
 	change_prompt(&g_info, 0);
-	ft_strdel(&(*lst)->line);
+//	ft_strdel(&str);
 	return (end);
 }
