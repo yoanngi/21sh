@@ -143,13 +143,14 @@ char *heredoc(void)
 	{
 		if (g_info.line && !first_round)
 		{
-			g_info.h_d.fill = str_append(g_info.h_d.fill, "\n");
 			g_info.h_d.fill = str_append(g_info.h_d.fill, g_info.line);
+			g_info.h_d.fill = str_append(g_info.h_d.fill, "\n");
 		}
 		first_round = 0;
 		reinit_info(&g_info);
 		line_edit(&g_info, tmp);
 	}
 	quit_hd();
+	g_info.h_d.fill[ft_strlen(g_info.h_d.fill) - 1] = 0;
 	return (g_info.h_d.fill);
 }
