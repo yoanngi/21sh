@@ -13,7 +13,7 @@
 
 #include "../../includes/shell.h"
 
-void ctrl_c(int sig)
+void	ctrl_c(int sig)
 {
 	t_info *info;
 	t_hist *tmp;
@@ -23,8 +23,6 @@ void ctrl_c(int sig)
 	tmp = info->history;
 	while (!tmp->current)
 		tmp = tmp->next;
-/*	if (!g_data->is_executing)
-		end_key(info);*/
 	raw_term_mode(info);
 	get_x_back(info);
 	ft_putendl("");
@@ -34,7 +32,6 @@ void ctrl_c(int sig)
 			ft_strdel(&tmp->name);
 		if (info->line)
 			ft_strdel(&info->line);
-	//	fill_history(info, tmp);
 		reinit_info(info);
 		print_prompt(info);
 	}
