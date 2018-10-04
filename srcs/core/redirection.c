@@ -46,6 +46,7 @@ int			fork_redirection(t_cmd *lst)
 	int		status;
 	t_path	*lst_path;
 
+	printf("FORK_REDIRECTION\n");
 	status = -1;
 	lst_path = lst->pathname;
 	while (lst->pathname)

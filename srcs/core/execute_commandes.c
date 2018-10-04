@@ -18,23 +18,27 @@ static int		exec_pipe_child(t_struct *mystruct, t_cmd *lst, int pipe_fd[2],
 {
 	int		builtins;
 
+	printf("EXEC_PIPE_CHILD (%s)\n", lst->rep);
 	if ((builtins = execute_builtins(mystruct, lst, pipe_fd, fd_in)) != -1)
 		return (builtins);
-	// edit -> a remettre comme avant ?
-	if (lst->pathname != NULL && (lst->op_next == 2 || lst->op_next == 3))
-		return (fork_redirection(lst));
-	if (lst->op_next == 4 || lst->op_next == 5)
+	else if (lst->op_next == 4 || lst->op_next == 5)
 		return (fork_heredoc(lst, 0));
-	if (lst->op_next == 1)
+	else if (lst->op_next == 1)
 	{
+		printf("%s ---> op_next = 1\n", __func__);
 		dup2(*fd_in, lst->stdin_cmd) == -1 ? basic_error("dup2", "failled") : 0;
 		dup2(pipe_fd[1], lst->stdout_cmd) == -1 ?
 	basic_error("dup2", "failled") : 0;
 		close(pipe_fd[0]) == -1 ? basic_error("close", "failled") : 0;
+		if (lst->pathname != NULL)
+			return (fork_redirection(lst));
 		return (execve(lst->rep, lst->tab_cmd, lst->env));
 	}
+	else if (lst->pathname != NULL)
+		return (fork_redirection(lst));
+	printf("%s ---> op_next = 0\n", __func__);
 	dup2(*fd_in, lst->stdin_cmd) == -1 ? basic_error("dup2", "failled") : 0;
-	close(pipe_fd[1]) == -1 ? basic_error("close", "failled") : 0;
+	//close(pipe_fd[1]) == -1 ? basic_error("close", "failled") : 0;
 	close(pipe_fd[0]) == -1 ? basic_error("close", "failled") : 0;
 	return (execve(lst->rep, lst->tab_cmd, lst->env));
 }
@@ -51,9 +55,6 @@ static int		pipe_child_norm(t_struct *mystruct, t_cmd *data, int pipe_fd[2],
 		basic_error(data->tab_cmd[0], ": command not found");
 		exit(EXIT_FAILURE);
 	}
-	// a delete ?
-	if (data->pathname != NULL)
-		return (fork_redirection(data));
 	return (0);
 }
 
