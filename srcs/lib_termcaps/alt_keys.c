@@ -6,7 +6,7 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/27 10:42:20 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/06 17:21:25 by volivry     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 12:46:42 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -94,7 +94,6 @@ void		alt_right(t_info *info, t_hist *tmp)
 
 void		ctrl_d(t_info *info, t_hist *tmp)
 {
-
 	if ((tmp->name && ft_strcmp(tmp->name, "")))
 		return ;
 	if ((!tmp->name || !ft_strcmp(tmp->name, "")) && info->h_d.cmd)

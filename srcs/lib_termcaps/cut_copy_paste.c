@@ -6,7 +6,7 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/25 13:50:09 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 17:47:51 by volivry     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 12:48:55 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -78,6 +78,7 @@ static void	cut_end(t_info *info, t_hist *tmp)
 static void	cut_beginning(t_info *info, t_hist *tmp)
 {
 	int	i;
+
 	copy_beginning(info, tmp);
 	i = ft_strlen(info->copy) + 1;
 	while (i)
