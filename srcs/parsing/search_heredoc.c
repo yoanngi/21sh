@@ -102,10 +102,10 @@ int			search_heredoc(t_cmd **lst, char *str, int i, int j)
 		ft_printf("retour: %s\n", (*lst)->heredoc_str);
 		j = start_heredoc_opt(str, 0);
 		end = end_heredoc_opt(str, j);
-		if (j < ft_strlen(str))
+		if (j < ft_strlen(str) && j != end)
 			add_params(lst, str, j, end);
 	}
 	change_prompt(&g_info, 0);
-//	ft_strdel(&str);
+	ft_strdel(&str);
 	return (end);
 }

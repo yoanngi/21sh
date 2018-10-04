@@ -67,7 +67,10 @@ static int			ft_split_cmd_suite(t_cmd **new, t_struct *data,
 			i += good_op_next(new, tmp, i);
 			i = good_tab_cmd(data, new, tmp, i);
 			verifie_op(new, tmp, i);
+            printf("HERE %s\n", __func__);
+            printf("str = |%s|\n", tmp);
 			i = resize_str(&tmp, i) - 1;
+            printf("str = |%s|\n", tmp);
 			if (tmp == NULL)
 				return (0);
 			(*new)->next = ft_init_cmd();
