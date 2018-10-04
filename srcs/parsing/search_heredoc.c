@@ -59,39 +59,37 @@ static char	**heredoc_simple(char *str, int i, int *j)
 }
 
 /*
-** cat << test auteur
-** on va jusqu'a test et si il reste des arguments, on les passes en parametre de la fonction
+**	cat << test auteur
+**	on va jusqu'a test et si il reste des arguments
+**	on les passes en parametre de la fonction
 */
 
-static int	len_heredoc(char *str)
+static int	len_heredoc(char *str, int i)
 {
-	int		i;
 	int		len;
 
-	i = 0;
-	if (!str)
-		return (0);
 	len = ft_strlen(str);
-	while (str[i] && i != len)
-	{
-		if (str[i] == '<' && str[i + 1] == '<')
-		{
-			i += 2;
-			if (str[i] == ' ')
-			{
-				while (str[i] == ' ' || str[i] == '\t')
-					i++;
-			}
-			while (str[i] && (str[i] != ' ' || str[i] != '\t'))
-				i++;
-			return (i);
-		}
+	while (str[i] && (str[i] != '<' && str[i + 1] != '<'))
 		i++;
+	i += 1;
+	if (str[i] == '<' && str[i + 1] == '<')
+	{
+		i += 2;
+		if (str[i] == ' ' || str[i] == '\t')
+		{
+			while (str[i] && (str[i] == ' ' || str[i] == '\t'))
+				i++;
+			i += 1;
+		}
+		while (str[i])
+		{
+			if (str[i] == ' ' || str[i] == '\t')
+				return (i);
+			i++;
+		}
 	}
-	return (i);
+	return (ft_strlen(str));
 }
-
-// A proteger
 
 static int	add_params(t_cmd **lst, char *str, int j)
 {
@@ -103,11 +101,16 @@ static int	add_params(t_cmd **lst, char *str, int j)
 	tabl = NULL;
 	i = 0;
 	tmp = ft_strsub(str, j, ft_strlen(str) - j);
-	tabl = ft_strsplit(str, ' ');
+	if (tmp == NULL)
+		return (0);
+	tabl = ft_strsplit(tmp, ' ');
+	if (tabl == NULL)
+		return (0);
 	while (tabl[i])
 	{
 		increase_tab(&(*lst)->tab_cmd);
 		(*lst)->tab_cmd[i + 1] = ft_strdup(tabl[i]);
+		clear_line(&(*lst)->tab_cmd[i + 1]);
 		i++;
 	}
 	ft_strdel(&tmp);
@@ -125,8 +128,9 @@ int			search_heredoc(t_cmd **lst, char *str, int i, int j)
 	{
 		(*lst)->line = ft_strdup(str);
 		(*lst)->heredoc_str = heredoc();
-		j = len_heredoc(str);
-		add_params(lst, str, j);
+		j = len_heredoc(str, 0);
+		if (j < ft_strlen(str))
+			add_params(lst, str, j);
 	}
 	change_prompt(&g_info, 0);
 	ft_strdel(&(*lst)->line);
