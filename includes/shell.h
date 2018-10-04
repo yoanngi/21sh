@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/04 14:43:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/03 14:50:41 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 11:20:45 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -471,7 +471,7 @@ void				ac_left_key(t_info *info, t_slct *slct, t_hist *hist);
 void				ac_up_key(t_info *info, t_slct *slct, t_hist *hist);
 void				ac_down_key(t_info *info, t_slct *slct, t_hist *hist);
 void				ac_tab_key(t_info *info, t_slct *slct, t_hist *hist);
-void				key_input(t_info *info, t_slct *slct, int *loop, t_hist *hist);
+int					key_input(t_info *info, t_slct *slct, int *loop, t_hist *hist);
 void				ac_print_arg(t_slct *slct, t_info *info);
 void				display(t_info *info, t_slct *slct);
 void				update_index(t_slct *root);
@@ -484,6 +484,7 @@ void				erase_prev(t_info *info, t_hist *hist);
 int					slct_current(t_slct *slct,t_info * info, t_hist *hist);
 char				*get_last_word(char *line, t_info *info);
 int					contains_letters(char *name, char *letters);
+int					is_cmd(char *cmd, char **pathes);
 
 /*
 **	END
