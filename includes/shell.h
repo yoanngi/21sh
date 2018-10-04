@@ -73,14 +73,6 @@
 # define CURS_Y get_curs_pos(1, info)
 
 /*
-**	Source :
-**	http://putaindecode.io/fr/articles/shell/redirections/
-**	https://www.gnu.org/software/bash/manual/bashref.html#Redirections
-**	https://abs.traduc.org/abs-5.3-fr/ch19.html
-**	https://openclassrooms.com/forum/sujet/executer-fonctions-sur-pipes-successifs
-**	https://stackoverflow.com/questions/17630247/coding-multiple-pipe-in-c/17631589
-**	https://openclassrooms.com/forum/sujet/dup-dup2-et-close-12008
-**
 **	***	Structures ***
 **
 **	t_cmd -> liste chainer des commandes a executer
@@ -119,7 +111,7 @@ typedef struct		s_cmd
 	int				stdout_cmd;
 	int				stderr_cmd;
 	int				pid;
-    int             bad_fd;
+    int				bad_fd;
 	char			*line;
 	struct s_path	*pathname;
 	struct s_cmd	*next;
@@ -144,10 +136,10 @@ typedef struct		s_ins
 typedef struct		s_path
 {
 	char			*name;
-    int				s_or_d;
-    int				redir_fd;
-    int				fd;
-    int				pid;
+	int				s_or_d;
+	int				redir_fd;
+	int				fd;
+	int				pid;
 	struct s_path	*next;
 }					t_path;
 
@@ -195,10 +187,10 @@ typedef struct		s_struct
 t_struct			*g_data;
 
 /*
- **	***	Fonctions ***
- **
- **	CORE
- */
+**	***	Fonctions ***
+**
+**	CORE
+*/
 void				core_shell(t_struct *data);
 int					execute_commandes(t_struct *mystruct, t_cmd *data);
 int					execute_builtins(t_struct *mystruct, t_cmd *data,
@@ -222,10 +214,11 @@ int					parse_line(t_struct *data, char **line, int ret);
 **	PARSING
 */
 t_ins				*ft_split_commandes(char **line, t_struct *data);
-t_ins				*ft_split_pvirgule(char **line, t_ins *lst, int i, int quote);
-int		ft_check_vir(t_ins **lst, char **line);
-int		resize_line(char **str, int i, t_ins **lst);
-int		add_code(t_ins *lst, char *str, int i);
+t_ins				*ft_split_pvirgule(char **line, t_ins *lst, int i,
+	int quote);
+int					ft_check_vir(t_ins **lst, char **line);
+int					resize_line(char **str, int i, t_ins **lst);
+int					add_code(t_ins *lst, char *str, int i);
 t_cmd				*ft_split_cmd(char *str, t_struct *data);
 int					clear_line(char **line);
 char				*clean_before(char *str);
@@ -256,14 +249,16 @@ int					good_op_next(t_cmd **lst, char *str, int i);
 void				verifie_op(t_cmd **lst, char *str, int i);
 int					check_search_null(t_path **lst, char *str, int i, int j);
 /*
- **	BUILTINS
- */
+**	BUILTINS
+*/
 int					ft_search_func(t_struct *mystruct, t_cmd *lst, int i);
 int					func_exit(t_struct *data, t_cmd *lst);
 int					func_env(t_struct *data, t_cmd **lst);
-int					execute_with_env(t_struct **data, t_cmd *lst, int i, int opt);
+int					execute_with_env(t_struct **data, t_cmd *lst, int i,
+	int opt);
 int					ft_is_func(t_struct *data, char *str, int hash);
-int					execute_var_modif(t_struct *data, t_cmd **lst, int i, int opt);
+int					execute_var_modif(t_struct *data, t_cmd **lst, int i,
+	int opt);
 int					func_echo(t_struct *data, t_cmd *lst);
 int					func_cd(t_struct *data, t_cmd *lst);
 int					func_history(t_struct *data, t_cmd *lst);
@@ -271,12 +266,14 @@ int					func_setenv(t_struct **data, t_cmd *lst);
 int					modifie_env(t_struct **data, t_cmd *lst, int i);
 int					check_if_path_modif(t_struct **data, t_cmd *lst);
 int					func_unsetenv(t_struct **data, t_cmd *lst);
-char				**malloc_for_env(t_struct **data, t_cmd **lst, int i, int opt);
+char				**malloc_for_env(t_struct **data, t_cmd **lst, int i,
+	int opt);
 char				**malloc_for_env_deux(t_struct **data, t_cmd **lst, int i);
-int					malloc_for_env_suite(char ***str, t_struct *data, t_cmd *lst, int i);
+int					malloc_for_env_suite(char ***str, t_struct *data,
+	t_cmd *lst, int i);
 /*
- **	INIT
- */
+**	INIT
+*/
 t_struct			*init_struct(char **env);
 char				*ft_check_infos(char **env, char *find);
 char				**ft_initialise_builtins(void);

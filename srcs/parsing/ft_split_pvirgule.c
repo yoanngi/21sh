@@ -13,13 +13,10 @@
 
 #include "../../includes/shell.h"
 
-static int		ft_split_pvir_suite(char **line, int i, t_ins **lst)
+static t_ins	*return_good_chain(t_ins **lst)
 {
-	char	*tmp;
-
-	tmp = NULL;
-	if (i == -1 || !(*line))
-		return (0);
+	if (!(*lst))
+		return (NULL);
 	if ((*lst)->str != NULL)
 	{
 		while ((*lst)->next)
@@ -27,6 +24,17 @@ static int		ft_split_pvir_suite(char **line, int i, t_ins **lst)
 		(*lst)->next = ft_init_ins();
 		*lst = (*lst)->next;
 	}
+	return (*lst);
+}
+
+static int		ft_split_pvir_suite(char **line, int i, t_ins **lst)
+{
+	char	*tmp;
+
+	tmp = NULL;
+	if (i == -1 || !(*line))
+		return (0);
+	*lst = return_good_chain(lst);
 	add_code(*lst, *line, i);
 	if (i == ft_strlen(*line))
 	{
@@ -47,6 +55,16 @@ static int		ft_split_pvir_suite(char **line, int i, t_ins **lst)
 	return (-1);
 }
 
+static int		check_tmp(char *tmp, int i)
+{
+	if (!tmp)
+		return (-1);
+	if (tmp[i] == ';' || (tmp[i] == '&' && tmp[i + 1] == '&') ||
+		(tmp[i] == '|' && tmp[i + 1] == '|'))
+		return (1);
+	return (0);
+}
+
 t_ins			*ft_split_pvirgule(char **line, t_ins *lst, int i, int quote)
 {
 	t_ins	*start;
@@ -63,9 +81,7 @@ t_ins			*ft_split_pvirgule(char **line, t_ins *lst, int i, int quote)
 			quote = 1;
 		else if ((tmp[i] == '\'' || tmp[i] == '\"') && quote == 1)
 			quote = 0;
-		else if (i == ft_strlen(tmp) || (quote == 0 && (tmp[i] == ';' ||
-	(tmp[i] == '&' && tmp[i + 1] == '&') ||
-	(tmp[i] == '|' && tmp[i + 1] == '|'))))
+		else if (i == ft_strlen(tmp) || (quote == 0 && check_tmp(tmp, i) == 1))
 			i = ft_split_pvir_suite(&tmp, i, &lst);
 		i++;
 	}

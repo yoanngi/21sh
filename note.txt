@@ -31,4 +31,5 @@ Affiche "test" au lieu de test
 error > or >>
 (search_redirection.c et good_tab_cmd.c)
 
-en train de modif search_heredoc.c
+quand heredoc | ou redir error
+check chemin quand >&

@@ -67,22 +67,6 @@ void			line_edit(t_info *info, t_hist *tmp)
 		get_key(info, tmp);
 }
 
-char			*hd_case(int *quit, char *full_line, t_struct *data)
-{
-	if (heredoc() == NULL || !g_info.h_d.fill ||
-	!ft_strcmp(g_info.h_d.fill, ""))
-		return (full_line);
-	g_info.h_d.cmd = str_append(g_info.h_d.cmd, " ");
-	g_info.h_d.cmd = str_append(g_info.h_d.cmd, g_info.h_d.fill);
-	full_line = ft_strdup(g_info.h_d.cmd);
-	ft_strdel(&g_info.h_d.fill);
-	ft_strdel(&g_info.h_d.cmd);
-	default_term_mode(&g_info);
-	g_data->is_executing = 1;
-	*quit = parse_line(data, &(full_line), 0);
-	return (full_line);
-}
-
 char			*quoted_loops(char *full_line, t_struct *data, int *quit)
 {
 	if (g_info.quoted == 1 || g_info.quoted == 2)
