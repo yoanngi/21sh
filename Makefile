@@ -140,6 +140,7 @@ N_SRCS = 	main.c\
 			parsing/insert_cmd_simple.c\
 			parsing/good_tab_cmd.c\
 			parsing/search_heredoc.c\
+			parsing/search_heredoc_suite.c\
 			parsing/search_redirection.c\
 			parsing/search_redirection_suite.c\
 			parsing/search_redirection_fd.c\

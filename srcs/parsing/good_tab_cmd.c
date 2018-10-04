@@ -48,8 +48,7 @@ static int		what_return(t_cmd **lst, char *str, int i, int ret)
 	}
 	else if ((*lst)->op_next == 4 || (*lst)->op_next == 5)
 	{
-		ret += search_heredoc(lst, str, i, i);
-		ret = ft_strlen(str);
+		ret = search_heredoc(lst, str, i, i);
 	}
 	return (ret);
 }

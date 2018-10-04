@@ -20,7 +20,8 @@ static int		exec_pipe_child(t_struct *mystruct, t_cmd *lst, int pipe_fd[2],
 
 	if ((builtins = execute_builtins(mystruct, lst, pipe_fd, fd_in)) != -1)
 		return (builtins);
-	if (lst->pathname != NULL)
+	// edit -> a remettre comme avant ?
+	if (lst->pathname != NULL && (lst->op_next == 2 || lst->op_next == 3))
 		return (fork_redirection(lst));
 	if (lst->op_next == 4 || lst->op_next == 5)
 		return (fork_heredoc(lst, 0));
@@ -50,6 +51,9 @@ static int		pipe_child_norm(t_struct *mystruct, t_cmd *data, int pipe_fd[2],
 		basic_error(data->tab_cmd[0], ": command not found");
 		exit(EXIT_FAILURE);
 	}
+	// a delete ?
+	if (data->pathname != NULL)
+		return (fork_redirection(data));
 	return (0);
 }
 

@@ -111,7 +111,7 @@ typedef struct		s_cmd
 	int				stdout_cmd;
 	int				stderr_cmd;
 	int				pid;
-    int				bad_fd;
+	int				bad_fd;
 	char			*line;
 	struct s_path	*pathname;
 	struct s_cmd	*next;
@@ -238,6 +238,8 @@ int					good_tab_cmd(t_struct *data, t_cmd **lst, char *str, int i);
 int					what_is_op(char *str, int i);
 int					search_redirection(t_cmd **lst, char *str, int i, int j);
 int					search_heredoc(t_cmd **lst, char *str, int i, int j);
+int					start_heredoc_opt(char *str, int i);
+int					end_heredoc_opt(char *str, int i);
 int					check_validity(t_cmd **lst, t_struct *data);
 int					check_link(t_cmd *lst);
 void				print_msg_error(char *str, int i);

@@ -26,8 +26,7 @@ int			exec_redirection(t_path *file, int op)
 		return (-1);
 	if (op == 2)
 		fd = open(file->name, O_CREAT | O_TRUNC | O_WRONLY, S_IRUSR |
-	S_IWUSR | S_IRGRP |
-				S_IROTH);
+	S_IWUSR | S_IRGRP | S_IROTH);
 	else if (op == 3)
 		fd = open(file->name, O_CREAT | O_APPEND | O_WRONLY, S_IRUSR |
 	S_IWUSR | S_IRGRP | S_IROTH);
@@ -51,7 +50,8 @@ int			fork_redirection(t_cmd *lst)
 	lst_path = lst->pathname;
 	while (lst->pathname)
 	{
-		lst->pathname->fd = exec_redirection(lst->pathname, lst->op_next);
+		lst->pathname->fd = exec_redirection(lst->pathname,
+	lst->pathname->s_or_d);
 		lst->pathname = lst->pathname->next;
 	}
 	lst->pathname = lst_path;
