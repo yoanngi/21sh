@@ -50,7 +50,7 @@ static char		*get_hd_trigger(char *str)
 	return (str);
 }
 
-static char 	*get_hd_cmd()
+static char 	*get_hd_cmd(void)
 {
 	int		len;
 	int		i;
@@ -87,7 +87,7 @@ static char 	*get_hd_cmd()
 	return (remain);
 }
 
-static int	hd_err(char *remain)
+static int		hd_err(char *remain)
 {
 	if (!g_info.h_d.trigger || !ft_strcmp(g_info.h_d.trigger, "") ||
 	(g_info.line[0] == '<' && g_info.line[1] == '<'))

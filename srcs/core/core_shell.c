@@ -70,6 +70,19 @@ int					parse_line(t_struct *data, char **line, int ret)
 **	Boucle infini, Attend un retour different de zero pour exit
 */
 
+static void			exit_core_shell(char *full_line)
+{
+	if (full_line)
+		ft_strdel(&full_line);
+	if (g_info.line)
+		ft_strdel(&g_info.line);
+	free_hist(g_info.history);
+	if (g_info.copy)
+		ft_strdel(&g_info.copy);
+	ft_strdel(&g_info.prmpt);
+	default_term_mode(&g_info);
+}
+
 void				core_shell(t_struct *data)
 {
 	int		quit;
@@ -90,13 +103,5 @@ void				core_shell(t_struct *data)
 		}
 		reinit_info(&g_info);
 	}
-	if (full_line)
-		ft_strdel(&full_line);
-	if (g_info.line)
-		ft_strdel(&g_info.line);
-	free_hist(g_info.history);
-	if (g_info.copy)
-		ft_strdel(&g_info.copy);
-	ft_strdel(&g_info.prmpt);
-	default_term_mode(&g_info);
+	exit_core_shell(full_line);
 }
