@@ -66,6 +66,8 @@ static int			ft_split_cmd_suite(t_cmd **new, t_struct *data,
 		{
 			i += good_op_next(new, tmp, i);
 			i = good_tab_cmd(data, new, tmp, i);
+            if (i == -1)
+                return (1);
 			verifie_op(new, tmp, i);
 			i = resize_str(&tmp, i) - 1;
 			if (tmp == NULL)

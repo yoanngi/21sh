@@ -100,8 +100,7 @@ int			search_heredoc(t_cmd **lst, char *str, int i, int j)
 	{
 		(*lst)->heredoc_str = heredoc(str);
         if ((*lst)->heredoc_str == NULL)
-            return (ft_strlen(str));
-		ft_printf("str: %s\n", (*lst)->heredoc_str);
+            return (-1);
 		j = start_heredoc_opt(str, 0);
 		end = end_heredoc_opt(str, j);
 		if (j < ft_strlen(str) && j != end)
