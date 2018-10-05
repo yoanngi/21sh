@@ -26,6 +26,8 @@ static char		*get_hd_cmd2(char *str, char *remain, int i)
 		j++;
 	}
 	remain[j] = 0;
+	if (ft_strstr(remain, "<<"))
+		return (NULL);
 	return (remain);
 }
 
@@ -53,7 +55,8 @@ static char		*get_hd_cmd(char *str)
 	if (!(remain = malloc(ft_strlen(str) - len + 2)))
 		return (NULL);
 	remain = get_hd_cmd2(str, remain, i);
-	remain = get_hd_trigger(remain);
+	if (remain)
+		remain = get_hd_trigger(remain);
 	return (remain);
 }
 
