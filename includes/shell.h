@@ -195,24 +195,6 @@ void					core_shell(t_struct *data);
 int						execute_commandes(t_struct *mystruct, t_cmd *data);
 int						execute_builtins(t_struct *mystruct, t_cmd *data,
 	int pipe_fd[2], int *fd_in);
-<<<<<<< HEAD
-int					execute_builtins_light(t_struct *mystruct, t_cmd *data);
-int					exec_pipe(t_struct *data);
-int					exec_pipe_suite(t_struct *data);
-int					ft_process(t_cmd *data);
-int					ft_check_arg_invalid(t_struct *data, t_cmd *cmd);
-int					fork_redirection(t_cmd *lst);
-int					fork_heredoc(t_cmd *lst, int code);
-int					exec_redirection(t_path *file, int op);
-int					ft_kill_process(t_cmd *start, int pid);
-int					cmd_suivante(t_ins *cpy, int code);
-int					exit_status(int status);
-int					wait_or_not(int *status, pid_t pid, t_cmd *start);
-int					redirection_fd(t_cmd *data);
-int					delete_tmp(char **file);
-int					parse_line(t_struct *data, char **line, int ret);
-int                 duplique_process(t_cmd *lst, int pipe_fd[2], int *fd_in);
-=======
 int						execute_builtins_light(t_struct *mystruct, t_cmd *data);
 int						exec_pipe(t_struct *data);
 int						exec_pipe_suite(t_struct *data);
@@ -228,7 +210,7 @@ int						wait_or_not(int *status, pid_t pid, t_cmd *start);
 int						redirection_fd(t_cmd *data);
 int						delete_tmp(char **file);
 int						parse_line(t_struct *data, char **line, int ret);
->>>>>>> 257f4c439a15ec9c41528e02b75f6c3ec88db497
+int                     duplique_process(t_cmd *lst, int pipe_fd[2], int *fd_in);
 /*
 **	PARSING
 */
