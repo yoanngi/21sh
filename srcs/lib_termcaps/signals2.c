@@ -20,7 +20,7 @@ void	ctrl_c(int sig)
 
 	(void)sig;
 	if (g_info.over)
-		return;
+		return ;
 	info = &g_info;
 	tmp = info->history;
 	while (!tmp->current)
