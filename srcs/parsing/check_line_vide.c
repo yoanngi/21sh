@@ -54,6 +54,8 @@ int			ft_check_line_vide(char *str, t_struct **data)
 	int		i;
 
 	i = 0;
+    if (line_vide(str) == 0)
+        return (0);
 	if (str == NULL || ft_strlen(str) == 0)
 		return (0);
 	if (other_check(str, data) == 1)

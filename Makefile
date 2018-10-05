@@ -151,6 +151,7 @@ N_SRCS = 	main.c\
 			parsing/modifie_fd.c\
 			parsing/check_regex_classic.c\
 			parsing/good_op_next.c\
+			parsing/line_vide.c\
 			debug.c\
 
 all: $(NAME)

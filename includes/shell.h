@@ -257,6 +257,8 @@ void					verifie_op(t_cmd **lst, char *str, int i);
 int						check_search_null(t_path **lst, char *str,
 									int i, int j);
 int						check_new(char **new);
+int						line_vide(char *str);
+
 /*
 **	BUILTINS
 */
