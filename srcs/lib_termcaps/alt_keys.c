@@ -15,13 +15,13 @@
 
 void		alt_up_down(t_info *info, char *buff)
 {
-	if ((KEY_CODE_ALT_UP) && info->curs_y > info->orig_y)
+	if ((ALT_UP) && info->curs_y > info->orig_y)
 	{
 		tputs(tgetstr("up", NULL), 1, ft_putchar_err);
 		get_curs_pos(info);
 		info->curs_in_str -= info->col_nb;
 	}
-	else if ((KEY_CODE_ALT_DOWN) && info->s_len + ft_strlen(info->prmpt)
+	else if ((A_DWN) && info->s_len + ft_strlen(info->prmpt)
 			> info->col_nb)
 	{
 		if (info->s_len - info->curs_in_str >= info->col_nb)

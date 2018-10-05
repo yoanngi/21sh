@@ -19,6 +19,8 @@ void	ctrl_c(int sig)
 	t_hist *tmp;
 
 	(void)sig;
+	if (g_info.over)
+		return ;
 	info = &g_info;
 	tmp = info->history;
 	while (!tmp->current)

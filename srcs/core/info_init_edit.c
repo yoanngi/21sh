@@ -33,6 +33,7 @@ void			init_info(t_info *info)
 	info->max_len = 0;
 	info->nb_elem = 0;
 	info->h_d.cmd = NULL;
+	info->over = 0;
 	info->h_d.trigger = NULL;
 	info->h_d.fill = NULL;
 }
