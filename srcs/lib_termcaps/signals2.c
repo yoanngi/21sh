@@ -38,4 +38,5 @@ void	ctrl_c(int sig)
 		reinit_info(info);
 		print_prompt(info);
 	}
+	g_data->is_executing = 0;
 }
