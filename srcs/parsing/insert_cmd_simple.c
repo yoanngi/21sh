@@ -19,6 +19,8 @@
 
 int			insert_cmd_simple(t_struct *data, t_cmd **lst, char *str)
 {
+    if (str == NULL)
+        return (1);
 	if (ft_strstr(str, "echo"))
 		(*lst)->tab_cmd = split_echo(str);
 	else

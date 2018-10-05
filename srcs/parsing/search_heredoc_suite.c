@@ -23,6 +23,8 @@ int			start_heredoc_opt(char *str, int i)
 {
 	int		len;
 
+    if (str == NULL)
+        return (0);
 	len = ft_strlen(str);
 	while (str[i] && (str[i] != '<' && str[i + 1] != '<'))
 		i++;
@@ -48,7 +50,7 @@ int			start_heredoc_opt(char *str, int i)
 
 int			end_heredoc_opt(char *str, int i)
 {
-	if (!str)
+	if (str == NULL)
 		return (0);
 	while (str[i])
 	{
