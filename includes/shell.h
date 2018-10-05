@@ -210,7 +210,8 @@ int						wait_or_not(int *status, pid_t pid, t_cmd *start);
 int						redirection_fd(t_cmd *data);
 int						delete_tmp(char **file);
 int						parse_line(t_struct *data, char **line, int ret);
-int                     duplique_process(t_cmd *lst, int pipe_fd[2], int *fd_in);
+int						duplique_process(t_cmd *lst, int pipe_fd[2],
+							int *fd_in);
 /*
 **	PARSING
 */

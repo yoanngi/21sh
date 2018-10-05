@@ -98,6 +98,7 @@ int			search_heredoc(t_cmd **lst, char *str, int i, int j)
 		(*lst)->heredoc = heredoc_simple(str, i, &j);
 	else if ((*lst)->op_next == 5)
 	{
+		ft_printf("str search: %s\n", str);
 		(*lst)->heredoc_str = heredoc(str);
         if ((*lst)->heredoc_str == NULL)
             return (-1);
