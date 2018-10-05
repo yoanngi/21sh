@@ -32,7 +32,7 @@ void		fill_history(t_info *info, t_hist *tmp)
 	}
 	while (tmp->next != info->history)
 		tmp = tmp->next;
-	if (!last->name ||
+	if ((!last->name || str_iswhite(last->name)) ||
 			(last->prev->name && !ft_strcmp(last->name, last->prev->name)))
 		remove_elem(last);
 }

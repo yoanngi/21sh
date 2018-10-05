@@ -1,41 +1,28 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   signals2.c                                       .::    .:/ .      .::   */
+/*   str_iswhite.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/09/06 14:04:31 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/06 17:48:16 by volivry     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/10/05 17:15:50 by volivry      #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/05 17:24:30 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../includes/libft.h"
 
-void	ctrl_c(int sig)
+int	str_iswhite(char *str)
 {
-	t_info *info;
-	t_hist *tmp;
+	int	i;
 
-	(void)sig;
-	if (g_info.over)
-		return ;
-	info = &g_info;
-	tmp = info->history;
-	while (!tmp->current)
-		tmp = tmp->next;
-	raw_term_mode(info);
-	end_key(info);
-	get_x_back(info);
-	ft_putendl("");
-	if (!g_data->is_executing)
+	i = 0;
+	while (str[i])
 	{
-		if (tmp->name)
-			ft_strdel(&tmp->name);
-		if (info->line)
-			ft_strdel(&info->line);
-		reinit_info(info);
-		print_prompt(info);
+		if (!ft_iswhite(str[i]))
+			return (0);
+		i++;
 	}
+	return (1);
 }
