@@ -37,9 +37,9 @@ void		rc_key(t_info *info, t_hist *tmp)
 
 static void	get_key2(t_info *info, t_hist *tmp, char *buff)
 {
-	if (KEY_CODE_ALT_RIGHT)
+	if (A_RGHT)
 		alt_right(info, tmp);
-	else if (KEY_CODE_ALT_LEFT)
+	else if (A_LFT)
 		alt_left(info, tmp);
 	else if (KEY_CODE_BSP)
 		del_char(info, tmp);
@@ -82,7 +82,7 @@ void		get_key(t_info *info, t_hist *tmp)
 		right_key(info);
 	else if (KEY_CODE_LEFT)
 		left_key(info);
-	else if ((KEY_CODE_ALT_UP) || (KEY_CODE_ALT_DOWN))
+	else if ((ALT_UP) || (A_DWN))
 		alt_up_down(info, buff);
 	else
 		get_key2(info, tmp, buff);
