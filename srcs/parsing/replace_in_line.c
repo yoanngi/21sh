@@ -25,6 +25,8 @@ static int		return_compt(char *str, int j)
 	compt = 0;
 	if (str == NULL)
 		return (0);
+    if (str[j] == '?' || str[j] == '$')
+        return (1);
 	while (str[j] > 64 && str[j] < 91)
 	{
 		j++;
