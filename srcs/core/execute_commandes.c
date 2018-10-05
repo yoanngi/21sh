@@ -13,43 +13,42 @@
 
 #include "../../includes/shell.h"
 
+static int      exec_pipe_child2(t_cmd *lst, int pipe_fd[2], int *fd_in)
+{
+	dup2(*fd_in, lst->stdin_cmd) == -1 ? basic_error("dup2", "failled") : 0;
+	close(pipe_fd[1]) == -1 ? basic_error("close", "failled") : 0;
+	close(pipe_fd[0]) == -1 ? basic_error("close", "failled") : 0;
+	return (execve(lst->rep, lst->tab_cmd, lst->env));
+}
+
 static int		exec_pipe_child(t_struct *mystruct, t_cmd *lst, int pipe_fd[2],
 	int *fd_in)
 {
 	int		builtins;
 
-    // A delete
-	printf("EXEC_PIPE_CHILD (%s)\n", lst->rep);
-    // ***
-
+    if (lst->pathname != NULL && lst->op_next != 2 && lst->op_next != 3)
+        duplique_process(lst, pipe_fd, fd_in);
 	if ((builtins = execute_builtins(mystruct, lst, pipe_fd, fd_in)) != -1)
 		return (builtins);
 	else if (lst->op_next == 4 || lst->op_next == 5)
 		return (fork_heredoc(lst, 0));
-	else if (lst->op_next == 1 && lst->pathname == NULL)
+	else if (lst->op_next == 1)
 	{
-		printf("%s ---> op_next = 1\n", __func__);
 		dup2(*fd_in, lst->stdin_cmd) == -1 ? basic_error("dup2", "failled") : 0;
 		dup2(pipe_fd[1], lst->stdout_cmd) == -1 ?
-	basic_error("dup2", "failled") : 0;
+    basic_error("dup2", "failled") : 0;
 		close(pipe_fd[0]) == -1 ? basic_error("close", "failled") : 0;
-		if (lst->pathname != NULL)
-			return (fork_redirection(lst));
 		return (execve(lst->rep, lst->tab_cmd, lst->env));
 	}
-	else if (lst->pathname != NULL)
+	else if (lst->op_next == 2 || lst->op_next == 3)
     {
 		dup2(*fd_in, lst->stdin_cmd) == -1 ? basic_error("dup2", "failled") : 0;
 		dup2(pipe_fd[0], lst->stdout_cmd) == -1 ?
-	basic_error("dup2", "failled") : 0;
+    basic_error("dup2", "failled") : 0;
 		close(pipe_fd[1]) == -1 ? basic_error("close", "failled") : 0;
 		return (fork_redirection(lst));
     }
-	printf("%s ---> op_next = 0\n", __func__);
-	dup2(*fd_in, lst->stdin_cmd) == -1 ? basic_error("dup2", "failled") : 0;
-	close(pipe_fd[1]) == -1 ? basic_error("close", "failled") : 0;
-	close(pipe_fd[0]) == -1 ? basic_error("close", "failled") : 0;
-	return (execve(lst->rep, lst->tab_cmd, lst->env));
+    return (exec_pipe_child2(lst, pipe_fd, fd_in));
 }
 
 /*

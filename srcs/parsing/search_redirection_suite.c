@@ -17,7 +17,8 @@ int		check_search_null(t_path **lst, char *str, int i, int j)
 {
 	if (str[i] == '|' || str[i] == '<')
 	{
-		*lst = ft_init_path();
+		(*lst)->next = ft_init_path();
+		*lst = (*lst)->next;
 		(*lst)->name = ft_strsub(str, j, i - j);
 		(*lst)->s_or_d = what_is_op(str, j);
 		clear_line(&(*lst)->name);

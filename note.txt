@@ -21,9 +21,7 @@ a check quand fusion: gestion du heredoc
 
 Segfault / double free .... :
 echo"test"
-$MACHIN si n'existe pas remplacer par null
-segfault sur delete_bs
-segfault ou abort sur split_echo
+$MACHIN si n'existe pas remplacer par null > OK
 
 Erreur std:
 error echo "test" > test
@@ -33,3 +31,12 @@ error > or >>
 
 quand heredoc | ou redir error
 check chemin quand >&
+
+test a faire (redir et pipe):
+idem avec > et >>
+
+ls -la > test
+ls -la | sort
+ls -la | grep auteur | sort
+ls -la > test | grep auteur | wc
+ls -la > test | grep auteur > test2

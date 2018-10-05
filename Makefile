@@ -47,6 +47,7 @@ N_SRCS = 	main.c\
 			core/exit_status.c\
 			core/wait_or_not.c\
 			core/redirection_fd.c\
+			core/duplique_process.c\
 			init/ft_check_infos.c\
 			init/ft_delete_struct.c\
 			init/ft_init_builtins.c\
