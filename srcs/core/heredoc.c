@@ -57,13 +57,13 @@ static char		*get_hd_cmd(char *str)
 	return (remain);
 }
 
-static int		hd_err(char *remain, char *str)
+static int		hd_err(char *remain, char **str)
 {
 	if (!g_info.h_d.trigger || !ft_strcmp(g_info.h_d.trigger, "") ||
-	(str[0] == '<' && str[1] == '<'))
+	(*str[0] == '<' && *str[1] == '<'))
 	{
 		ft_putstr("21sh: parse error near \\n\n");
-		ft_strdel(&str);
+		ft_strdel(str);
 		change_prompt(&g_info, 0);
 		g_info.quoted = 0;
 		return (1);
@@ -71,7 +71,7 @@ static int		hd_err(char *remain, char *str)
 	if (ft_strstr(remain, "<<"))
 	{
 		ft_putstr("Parse error: multiple heredocs in the same command\n");
-		ft_strdel(&str);
+		ft_strdel(str);
 		change_prompt(&g_info, 0);
 		g_info.quoted = 0;
 		return (1);
@@ -105,7 +105,7 @@ char			*heredoc(char *str)
 	first_round = 1;
 	tmp = last_elem(g_info.history);
 	remain = get_hd_cmd(str);
-	if (hd_err(remain, str))
+	if (hd_err(remain, &str))
 		return (NULL);
 	change_prompt(&g_info, 4);
 	g_info.h_d.fill = remain ? ft_strdup(remain) : NULL;
