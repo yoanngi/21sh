@@ -397,6 +397,7 @@ typedef struct			s_info
 	int					nb_elem;
 	int					max_len;
 	int					loop;
+	int					over;
 	t_here_d			h_d;
 }						t_info;
 
