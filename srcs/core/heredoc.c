@@ -123,5 +123,6 @@ char			*heredoc(char *str)
 		reinit_info(&g_info);
 		line_edit(&g_info, tmp);
 	}
+	ft_printf("ret: %s\n", g_info.h_d.fill);
 	return (quit_hd());
 }
