@@ -32,8 +32,7 @@ int			exec_redirection(t_path *file, int op)
 	S_IWUSR | S_IRGRP | S_IROTH);
 	if (fd == -1)
 		exit(EXIT_FAILURE);
-	dup2(fd, file->redir_fd) == -1 ? basic_error("dup2", "failled") : 0;
-	close(fd) == -1 ? basic_error("close", "failled") : 0;
+	dup2(fd, file->redir_fd) == -1 ? basic_error("dup2", " failled") : 0;
 	return (fd);
 }
 

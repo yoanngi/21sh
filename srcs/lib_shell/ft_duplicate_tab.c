@@ -32,7 +32,8 @@ char		**ft_duplicate_tab(char **tabl)
 		return (NULL);
 	while (tabl[i])
 	{
-		new[i] = ft_strdup(tabl[i]);
+		if (!(new[i] = ft_strdup(tabl[i])))
+            new[i] = NULL;
 		i++;
 	}
 	new[len] = NULL;

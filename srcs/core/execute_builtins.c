@@ -27,7 +27,7 @@ int			execute_builtins(t_struct *mystruct, t_cmd *lst, int pipe_fd[2],
 		{
 			if (lst->pathname != NULL)
 			{
-				clear_echo(&lst->tab_cmd);
+				clear_tab(&lst->tab_cmd);
 				return (fork_redirection(lst));
 			}
 			dup2(*fd_in, lst->stdin_cmd) == -1 ?

@@ -15,22 +15,24 @@
 
 int		check_search_null(t_path **lst, char *str, int i, int j)
 {
-	if (str[i] == '|' || str[i] == '<')
+	if (lst == NULL)
+        return (i);
+	if (str[i] == '|' || str[i] == '<' || i >= ft_strlen(str) - 1)
 	{
-		(*lst)->next = ft_init_path();
-		*lst = (*lst)->next;
+        if (*lst == NULL)
+            return (i);
+        if ((*lst)->name != NULL)
+        {
+		    (*lst)->next = ft_init_path();
+		    *lst = (*lst)->next;
+        }
 		(*lst)->name = ft_strsub(str, j, i - j);
-		(*lst)->s_or_d = what_is_op(str, j);
+        if ((*lst)->s_or_d == 0)
+		    (*lst)->s_or_d = what_is_op(str, j - 1, (*lst)->s_or_d);
+        if ((*lst)->redir_fd == 0)
+            (*lst)->redir_fd = search_fd(str, j - 1);
 		clear_line(&(*lst)->name);
 		return (i);
-	}
-	if (lst == NULL)
-	{
-		*lst = ft_init_path();
-		(*lst)->name = ft_strdup(str);
-		(*lst)->s_or_d = what_is_op(str, i);
-		clear_line(&(*lst)->name);
-		return (ft_strlen(str));
 	}
 	else if (j < i)
 	{

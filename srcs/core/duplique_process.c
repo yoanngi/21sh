@@ -22,10 +22,9 @@ int      duplique_process(t_cmd *lst, int pipe_fd[2], int *fd_in)
         return (1);
     if (pid == 0)
     {
-	    dup2(*fd_in, lst->stdin_cmd) == -1 ? basic_error("dup2", "failled") : 0;
-	    dup2(pipe_fd[0], lst->stdout_cmd) == -1 ?
-    basic_error("dup2", "failled") : 0;
-    	close(pipe_fd[1]) == -1 ? basic_error("close", "failled") : 0;
+	    dup2(*fd_in, lst->stdin_cmd) == -1 ? basic_error("dup2", "HEre failled") : 0;
+	    dup2(pipe_fd[1], lst->stdout_cmd) == -1 ?
+    basic_error("dup2", "la failled") : 0;
 	    return (fork_redirection(lst));
     }
     else

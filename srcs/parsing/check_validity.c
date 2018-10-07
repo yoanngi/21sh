@@ -49,6 +49,8 @@ static int		check_lst_special(t_struct *data, t_cmd **lst, int i)
 	while (*lst)
 	{
 		i = 0;
+        if ((*lst)->tab_cmd == NULL)
+            return (0);
 		while ((*lst)->tab_cmd[i])
 		{
 			replace_in_line(data, &(*lst)->tab_cmd[i]);

@@ -13,12 +13,9 @@
 
 #include "../../includes/shell.h"
 
-static int			good_return(t_cmd **new)
-{
-	if ((*new)->op_next == 1 || (*new)->op_next == 2 || (*new)->op_next == 4)
-		return (1);
-	return (2);
-}
+/*
+**  Retourne le code du bon operateur
+*/
 
 int					good_op_next(t_cmd **lst, char *str, int i)
 {
@@ -43,9 +40,12 @@ int					good_op_next(t_cmd **lst, char *str, int i)
 		(*lst)->op_next = 7;
 	else if (str[i] == '|' && str[i + 1] == '|')
 		(*lst)->op_next = 8;
-	ret = good_return(lst);
-	return (ret);
+	return (0);
 }
+
+/*
+** Si redirection et apres pipe, change code operateur
+*/
 
 void				verifie_op(t_cmd **lst, char *str, int i)
 {

@@ -17,26 +17,13 @@ A faire:
 
 Encore quelques erreur sur le cd
 A verifier, normalement ok
-a check quand fusion: gestion du heredoc
 
 Segfault / double free .... :
-echo"test"
 $MACHIN si n'existe pas remplacer par null > OK
 
 Erreur std:
 error echo "test" > test
 Affiche "test" au lieu de test
-error > or >>
-(search_redirection.c et good_tab_cmd.c)
 
-quand heredoc | ou redir error
-check chemin quand >&
-
-test a faire (redir et pipe):
-idem avec > et >>
-
-ls -la > test
-ls -la | sort
-ls -la | grep auteur | sort
-ls -la > test | grep auteur | wc
-ls -la > test | grep auteur > test2
+|          /bin/ls              -l| > double free
+|wc -l < file                     | > trop de fork, pas de retour

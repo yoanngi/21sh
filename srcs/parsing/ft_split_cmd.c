@@ -24,31 +24,6 @@ static int			check_split(t_struct *data, t_cmd **new, char *str)
 	return (0);
 }
 
-static int			return_val_i(char *str, int i)
-{
-	if (str[i] == '\"')
-	{
-		i++;
-		while (str[i] != '\"')
-		{
-			if (str[i] == '\0')
-				return (1);
-			i++;
-		}
-	}
-	else if (str[i] == '\'')
-	{
-		i++;
-		while (str[i] != '\'')
-		{
-			if (str[i] == '\0')
-				return (1);
-			i++;
-		}
-	}
-	return (i);
-}
-
 static int			ft_split_cmd_suite(t_cmd **new, t_struct *data,
 	char *str, int i)
 {
@@ -58,17 +33,19 @@ static int			ft_split_cmd_suite(t_cmd **new, t_struct *data,
 	if (check_split(data, new, str) == 1)
 		return (0);
 	tmp = ft_strdup(str);
-	while (tmp[i] && i < ft_strlen(tmp))
+	while (tmp[i])
 	{
-		i = return_val_i(tmp, i);
+		i = echap_quote(tmp, i, 0);
 		if (tmp[i] == '|' || tmp[i] == '>' ||
-	tmp[i] == '<' || i == ft_strlen(tmp) - 1)
+	tmp[i] == '<' || (tmp[i + 1] == '\0' || tmp[i] == '\0'))
 		{
-			i += good_op_next(new, tmp, i);
+			good_op_next(new, tmp, i);
 			i = good_tab_cmd(data, new, tmp, i);
             if (i == -1)
                 return (1);
 			verifie_op(new, tmp, i);
+            if ((*new)->op_next == 5)
+                i = i - 1;
 			i = resize_str(&tmp, i) - 1;
 			if (tmp == NULL)
 				return (0);
@@ -85,9 +62,7 @@ t_cmd				*ft_split_cmd(char *str, t_struct *data)
 {
 	t_cmd	*new;
 	t_cmd	*start;
-	int		i;
 
-	i = 0;
 	new = NULL;
 	start = NULL;
 	if (!(new = ft_init_cmd()) || str == NULL)

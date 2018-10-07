@@ -26,16 +26,19 @@ static char			**insert_option_cmd(char **tab_cmd, char **new_tab,
 	if (!(new = (char **)malloc(sizeof(char *) * (len_1 + len_2 + 1))))
 		return (NULL);
 	new[len_1 + len_2] = NULL;
+	new[len_1 + len_2 - 1] = NULL;
 	len_1 = 0;
 	len_2 = 1;
 	while (tab_cmd[len_1])
 	{
-		new[len_1] = ft_strdup(tab_cmd[len_1]);
+		if (!(new[len_1] = ft_strdup(tab_cmd[len_1])))
+            new[len_1] = NULL;
 		len_1++;
 	}
 	while (new_tab[len_2])
 	{
-		new[len_1] = ft_strdup(new_tab[len_2]);
+		if (!(new[len_1] = ft_strdup(new_tab[len_2])))
+            new[len_1] = NULL;
 		len_1++;
 		len_2++;
 	}
@@ -68,8 +71,11 @@ static char			*return_name(t_cmd **lst, char *str, int start, int end)
 
 	new = NULL;
 	tab_tmp = NULL;
-	if (str[start] == '&')
-		start += modifie_fd(lst, str, start);
+	if (str[end + 1] == '&')
+    {
+		start += modifie_fd(lst, str, end + 1);
+        return (NULL);
+    }
 	if (start > end)
 		return (NULL);
 	if (ft_strlen(str) == end + 1)
@@ -119,14 +125,23 @@ int					search_redirection(t_cmd **lst, char *str, int i, int j)
 	val = 0;
 	while (str[i] && str[i] != '|' && str[i] != '<')
 	{
-		if (str[i] == '>' || str[i + 1] == '\0')
+		if (str[i] == '>' && str[i + 1] != '&')
 		{
 			new = search_suite(&new, lst);
 			new->name = return_name(lst, str, j, i);
-			new->s_or_d = what_is_op(str, i);
-			new->redir_fd = search_fd(str, j - 1);
+            if (new->s_or_d == 0)
+			    new->s_or_d = what_is_op(str, j, new->s_or_d);
+            if (new->redir_fd == 0)
+			    new->redir_fd = search_fd(str, j);
+            new->s_or_d == 3 ? i += 1 : 0;
 			j = i + 1;
 		}
+        else if (str[i] == '>' && str[i + 1] == '&')
+        {
+            i += modifie_fd(lst, str, i + 1);
+            j = i + 1;
+            
+        }
 		i++;
 	}
 	if (new == NULL)

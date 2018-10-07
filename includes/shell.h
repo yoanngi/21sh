@@ -239,7 +239,7 @@ int						insert_cmd_simple(t_struct *data, t_cmd **lst,
 									char *str);
 int						good_tab_cmd(t_struct *data, t_cmd **lst,
 									char *str, int i);
-int						what_is_op(char *str, int i);
+int						what_is_op(char *str, int i, int op);
 int						search_redirection(t_cmd **lst, char *str,
 									int i, int j);
 int						search_heredoc(t_cmd **lst, char *str,
@@ -259,6 +259,7 @@ int						check_search_null(t_path **lst, char *str,
 									int i, int j);
 int						check_new(char **new);
 int						line_vide(char *str);
+int						clear_tab(char ***tabl);
 
 /*
 **	BUILTINS

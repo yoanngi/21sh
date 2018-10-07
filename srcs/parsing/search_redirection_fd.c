@@ -17,11 +17,13 @@ int				search_fd(char *str, int i)
 {
 	if (str == NULL)
 		return (1);
-	if (i == 0 || i < 2 || i + 1 == ft_strlen(str) || str[i] != '>')
-		return (1);
-	if (ft_isdigit(str[i - 1]) == 1)
+    if (str[i] == '>')
+        i--;
+    if (str[i] == '>')
+        i--;
+	if (ft_isdigit(str[i]) == 1)
 	{
-		return (str[i - 1] - 48);
+		return (str[i] - 48);
 	}
 	return (1);
 }
