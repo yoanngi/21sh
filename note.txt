@@ -15,15 +15,12 @@ https://openclassrooms.com/forum/sujet/pipe-et-dup2-comment-faire-23270
 
 A faire:
 
-Encore quelques erreur sur le cd
+Encore quelques erreur sur le cd:
+cd -
 A verifier, normalement ok
 
 Segfault / double free .... :
 $MACHIN si n'existe pas remplacer par null > OK
 
-Erreur std:
-error echo "test" > test
-Affiche "test" au lieu de test
-
 |          /bin/ls              -l| > double free
-|wc -l < file                     | > trop de fork, pas de retour
+cat -e << EOF >> test               > >> test se retrouve dans le heredoc

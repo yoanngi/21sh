@@ -58,7 +58,7 @@ static int			ft_split_cmd_suite(t_cmd **new, t_struct *data,
 	return (0);
 }
 
-t_cmd				*ft_split_cmd(char *str, t_struct *data)
+t_cmd				*ft_split_cmd(char **str, t_struct *data)
 {
 	t_cmd	*new;
 	t_cmd	*start;
@@ -68,8 +68,8 @@ t_cmd				*ft_split_cmd(char *str, t_struct *data)
 	if (!(new = ft_init_cmd()) || str == NULL)
 		return (NULL);
 	start = new;
-	clear_line(&str);
-	if (str == NULL || ft_split_cmd_suite(&new, data, str, 0) == 1)
+	clear_line(str);
+	if (str == NULL || ft_split_cmd_suite(&new, data, *str, 0) == 1)
 	{
 		new = clear_cmd(new);
 		return (NULL);

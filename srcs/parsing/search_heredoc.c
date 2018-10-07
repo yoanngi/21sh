@@ -13,24 +13,20 @@
 
 #include "../../includes/shell.h"
 
-static int	ft_return_heredoc(char *str, char **tmp, int i, int opt)
+static int	ft_return_heredoc(char *str, char **tmp, int i)
 {
 	int		j;
 	int		len;
 
 	j = i;
 	len = ft_strlen(str) - 1;
-	while (str[i] == ' ')
+	while (str[i] == ' ' || str[i] == '<')
 		i++;
+    i += 2;
 	while (str[i])
 	{
-		if (opt == 1 && (i == len || (str[i] == ' ' || str[i] == '|' ||
-	str[i] == '>' || str[i] == '<')))
-		{
-			*tmp = ft_strsub(str, j, i - j + 1);
-			return (i);
-		}
-		if (opt == 2 && (i == len || (str[i] == '>' && str[i + 1] == '>')))
+		if (i == len || (str[i] == '|' ||
+	str[i] == '>' || str[i] == '<'))
 		{
 			*tmp = ft_strsub(str, j, i - j + 1);
 			return (i);
@@ -47,7 +43,7 @@ static char	**heredoc_simple(char *str, int i, int *j)
 
 	tmp = NULL;
 	new = NULL;
-	*j = ft_return_heredoc(str, &tmp, i, 1);
+	*j = ft_return_heredoc(str, &tmp, i + 1);
 	if (tmp == NULL)
 		return (NULL);
 	if (!(new = (char **)malloc(sizeof(char *) * 2)))
@@ -87,6 +83,27 @@ static int	add_params(t_cmd **lst, char *str, int j, int end)
 	return (0);
 }
 
+int			clear_tab_heredoc(t_cmd **lst)
+{
+    int     len;
+    char    *tmp;
+
+    tmp = NULL;
+    if ((*lst)->heredoc == NULL)
+        return (0);
+    len = ft_strlen((*lst)->heredoc[0]);
+    if (!(tmp = ft_strdup((*lst)->heredoc[0])))
+        return (1);
+    if (tmp[len - 1] == '>' || tmp[len - 1] == '|')
+    {
+        ft_strdel(&(*lst)->heredoc[0]);
+        (*lst)->heredoc[0] = ft_strsub(tmp, 0, len - 1);
+    }
+    ft_strdel(&tmp);
+    return (0);
+}
+
+
 int			search_heredoc(t_cmd **lst, char *str, int i, int j)
 {
 	int		end;
@@ -95,7 +112,11 @@ int			search_heredoc(t_cmd **lst, char *str, int i, int j)
 	if (!lst || !str)
 		return (-1);
 	if ((*lst)->op_next == 4)
+    {
 		(*lst)->heredoc = heredoc_simple(str, i, &j);
+        clear_tab_heredoc(lst);
+        end = j;
+    }
 	else if ((*lst)->op_next == 5)
 	{
 		(*lst)->heredoc_str = heredoc(str);

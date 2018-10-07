@@ -46,6 +46,7 @@ void		print_debug(t_cmd **data, int code)
 				printf("\ttab_cmd[%d] = |%s|\n", i, start->tab_cmd[i]);
 				i++;
 			}
+			printf("\ttab_cmd[%d] = |%s|\n", i, start->tab_cmd[i]);
 		}
 		i = 0;
 		printf("HEREDOC:\n");

@@ -50,18 +50,22 @@ static int		exec_pipe_child(t_struct *mystruct, t_cmd *lst, int pipe_fd[2],
 		dup2(pipe_fd[1], lst->stdout_cmd) == -1 ?
     basic_error("dup2", "2 failled") : 0;
 		close(pipe_fd[0]) == -1 ? basic_error("close", "3 failled") : 0;
-        if (lst->pathname != NULL)
+        if (lst->pathname != NULL ||lst->heredoc != NULL ||
+    lst->heredoc_str != NULL)
             duplique_process(lst, pipe_fd, fd_in);
 		return (execve(lst->rep, lst->tab_cmd, lst->env));
 	}
 	if (lst->op_next == 2 || lst->op_next == 3)
     {
+        if (lst->heredoc != NULL || lst->heredoc_str != NULL)
+            return (fork_heredoc(lst, 0));
         if (redir_one(lst->pathname) == 1)
         {
-		    dup2(*fd_in, lst->stdin_cmd) == -1 ? basic_error("dup2", "LAA failled") : 0;
+		    dup2(*fd_in, lst->stdin_cmd) == -1 ?
+    basic_error("dup2", "failled") : 0;
 		    dup2(pipe_fd[0], lst->stdout_cmd) == -1 ?
     basic_error("dup2", " failled") : 0;
-		    close(pipe_fd[1]) == -1 ? basic_error("close", "00 failled") : 0;
+		    close(pipe_fd[1]) == -1 ? basic_error("close", "failled") : 0;
         }
 		return (fork_redirection(lst));
     }

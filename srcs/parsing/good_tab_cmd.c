@@ -55,10 +55,11 @@ static int		what_return(t_cmd **lst, char *str, int i, int ret)
 	else if ((*lst)->op_next == 4 || (*lst)->op_next == 5)
 	{
 		ret = search_heredoc(lst, str, i, i);
-        if (str[ret] == '>')
+        if (str[ret] == '>' || str[ret + 1]  == '>' || str[ret] == '|' ||
+    str[ret + 1] == '|')
         {
             good_op_next(lst, str, ret);
-            ret =  what_return(lst, str, ret, ft_strlen(str) - ret);
+            ret =  what_return(lst, str, ret, ret);
         }
     }
 	return (ret);

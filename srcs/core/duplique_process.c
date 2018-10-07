@@ -25,7 +25,10 @@ int      duplique_process(t_cmd *lst, int pipe_fd[2], int *fd_in)
 	    dup2(*fd_in, lst->stdin_cmd) == -1 ? basic_error("dup2", "HEre failled") : 0;
 	    dup2(pipe_fd[1], lst->stdout_cmd) == -1 ?
     basic_error("dup2", "la failled") : 0;
-	    return (fork_redirection(lst));
+        if (lst->heredoc != NULL || lst->heredoc_str != NULL)
+	        return (fork_heredoc(lst, 0));
+        if (lst->pathname != NULL)
+	        return (fork_redirection(lst));
     }
     else
         wait(NULL);

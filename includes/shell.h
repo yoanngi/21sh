@@ -221,7 +221,7 @@ t_ins					*ft_split_pvirgule(char **line, t_ins *lst, int i,
 int						ft_check_vir(t_ins **lst, char **line);
 int						resize_line(char **str, int i, t_ins **lst);
 int						add_code(t_ins *lst, char *str, int i);
-t_cmd					*ft_split_cmd(char *str, t_struct *data);
+t_cmd					*ft_split_cmd(char **str, t_struct *data);
 int						clear_line(char **line);
 char					*clean_before(char *str);
 char					*clean_next(char *str);

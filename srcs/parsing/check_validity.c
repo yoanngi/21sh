@@ -72,7 +72,7 @@ int				check_link(t_cmd *lst)
 {
 	if (lst->op_next == 1 && lst->next->rep == NULL)
 		return (1);
-	if (lst->op_next == 2 && lst->pathname == NULL)
+	if ((lst->op_next == 2 || lst->op_next == 3) && lst->pathname == NULL)
 		return (1);
 	return (0);
 }

@@ -39,6 +39,8 @@ static char		*return_path_heredoc(char *name)
 
 	path = NULL;
 	tmp = NULL;
+    if (!name)
+        return (NULL);
 	if (!(path = ft_strnew(255)))
 		return (NULL);
 	getcwd(path, 255);
@@ -65,6 +67,8 @@ static int		heredoc_simple_exec(t_cmd *lst, int i)
 	ft_strdel(&path);
 	dup2(fd, lst->stdin_cmd);
 	close(fd);
+    if (lst->pathname != NULL)
+        return (fork_redirection(lst));
 	status = execve(lst->rep, lst->tab_cmd, lst->env);
 	return (status);
 }
@@ -89,6 +93,8 @@ static int		heredoc_exec(t_cmd *lst, char *file)
 		return (1);
 	dup2(fd, lst->stdin_cmd);
 	close(fd);
+    if (lst->pathname != NULL)
+        return (fork_redirection(lst));
 	status = execve(lst->rep, lst->tab_cmd, lst->env);
 	return (status);
 }
@@ -113,7 +119,7 @@ int				fork_heredoc(t_cmd *lst, int code)
 	}
 	if (!(lst))
 		return (1);
-	if (lst->op_next == 4)
+	if (lst->op_next == 4 || lst->heredoc != NULL)
 		ret = heredoc_simple_exec(lst, 0);
 	else
 		ret = heredoc_exec(lst, "./.heredoc_42sh_tmp");
