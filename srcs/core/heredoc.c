@@ -123,7 +123,10 @@ char			*heredoc(char *str)
 		reinit_info(&g_info);
 		line_edit(&g_info, tmp);
 	}
+<<<<<<< HEAD
     // a delete
 	    ft_printf("ret: %s\n", g_info.h_d.fill);
+=======
+>>>>>>> ab7e82b2909e117f8ddf46bf8deed4a4c1875aea
 	return (quit_hd());
 }
