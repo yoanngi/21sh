@@ -24,3 +24,9 @@ $MACHIN si n'existe pas remplacer par null > OK
 
 |          /bin/ls              -l| > double free
 cat -e << EOF >> test               > >> test se retrouve dans le heredoc
+
+correction 42sh:
+pas tester heredoc
+
+pb sur rm nosuchfile 2>&1 | cat -e
+
