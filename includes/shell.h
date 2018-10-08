@@ -274,6 +274,7 @@ int						execute_var_modif(t_struct *data, t_cmd **lst, int i,
 	int opt);
 int						func_echo(t_struct *data, t_cmd *lst);
 int						func_cd(t_struct *data, t_cmd *lst);
+int						actualise_env(t_struct *data, char *newpath);
 int						func_history(t_struct *data, t_cmd *lst);
 int						func_setenv(t_struct **data, t_cmd *lst);
 int						modifie_env(t_struct **data, t_cmd *lst, int i);

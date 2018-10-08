@@ -18,32 +18,6 @@
 **	~ // - // $ > traiter dans parsing
 */
 
-static int	actualise_env(t_struct *data, char *newpath)
-{
-	int i;
-
-	i = 0;
-	ft_strdel(&data->oldpwd);
-	data->oldpwd = ft_strdup(data->pwd);
-	ft_strdel(&data->pwd);
-	data->pwd = ft_strdup(newpath);
-	while (data->env[i])
-	{
-		if (ft_strncmp(data->env[i], "PWD=", 4) == 0)
-		{
-			ft_strdel(&data->env[i]);
-			data->env[i] = ft_strjoin("PWD=", data->pwd);
-		}
-		if (ft_strncmp(data->env[i], "OLDPWD=", 7) == 0)
-		{
-			ft_strdel(&data->env[i]);
-			data->env[i] = ft_strjoin("OLDPWD=", data->oldpwd);
-		}
-		i++;
-	}
-	return (0);
-}
-
 static int	change_directory(t_struct *data, t_cmd *lst, char *newpath)
 {
 	if (newpath != NULL)
@@ -61,7 +35,7 @@ static int	change_directory(t_struct *data, t_cmd *lst, char *newpath)
 	{
 		if (chdir(lst->tab_cmd[1]) == -1)
 		{
-			ft_putstr_fd("cd: no such file or directory:", 2);
+			ft_putstr_fd("cd: no such file or directory: ", 2);
 			ft_putstr_fd(lst->tab_cmd[1], 2);
 			ft_putstr_fd("\n", 2);
 			return (1);
@@ -117,6 +91,13 @@ static int	check_error_cd(char **tabargv)
 	return (EXIT_SUCCESS);
 }
 
+static int	cd_minus(t_struct *data, t_cmd *lst)
+{
+	change_directory(data, lst, lst->tab_cmd[1]);
+	ft_printf("%s\n", lst->tab_cmd[1]);
+	return (0);
+}
+
 int			func_cd(t_struct *data, t_cmd *lst)
 {
 	int mode;
@@ -132,6 +113,12 @@ int			func_cd(t_struct *data, t_cmd *lst)
 	{
 		if (lst->tab_cmd[1] == NULL)
 			change_directory(data, lst, data->home);
+		else if (!ft_strcmp(lst->tab_cmd[1], "-"))
+		{
+			ft_strdel(&lst->tab_cmd[1]);
+			lst->tab_cmd[1] = ft_strdup(data->oldpwd);
+			cd_minus(data, lst);
+		}
 		else
 			change_directory(data, lst, NULL);
 	}

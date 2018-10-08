@@ -114,6 +114,7 @@ N_SRCS = 	main.c\
 			lib_shell/delete_back_slash.c\
 			builtins/good_func.c\
 			builtins/func_cd.c\
+			builtins/func_cd2.c\
 			builtins/func_echo.c\
 			builtins/func_env.c\
 			builtins/func_env_suite.c\
