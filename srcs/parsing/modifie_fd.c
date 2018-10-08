@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/08 15:29:39 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/08 10:51:42 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/08 13:15:37 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -60,7 +60,6 @@ static int		fd_next_suite(char *str, int i, int add, int *fd_next)
 	char	*tmp;
 
 	tmp = NULL;
-	// add gestion chemin a faire
 	while (ft_isalpha(str[i + add]) == 1 || str[i + add] == '/')
 		add++;
 	tmp = ft_strsub(str, i + 1, add);
