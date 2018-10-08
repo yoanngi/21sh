@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/11 09:42:47 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 15:58:10 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/08 10:48:55 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -49,8 +49,8 @@ static int		check_lst_special(t_struct *data, t_cmd **lst, int i)
 	while (*lst)
 	{
 		i = 0;
-        if ((*lst)->tab_cmd == NULL)
-            return (0);
+		if ((*lst)->tab_cmd == NULL)
+			return (0);
 		while ((*lst)->tab_cmd[i])
 		{
 			replace_in_line(data, &(*lst)->tab_cmd[i]);

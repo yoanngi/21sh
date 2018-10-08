@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/28 11:34:39 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/30 10:03:01 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/08 10:52:31 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,8 +23,8 @@ int			start_heredoc_opt(char *str, int i)
 {
 	int		len;
 
-    if (str == NULL)
-        return (0);
+	if (str == NULL)
+		return (0);
 	len = ft_strlen(str);
 	while (str[i] && (str[i] != '<' && str[i + 1] != '<'))
 		i++;

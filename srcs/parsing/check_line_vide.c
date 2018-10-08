@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/26 12:06:01 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 11:58:20 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/08 10:50:39 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -54,8 +54,6 @@ int			ft_check_line_vide(char *str, t_struct **data)
 	int		i;
 
 	i = 0;
-    if (line_vide(str) == 0)
-        return (0);
 	if (str == NULL || ft_strlen(str) == 0)
 		return (0);
 	if (other_check(str, data) == 1)

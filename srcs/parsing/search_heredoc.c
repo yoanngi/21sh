@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/28 11:34:39 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/30 10:03:01 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/08 10:54:32 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,11 +22,11 @@ static int	ft_return_heredoc(char *str, char **tmp, int i)
 	len = ft_strlen(str) - 1;
 	while (str[i] == ' ' || str[i] == '<')
 		i++;
-    i += 2;
+	i += 2;
 	while (str[i])
 	{
 		if (i == len || (str[i] == '|' ||
-	str[i] == '>' || str[i] == '<'))
+					str[i] == '>' || str[i] == '<'))
 		{
 			*tmp = ft_strsub(str, j, i - j + 1);
 			return (i);
@@ -85,24 +85,23 @@ static int	add_params(t_cmd **lst, char *str, int j, int end)
 
 int			clear_tab_heredoc(t_cmd **lst)
 {
-    int     len;
-    char    *tmp;
+	int		len;
+	char	*tmp;
 
-    tmp = NULL;
-    if ((*lst)->heredoc == NULL)
-        return (0);
-    len = ft_strlen((*lst)->heredoc[0]);
-    if (!(tmp = ft_strdup((*lst)->heredoc[0])))
-        return (1);
-    if (tmp[len - 1] == '>' || tmp[len - 1] == '|')
-    {
-        ft_strdel(&(*lst)->heredoc[0]);
-        (*lst)->heredoc[0] = ft_strsub(tmp, 0, len - 1);
-    }
-    ft_strdel(&tmp);
-    return (0);
+	tmp = NULL;
+	if ((*lst)->heredoc == NULL)
+		return (0);
+	len = ft_strlen((*lst)->heredoc[0]);
+	if (!(tmp = ft_strdup((*lst)->heredoc[0])))
+		return (1);
+	if (tmp[len - 1] == '>' || tmp[len - 1] == '|')
+	{
+		ft_strdel(&(*lst)->heredoc[0]);
+		(*lst)->heredoc[0] = ft_strsub(tmp, 0, len - 1);
+	}
+	ft_strdel(&tmp);
+	return (0);
 }
-
 
 int			search_heredoc(t_cmd **lst, char *str, int i, int j)
 {
@@ -112,16 +111,16 @@ int			search_heredoc(t_cmd **lst, char *str, int i, int j)
 	if (!lst || !str)
 		return (-1);
 	if ((*lst)->op_next == 4)
-    {
+	{
 		(*lst)->heredoc = heredoc_simple(str, i, &j);
-        clear_tab_heredoc(lst);
-        end = j;
-    }
+		clear_tab_heredoc(lst);
+		end = j;
+	}
 	else if ((*lst)->op_next == 5)
 	{
 		(*lst)->heredoc_str = heredoc(str);
-        if ((*lst)->heredoc_str == NULL)
-            return (-1);
+		if ((*lst)->heredoc_str == NULL)
+			return (-1);
 		j = start_heredoc_opt(str, 0);
 		end = end_heredoc_opt(str, j);
 		if (j < ft_strlen(str) && j != end)
