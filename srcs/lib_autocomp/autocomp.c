@@ -75,7 +75,8 @@ void		autocomp(t_info *info, t_hist *hist)
 
 	line = ft_strdup(hist->name);
 	line = get_last_word(line, info);
-	slct = init_slct(line, info, hist);
+	g_slct = init_slct(line, info, hist);
+	slct = g_slct;
 	if (line != NULL)
 		ft_strdel(&line);
 	ac_get_info(slct, info);

@@ -22,15 +22,10 @@ void	ctrl_c(int sig)
 	if (g_info.over)
 		return ;
 	info = &g_info;
-	tmp = info->history;
-	while (!tmp->current)
-		tmp = tmp->next;
-	raw_term_mode(info);
-	end_key(info);
-	get_x_back(info);
 	ft_putendl("");
 	if (!g_data->is_executing)
 	{
+		tmp = last_elem(info->history);
 		if (tmp->name)
 			ft_strdel(&tmp->name);
 		if (info->line)

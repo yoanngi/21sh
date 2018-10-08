@@ -94,7 +94,7 @@ void		alt_right(t_info *info, t_hist *tmp)
 
 void		ctrl_d(t_info *info, t_hist *tmp)
 {
-	if ((tmp->name && ft_strcmp(tmp->name, "")))
+	if ((tmp->name && ft_strcmp(tmp->name, "")) || g_data->is_executing)
 		return ;
 	if ((!tmp->name || !ft_strcmp(tmp->name, "")) && info->h_d.cmd)
 	{

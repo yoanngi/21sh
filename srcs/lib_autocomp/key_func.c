@@ -25,8 +25,6 @@ static void	arrow_cmds(t_info *info, t_slct *slct, char *buff, t_hist *hist)
 		ac_down_key(info, slct, hist);
 	else if (KEY_CODE_TAB)
 		ac_tab_key(info, slct, hist);
-	else if (KEY_CODE_CTRL_D)
-		ctrl_d(info, hist);
 }
 
 int			key_input(t_info *info, t_slct *slct, int *loop, t_hist *hist)
@@ -38,7 +36,7 @@ int			key_input(t_info *info, t_slct *slct, int *loop, t_hist *hist)
 	if (buff[3] || buff[0] > 127)
 		return (0);
 	if ((KEY_CODE_RIGHT) || (KEY_CODE_LEFT) || (KEY_CODE_UP)
-	|| (KEY_CODE_DOWN) || (KEY_CODE_TAB) || (KEY_CODE_CTRL_D))
+	|| (KEY_CODE_DOWN) || (KEY_CODE_TAB))
 		arrow_cmds(info, slct, buff, hist);
 	else if ((buff[0] == 10 && buff[1] == 0) || (KEY_CODE_BSP)
 	|| ft_isprint(*buff))
