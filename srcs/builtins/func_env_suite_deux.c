@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/27 15:31:53 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/28 11:17:44 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/08 16:35:06 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,6 +16,10 @@
 /*
 **      Check si str et hash son valide
 */
+
+// a modifier
+// erreur sur env /bin/ls
+// erreur sur env ./21sh
 
 int				ft_is_func(t_struct *data, char *str, int hash)
 {
@@ -35,6 +39,8 @@ int				ft_is_func(t_struct *data, char *str, int hash)
 		ft_strdel(&tmp);
 		return (0);
 	}
+	else
+		return (ft_stat(str));
 	return (1);
 }
 

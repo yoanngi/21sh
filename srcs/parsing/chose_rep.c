@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/26 13:40:50 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/30 13:05:20 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/08 16:35:32 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -115,7 +115,7 @@ int				chose_rep(t_struct *data, t_cmd **new, int provisoire)
 	tmp = ft_return_path((*new)->tab_cmd[0]);
 	if (ft_strstr((*new)->tab_cmd[0], "./") != NULL)
 		(*new)->rep = ft_strdup((*new)->tab_cmd[0]);
-	else if (ft_dir_exist(tmp) == 1)
+	else if (ft_stat(tmp) == 0)
 		(*new)->rep = ft_strdup((*new)->tab_cmd[0]);
 	else
 		(*new)->rep = ft_search_path((*new)->tab_cmd[0], data);

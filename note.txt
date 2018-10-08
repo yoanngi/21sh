@@ -29,4 +29,9 @@ correction 42sh:
 pas tester heredoc
 
 pb sur rm nosuchfile 2>&1 | cat -e
+pb sur env 21sh
+pb sur env /bin/ls
+pb sur ls << test -l > test
+~ devant binaire
+
 

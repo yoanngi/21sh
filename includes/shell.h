@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/04 14:43:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/08 13:00:42 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/08 16:31:47 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -339,6 +339,7 @@ void					ft_print_tab_spe(char **env, char **tabl, int i);
 char					**ft_del_tab_index(char **tabl, int max);
 char					*ft_add_line(char *str, char **add, t_struct *data);
 int						ft_dir_exist(char *path);
+int						ft_stat(char *path);
 int						ft_access(char *path);
 int						ft_access_rep(char *path, int mode);
 void					basic_error(char *name, char *cmd);
