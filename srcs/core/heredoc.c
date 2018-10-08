@@ -109,7 +109,6 @@ char			*heredoc(char *str)
 	if (hd_err(remain, str))
 		return (NULL);
 	change_prompt(&g_info, 4);
-	g_info.h_d.fill = remain ? ft_strdup(remain) : NULL;
 	ft_strdel(&remain);
 	fill_history(&g_info, tmp);
 	while (g_info.h_d.trigger && (!g_info.line ||
