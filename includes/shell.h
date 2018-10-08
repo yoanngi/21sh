@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/04 14:43:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/04 11:20:45 by volivry     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/08 11:43:03 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -258,8 +258,10 @@ void					verifie_op(t_cmd **lst, char *str, int i);
 int						check_search_null(t_path **lst, char *str,
 									int i, int j);
 int						check_new(char **new);
-int						line_vide(char *str);
 int						clear_tab(char ***tabl);
+char					*return_name(t_cmd **lst, char *str, int start, int end);
+char					**insert_option_cmd(char **tab_cmd, char **new_tab,
+	int len_1, int len_2);
 
 /*
 **	BUILTINS
