@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/27 14:22:07 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/08 14:01:54 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/08 14:56:41 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,7 +29,8 @@ static int	verif_name(char **str)
 	tmp = NULL;
 	if (*str == NULL)
 		return (0);
-	tmp = ft_strsplit(*str, ' ');
+	if (!(tmp = ft_strsplit(*str, ' ')))
+		return (1);
 	if (ft_len_tab(tmp) > 1)
 	{
 		ft_strdel(str);
