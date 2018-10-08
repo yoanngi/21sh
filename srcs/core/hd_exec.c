@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/28 14:42:03 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/30 10:02:01 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/08 12:52:34 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,8 +39,8 @@ static char		*return_path_heredoc(char *name)
 
 	path = NULL;
 	tmp = NULL;
-    if (!name)
-        return (NULL);
+	if (!name)
+		return (NULL);
 	if (!(path = ft_strnew(255)))
 		return (NULL);
 	getcwd(path, 255);
@@ -67,8 +67,8 @@ static int		heredoc_simple_exec(t_cmd *lst, int i)
 	ft_strdel(&path);
 	dup2(fd, lst->stdin_cmd);
 	close(fd);
-    if (lst->pathname != NULL)
-        return (fork_redirection(lst));
+	if (lst->pathname != NULL)
+		return (fork_redirection(lst));
 	status = execve(lst->rep, lst->tab_cmd, lst->env);
 	return (status);
 }
@@ -84,7 +84,7 @@ static int		heredoc_exec(t_cmd *lst, char *file)
 	if (file == NULL)
 		return (1);
 	if ((fd = open(file, O_CREAT | O_WRONLY | O_WRONLY, S_IRUSR
-	| S_IWUSR | S_IRGRP | S_IROTH)) < 0)
+					| S_IWUSR | S_IRGRP | S_IROTH)) < 0)
 		return (1);
 	write(fd, lst->heredoc_str, ft_strlen(lst->heredoc_str));
 	write(fd, "\n", ft_strlen("\n"));
@@ -93,8 +93,8 @@ static int		heredoc_exec(t_cmd *lst, char *file)
 		return (1);
 	dup2(fd, lst->stdin_cmd);
 	close(fd);
-    if (lst->pathname != NULL)
-        return (fork_redirection(lst));
+	if (lst->pathname != NULL)
+		return (fork_redirection(lst));
 	status = execve(lst->rep, lst->tab_cmd, lst->env);
 	return (status);
 }
