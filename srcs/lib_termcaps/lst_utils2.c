@@ -63,6 +63,12 @@ void	free_hist(t_hist *lst)
 	t_hist	*tmp2;
 
 	tmp = lst->next;
+	while (tmp != lst)
+	{
+		ft_printf("lst->name:  %s\n", tmp->name);
+		tmp = tmp->next;
+	}
+	tmp = lst->next;
 	if (lst)
 	{
 		while (tmp != lst)

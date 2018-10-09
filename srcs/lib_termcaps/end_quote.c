@@ -37,12 +37,12 @@ void		toggle_quote(t_info *info)
 	if (info->line)
 		while (info->line[i])
 		{
-			if (((i == 0 && info->line[i] == '"') || (i > 0
-							&& info->line[i] == '"'
+			if (((i == 0 && info->line[i] == '"') || (i > 0 && info->line[i] == '"'
+							&& info->quoted != 4
 							&& info->line[i - 1] != '\\')) && info->quoted != 1)
 				double_toggle(info);
-			if (((i == 0 && info->line[i] == 39) || (i > 0
-							&& info->line[i] == 39
+			if (((i == 0 && info->line[i] == 39) || (i > 0 && info->line[i] == 39
+							&& info->quoted != 4
 							&& info->line[i - 1] != '\\')) && info->quoted != 2)
 				single_toggle(info);
 			i++;
