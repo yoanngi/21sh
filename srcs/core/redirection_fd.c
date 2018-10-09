@@ -19,5 +19,5 @@ int			redirection_fd(t_cmd *data)
 		dup2(data->stdout_cmd, 1);
 	if (data->stderr_cmd != 2)
 		dup2(data->stderr_cmd, 2);
-	return (0);
+    return (0);
 }
