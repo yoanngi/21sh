@@ -54,7 +54,7 @@ static char		*get_hd_cmd(char *str)
 	clear_line(&g_info.h_d.cmd);
 	if (!(remain = malloc(ft_strlen(str) - len + 2)))
 		return (NULL);
-	remain =  remain ? get_hd_cmd2(str, remain, i) : NULL;
+	remain = remain ? get_hd_cmd2(str, remain, i) : NULL;
 	if (remain)
 		remain = get_hd_trigger(remain);
 	return (remain);
