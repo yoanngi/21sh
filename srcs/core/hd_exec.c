@@ -36,6 +36,7 @@ static char		*return_path_heredoc(char *name)
 {
 	char	*path;
 	char	*tmp;
+	char	*cpy;
 
 	path = NULL;
 	tmp = NULL;
@@ -47,10 +48,12 @@ static char		*return_path_heredoc(char *name)
 	if (!(tmp = ft_strjoin(path, "/")))
 		return (NULL);
 	ft_strdel(&path);
-	clear_line(&name);
-	if (!(path = ft_strjoin(tmp, name)))
+    cpy = ft_strdup(name);
+    clear_line(&cpy);
+	if (!(path = ft_strjoin(tmp, cpy)))
 		return (NULL);
-	return (name);
+    ft_strdel(&cpy);
+	return (path);
 }
 
 static int		heredoc_simple_exec(t_cmd *lst, int i)
@@ -63,7 +66,11 @@ static int		heredoc_simple_exec(t_cmd *lst, int i)
 	if (!(path = return_path_heredoc(lst->heredoc[i])))
 		return (1);
 	if ((fd = open(path, O_RDONLY)) < 0)
+    {
+        basic_error(lst->heredoc[i], ": No such file or directory");
+        ft_strdel(&path);
 		return (1);
+    }
 	ft_strdel(&path);
 	dup2(fd, lst->stdin_cmd);
 	close(fd);
@@ -81,7 +88,7 @@ static int		heredoc_exec(t_cmd *lst, char *file)
 
 	i = 0;
 	status = 0;
-	if (file == NULL)
+	if (file == NULL || lst->heredoc_str == NULL)
 		return (1);
 	if ((fd = open(file, O_CREAT | O_WRONLY | O_WRONLY, S_IRUSR
 					| S_IWUSR | S_IRGRP | S_IROTH)) < 0)
@@ -123,5 +130,5 @@ int				fork_heredoc(t_cmd *lst, int code)
 		ret = heredoc_simple_exec(lst, 0);
 	else
 		ret = heredoc_exec(lst, "./.heredoc_42sh_tmp");
-	return (ret);
+	exit(ret);
 }

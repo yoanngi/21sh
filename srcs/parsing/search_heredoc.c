@@ -26,7 +26,7 @@ static int	ft_return_heredoc(char *str, char **tmp, int i)
 	while (str[i])
 	{
 		if (i == len || (str[i] == '|' ||
-					str[i] == '>' || str[i] == '<'))
+	str[i] == '>' || str[i] == '<'))
 		{
 			*tmp = ft_strsub(str, j, i - j + 1);
 			return (i);

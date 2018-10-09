@@ -15,23 +15,11 @@ https://openclassrooms.com/forum/sujet/pipe-et-dup2-comment-faire-23270
 
 A faire:
 
-Encore quelques erreur sur le cd:
-cd -
-A verifier, normalement ok
-
-Segfault / double free .... :
-$MACHIN si n'existe pas remplacer par null > OK
-
-|          /bin/ls              -l| > double free
-cat -e << EOF >> test               > >> test se retrouve dans le heredoc
-
-correction 42sh:
-pas tester heredoc
-
 pb sur rm nosuchfile 2>&1 | cat -e
 pb sur env 21sh
 pb sur env /bin/ls
 pb sur ls << test -l > test
+pb sur cat << test >> test (heredoc vide, on ne creer pas le fichier)
 ~ devant binaire
 
 
