@@ -439,6 +439,7 @@ void					end_key(t_info *info);
 void					add_queue(t_hist *root);
 void					add_head(t_hist *root);
 void					remove_elem(t_hist *elem);
+void					remove_this_elem(t_hist *elem);
 t_hist					*root_hist(void);
 t_hist					*first_elem(t_hist *root);
 t_hist					*last_elem(t_hist *root);

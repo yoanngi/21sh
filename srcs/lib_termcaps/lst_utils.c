@@ -56,3 +56,14 @@ void	remove_elem(t_hist *elem)
 	if (elem->backup)
 		ft_strdel(&elem->backup);
 }
+
+void	remove_this_elem(t_hist *elem)
+{
+	elem->prev->next = elem->next;
+	elem->next->prev = elem->prev;
+	if (elem->name)
+		ft_strdel(&elem->name);
+	if (elem->backup)
+		ft_strdel(&elem->backup);
+	free(elem);
+}

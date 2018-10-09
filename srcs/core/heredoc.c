@@ -54,7 +54,7 @@ static char		*get_hd_cmd(char *str)
 	clear_line(&g_info.h_d.cmd);
 	if (!(remain = malloc(ft_strlen(str) - len + 2)))
 		return (NULL);
-	remain =  remain ? get_hd_cmd2(str, remain, i) : NULL;
+	remain = remain ? get_hd_cmd2(str, remain, i) : NULL;
 	if (remain)
 		remain = get_hd_trigger(remain);
 	return (remain);
@@ -92,10 +92,9 @@ static char		*quit_hd(void)
 	g_info.loop = 0;
 	change_prompt(&g_info, 0);
 	g_info.quoted = 0;
-	remove_elem(tmp);
+	remove_this_elem(tmp);
 	if (g_info.h_d.fill)
 		g_info.h_d.fill[ft_strlen(g_info.h_d.fill) - 1] = 0;
-
 	return (g_info.h_d.fill);
 }
 
@@ -113,17 +112,13 @@ char			*heredoc(char *str)
 	change_prompt(&g_info, 4);
 	g_info.h_d.fill = NULL;
 	ft_strdel(&remain);
-	//ft_printf("before loop: %s\n", tmp->name);
-	//fill_history(&g_info, tmp);
 	while (g_info.h_d.trigger && (!tmp->name ||
 		ft_strcmp(tmp->name, g_info.h_d.trigger)))
 	{
-	//	ft_printf("last: %s\n", tmp);
 		if (g_info.line && !first_round)
 			g_info.h_d.fill = str_append(g_info.h_d.fill, g_info.line);
 		if (!first_round)
 			g_info.h_d.fill = str_append(g_info.h_d.fill, "\n");
-		//ft_printf("last: %s\n", tmp->name);
 		reinit_info(&g_info);
 		line_edit(&g_info, tmp);
 		tmp = last_elem(g_info.history);
