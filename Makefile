@@ -155,6 +155,7 @@ N_SRCS = 	main.c\
 			parsing/good_op_next.c\
 			parsing/return_name.c\
 			parsing/insert_options_cmd.c\
+			parsing/search_regex_invalid.c\
 			debug.c\
 
 all: $(NAME)

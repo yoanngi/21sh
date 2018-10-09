@@ -103,6 +103,8 @@ static int		check_regex_invalid(char *str, int i)
 
 int				ft_nefaitrien(char **line)
 {
+	if (search_regex_invalid(*line) == 1)
+		return (1);
 	if (ft_check_start_line(*line) == 1)
 		return (1);
 	if (ft_strstr(*line, "\"") == NULL &&

@@ -218,6 +218,7 @@ int						duplique_process(t_cmd *lst, int pipe_fd[2],
 **	PARSING
 */
 t_ins					*ft_split_commandes(char **line, t_struct *data);
+int						search_regex_invalid(char *line);
 t_ins					*ft_split_pvirgule(char **line, t_ins *lst, int i,
 	int quote);
 int						ft_check_vir(t_ins **lst, char **line);
