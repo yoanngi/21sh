@@ -98,7 +98,7 @@ void		ctrl_d(t_info *info, t_hist *tmp)
 		return ;
 	if ((!tmp->name || !ft_strcmp(tmp->name, "")) && info->h_d.cmd)
 	{
-		info->line = ft_strdup(info->h_d.trigger);
+		tmp->name = ft_strdup(info->h_d.trigger);
 		rc_key(info, tmp);
 	}
 	else if ((!tmp->name || !ft_strcmp(tmp->name, "")) && !info->h_d.cmd)
