@@ -121,12 +121,8 @@ int			search_heredoc(t_cmd **lst, char *str, int i, int j)
 	else if ((*lst)->op_next == 5)
 	{
 		(*lst)->heredoc_str = heredoc(str, &err);
-		ft_printf("ret: %s\n", (*lst)->heredoc_str);
 		if (err)
-		{
-			ft_putendl("Dans l'erreur");
 			return (-1);
-		}
 		j = start_heredoc_opt(str, 0);
 		end = end_heredoc_opt(str, j);
 		if (j < ft_strlen(str) && j != end)

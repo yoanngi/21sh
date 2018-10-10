@@ -35,7 +35,6 @@ static char     **init_tab_error(void)
     tabl[7] = ft_strdup("<>");
     tabl[8] = NULL;
     tabl[9] = NULL;
-    tabl[10] = NULL;
     return (tabl);
 }
 
@@ -82,8 +81,6 @@ int				search_regex_invalid(char *line)
 
     i = 0;
     tab_error = NULL;
-    // a delete
-    // pb introuvable
     if (!line)
         return (1);
     if (!(tab_error = init_tab_error()))
