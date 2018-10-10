@@ -23,6 +23,7 @@ t_slct	*root_slct(void)
 	lst->current = 1;
 	lst->len = 0;
 	lst->index = 0;
+	lst->is_dir = 0;
 	lst->name = NULL;
 	lst->next = lst;
 	lst->prev = lst;
