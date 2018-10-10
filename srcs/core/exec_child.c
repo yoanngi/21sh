@@ -61,8 +61,6 @@ int				exec_pipe_child(t_struct *mystruct, t_cmd *lst, int pipe_fd[2],
 		return (exec_pipe_op_1(lst, pipe_fd, fd_in));
 	if (lst->op_next == 2 || lst->op_next == 3)
 	{
-		if (lst->heredoc != NULL || lst->heredoc_str != NULL)
-			return (fork_heredoc(lst, 0));
 		if (redir_one(lst->pathname) == 1)
 		{
 			dup2(*fd_in, lst->stdin_cmd) == -1 ?
