@@ -88,13 +88,14 @@ static int		heredoc_exec(t_cmd *lst, char *file)
 
 	i = 0;
 	status = 0;
-	if (file == NULL || lst->heredoc_str == NULL)
-		return (1);
 	if ((fd = open(file, O_CREAT | O_WRONLY | O_WRONLY, S_IRUSR
 					| S_IWUSR | S_IRGRP | S_IROTH)) < 0)
 		return (1);
-	write(fd, lst->heredoc_str, ft_strlen(lst->heredoc_str));
-	write(fd, "\n", ft_strlen("\n"));
+    if (lst->heredoc_str != NULL)
+    {
+	    write(fd, lst->heredoc_str, ft_strlen(lst->heredoc_str));
+	    write(fd, "\n", ft_strlen("\n"));
+    }
 	close(fd);
 	if ((fd = open(file, O_RDONLY)) < 0)
 		return (1);

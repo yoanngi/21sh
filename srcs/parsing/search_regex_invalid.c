@@ -23,15 +23,19 @@ static char     **init_tab_error(void)
     char        **tabl;
 
     tabl = NULL;
-    tabl = (char **)malloc(sizeof(char *) * 5);
-    if (tabl == NULL)
+    if (!(tabl = (char **)malloc(sizeof(char *) * 10)))
         return (NULL);
     tabl[0] = ft_strdup(">>>");
     tabl[1] = ft_strdup("<<<");
     tabl[2] = ft_strdup(">|");
-    tabl[3] = ft_strdup("|>");
-    tabl[4] = ft_strdup("><");
-    tabl[5] = NULL;
+    tabl[3] = ft_strdup("<|");
+    tabl[4] = ft_strdup("|>");
+    tabl[5] = ft_strdup("|<");
+    tabl[6] = ft_strdup("><");
+    tabl[7] = ft_strdup("<>");
+    tabl[8] = NULL;
+    tabl[9] = NULL;
+    tabl[10] = NULL;
     return (tabl);
 }
 
@@ -46,16 +50,20 @@ static int      test_string(char *line, char **tabl, int i)
 {
     int     j;
     int     x;
+    int     quit;
 
     j = 0;
     x = 0;
     while(tabl[j])
     {
         i = 0;
-        while (line[i])
+        quit = 0;
+        while (line[i] && quit == 0)
         {
             i = echap_quote(line, i, 0);
-            if (ft_strncmp(line + i, tabl[j], ft_strlen(tabl[j])) == 0)
+            if (ft_strlen(line) <= ft_strlen(tabl[j]) + i)
+                quit = 1;
+            else if (ft_strncmp(line + i, tabl[j], ft_strlen(tabl[j])) == 0)
             {
                 error_parsing(line, i);
                 return (1);
@@ -74,6 +82,11 @@ int				search_regex_invalid(char *line)
 
     i = 0;
     tab_error = NULL;
+    // a delete
+    // pb introuvable
+    return (0);
+    if (!line)
+        return (1);
     if (!(tab_error = init_tab_error()))
         return (1);
     if (test_string(line, tab_error, i) == 1)
