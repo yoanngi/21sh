@@ -74,6 +74,7 @@ static int		heredoc_simple_exec(t_cmd *lst, int i)
 	ft_strdel(&path);
 	dup2(fd, lst->stdin_cmd);
 	close(fd);
+    // A CHECK
 	if (lst->pathname != NULL)
 		return (fork_redirection(lst));
 	status = execve(lst->rep, lst->tab_cmd, lst->env);
@@ -94,15 +95,13 @@ static int		heredoc_exec(t_cmd *lst, char *file)
     if (lst->heredoc_str != NULL)
     {
 	    write(fd, lst->heredoc_str, ft_strlen(lst->heredoc_str));
-	    write(fd, "\n", ft_strlen("\n"));
+        write(fd, "\n", ft_strlen("\n"));
     }
 	close(fd);
 	if ((fd = open(file, O_RDONLY)) < 0)
 		return (1);
 	dup2(fd, lst->stdin_cmd);
 	close(fd);
-	if (lst->pathname != NULL)
-		return (fork_redirection(lst));
 	status = execve(lst->rep, lst->tab_cmd, lst->env);
 	return (status);
 }

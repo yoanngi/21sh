@@ -55,6 +55,8 @@ int			fork_redirection(t_cmd *lst)
 	}
 	lst->pathname = lst_path;
 	redirection_fd(lst);
+    if (lst->redir_heredoc == 1)
+        fork_heredoc(lst, 0);
 	status = execve(lst->rep, lst->tab_cmd, lst->env);
 	return (status);
 }
