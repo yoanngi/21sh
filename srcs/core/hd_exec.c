@@ -69,12 +69,11 @@ static int		heredoc_simple_exec(t_cmd *lst, int i)
     {
         basic_error(lst->heredoc[i], ": No such file or directory");
         ft_strdel(&path);
-		return (1);
+		exit(1);
     }
 	ft_strdel(&path);
 	dup2(fd, lst->stdin_cmd);
 	close(fd);
-    // A CHECK
 	if (lst->pathname != NULL)
 		return (fork_redirection(lst));
 	status = execve(lst->rep, lst->tab_cmd, lst->env);
