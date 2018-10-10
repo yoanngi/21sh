@@ -63,7 +63,7 @@ static char		*get_hd_cmd(char *str)
 static int		hd_err(char *remain, char *str, int *err)
 {
 	if (!g_info.h_d.trigger || !ft_strcmp(g_info.h_d.trigger, "") ||
-	(str[0] == '<' && str[1] == '<') || ft_strstr(remain, "<<<"))
+	(str[0] == '<' && str[1] == '<') || ft_strstr(str, "<<<"))
 	{
 		ft_putstr("21sh: parse error near \\n\n");
 		change_prompt(&g_info, 0);
