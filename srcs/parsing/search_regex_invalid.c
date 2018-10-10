@@ -23,18 +23,17 @@ static char     **init_tab_error(void)
     char        **tabl;
 
     tabl = NULL;
-    if (!(tabl = (char **)malloc(sizeof(char *) * 11)))
+    if (!(tabl = (char **)malloc(sizeof(char *) * 9)))
         return (NULL);
     tabl[0] = ft_strdup(">>>");
-    tabl[1] = ft_strdup("<<<");
+    tabl[1] = ft_strdup("<>");
     tabl[2] = ft_strdup(">|");
     tabl[3] = ft_strdup("<|");
     tabl[4] = ft_strdup("|>");
     tabl[5] = ft_strdup("|<");
     tabl[6] = ft_strdup("><");
-    tabl[7] = ft_strdup("<>");
+    tabl[7] = NULL;
     tabl[8] = NULL;
-    tabl[9] = NULL;
     return (tabl);
 }
 
