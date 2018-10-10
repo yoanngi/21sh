@@ -39,6 +39,8 @@ static void		resize_win(int sig)
 	t_info	*info;
 
 	(void)sig;
+	if (g_data->is_executing)
+		return ;
 	info = &g_info;
 	tputs(tgetstr("vi", NULL), 1, ft_putchar_err);
 	tmp = first_elem(info->history);

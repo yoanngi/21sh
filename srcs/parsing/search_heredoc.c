@@ -106,7 +106,9 @@ int			clear_tab_heredoc(t_cmd **lst)
 int			search_heredoc(t_cmd **lst, char *str, int i, int j)
 {
 	int		end;
+	int		err;
 
+	err = 0;
 	end = 0;
 	if (!lst || !str)
 		return (-1);
@@ -118,10 +120,13 @@ int			search_heredoc(t_cmd **lst, char *str, int i, int j)
 	}
 	else if ((*lst)->op_next == 5)
 	{
-		(*lst)->heredoc_str = heredoc(str);
+		(*lst)->heredoc_str = heredoc(str, &err);
 		ft_printf("ret: %s\n", (*lst)->heredoc_str);
-		if ((*lst)->heredoc_str == NULL)
+		if (err)
+		{
+			ft_putendl("Dans l'erreur");
 			return (-1);
+		}
 		j = start_heredoc_opt(str, 0);
 		end = end_heredoc_opt(str, j);
 		if (j < ft_strlen(str) && j != end)
