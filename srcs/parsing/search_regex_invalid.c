@@ -23,7 +23,7 @@ static char     **init_tab_error(void)
     char        **tabl;
 
     tabl = NULL;
-    if (!(tabl = (char **)malloc(sizeof(char *) * 10)))
+    if (!(tabl = (char **)malloc(sizeof(char *) * 11)))
         return (NULL);
     tabl[0] = ft_strdup(">>>");
     tabl[1] = ft_strdup("<<<");
@@ -84,7 +84,6 @@ int				search_regex_invalid(char *line)
     tab_error = NULL;
     // a delete
     // pb introuvable
-    return (0);
     if (!line)
         return (1);
     if (!(tab_error = init_tab_error()))
