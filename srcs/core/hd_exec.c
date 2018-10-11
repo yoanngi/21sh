@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/28 14:42:03 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/08 12:52:34 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/11 14:17:48 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,11 +48,11 @@ static char		*return_path_heredoc(char *name)
 	if (!(tmp = ft_strjoin(path, "/")))
 		return (NULL);
 	ft_strdel(&path);
-    cpy = ft_strdup(name);
-    clear_line(&cpy);
+	cpy = ft_strdup(name);
+	clear_line(&cpy);
 	if (!(path = ft_strjoin(tmp, cpy)))
 		return (NULL);
-    ft_strdel(&cpy);
+	ft_strdel(&cpy);
 	return (path);
 }
 
@@ -66,16 +66,14 @@ static int		heredoc_simple_exec(t_cmd *lst, int i)
 	if (!(path = return_path_heredoc(lst->heredoc[i])))
 		return (1);
 	if ((fd = open(path, O_RDONLY)) < 0)
-    {
-        basic_error(lst->heredoc[i], ": No such file or directory");
-        ft_strdel(&path);
+	{
+		basic_error(lst->heredoc[i], ": No such file or directory");
+		ft_strdel(&path);
 		exit(1);
-    }
+	}
 	ft_strdel(&path);
 	dup2(fd, lst->stdin_cmd);
 	close(fd);
-	if (lst->pathname != NULL)
-		return (fork_redirection(lst));
 	status = execve(lst->rep, lst->tab_cmd, lst->env);
 	return (status);
 }
@@ -91,11 +89,11 @@ static int		heredoc_exec(t_cmd *lst, char *file)
 	if ((fd = open(file, O_CREAT | O_WRONLY | O_WRONLY, S_IRUSR
 					| S_IWUSR | S_IRGRP | S_IROTH)) < 0)
 		return (1);
-    if (lst->heredoc_str != NULL)
-    {
-	    write(fd, lst->heredoc_str, ft_strlen(lst->heredoc_str));
-        write(fd, "\n", ft_strlen("\n"));
-    }
+	if (lst->heredoc_str != NULL)
+	{
+		write(fd, lst->heredoc_str, ft_strlen(lst->heredoc_str));
+		write(fd, "\n", ft_strlen("\n"));
+	}
 	close(fd);
 	if ((fd = open(file, O_RDONLY)) < 0)
 		return (1);
