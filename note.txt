@@ -18,8 +18,6 @@ A faire:
 pb sur rm nosuchfile 2>&1 | cat -e
 pb sur env 21sh
 pb sur env /bin/ls
-pb sur ls << test -l > test
-pb sur cat << test >> test (heredoc vide, on ne creer pas le fichier)
 ~ devant binaire
 
 
