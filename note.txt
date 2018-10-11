@@ -16,8 +16,6 @@ https://openclassrooms.com/forum/sujet/pipe-et-dup2-comment-faire-23270
 A faire:
 
 pb sur rm nosuchfile 2>&1 | cat -e
-pb sur env 21sh
-pb sur env /bin/ls
 ~ devant binaire
 
 

@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/26 13:40:50 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/11 15:42:44 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/11 15:56:54 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -108,6 +108,11 @@ int				chose_rep(t_struct *data, t_cmd **new, int provisoire)
 	tmp = NULL;
 	if (provisoire == 1)
 	{
+		if (ft_stat((*new)->tab_cmd[0]) == 0)
+		{
+			(*new)->rep = ft_strdup((*new)->tab_cmd[0]);
+			return (0);
+		}
 		chose_rep_provisoire(new, &tmp, 0);
 		ft_strdel(&tmp);
 		return (0);
