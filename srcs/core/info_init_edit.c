@@ -30,6 +30,7 @@ void			init_info(t_info *info)
 	info->history = root_hist();
 	info->letters = NULL;
 	info->loop = 1;
+	info->out = 0;
 	info->max_len = 0;
 	info->nb_elem = 0;
 	info->h_d.cmd = NULL;
@@ -48,6 +49,7 @@ void			reinit_info(t_info *info)
 	get_curs_pos(info);
 	info->orig_y = info->curs_y;
 	info->curs_in_str = 1;
+	info->out = 1;
 	ft_strdel(&(info->line));
 	info->loop = 1;
 }

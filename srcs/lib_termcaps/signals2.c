@@ -25,6 +25,8 @@ void	ctrl_c(int sig)
 	ft_putendl("");
 	if (!g_data->is_executing)
 	{
+		if (g_slct)
+			info->out = 1;
 		tmp = last_elem(info->history);
 		if (tmp->name)
 			ft_strdel(&tmp->name);
@@ -32,5 +34,6 @@ void	ctrl_c(int sig)
 			ft_strdel(&info->line);
 		reinit_info(info);
 		print_prompt(info);
+		tputs(tgetstr("ve", NULL), 1, ft_putchar_err);
 	}
 }
