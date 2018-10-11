@@ -6,7 +6,7 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/30 18:56:33 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/27 11:03:03 by volivry     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/11 15:29:40 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,9 +51,9 @@ void		display(t_info *info, t_slct *slct)
 	while (tmp != slct)
 	{
 		ac_print_arg(tmp, info);
-		if (tmp->next != slct)
+		if (tmp->next != slct && !info->out)
 			ft_putstr("  ");
-		if (tmp->index % cols == 0 && tmp->next != slct)
+		if (tmp->index % cols == 0 && tmp->next != slct && !info->out)
 		{
 			tputs(tgetstr("sf", NULL), 1, ft_putchar_err);
 			get_x_back(info);
@@ -91,6 +91,8 @@ void		ac_print_arg(t_slct *slct, t_info *info)
 {
 	int	i;
 
+	if (info->out)
+		return ;
 	i = info->max_len - slct->len;
 	if (slct->is_dir || slct->is_exe)
 		print_dir_exe(slct, info);
@@ -105,9 +107,7 @@ void		ac_print_arg(t_slct *slct, t_info *info)
 			tputs(tgetstr("se", NULL), 1, ft_putchar_err);
 		}
 		else
-		{
 			ft_printf("%s", slct->name);
-		}
 		while (i--)
 			ft_putchar(' ');
 	}
