@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/11 09:36:12 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/11 13:51:12 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/12 16:28:51 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -72,7 +72,7 @@ int				execute_commandes(t_struct *mystruct, t_cmd *data)
 	start = NULL;
 	if (!data)
 		return (-1);
-	if (len_list(data) == 1 && (data)->op_next == 0)
+	if (len_list(data) == 1 && data->op_next == 0)
 	{
 		if ((ret = execute_builtins_light(mystruct, data)) == -2)
 			return (ft_process(data));

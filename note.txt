@@ -15,7 +15,9 @@ https://openclassrooms.com/forum/sujet/pipe-et-dup2-comment-faire-23270
 
 A faire:
 
-pb sur rm nosuchfile 2>&1 | cat -e
 ~ devant binaire
+/usr/lol/env
+cmd urandom fait des leaks ?
+
 
 
