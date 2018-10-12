@@ -104,4 +104,5 @@ void				core_shell(t_struct *data)
 		reinit_info(&g_info);
 	}
 	exit_core_shell(full_line);
+	sleep (10);
 }

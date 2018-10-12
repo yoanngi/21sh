@@ -94,7 +94,6 @@ static int	check_error_cd(char **tabargv)
 static int	cd_minus(t_struct *data, t_cmd *lst)
 {
 	change_directory(data, lst, lst->tab_cmd[1]);
-	ft_printf("%s\n", lst->tab_cmd[1]);
 	return (0);
 }
 
