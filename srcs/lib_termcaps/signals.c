@@ -18,10 +18,25 @@ static void		resize(t_info *info, t_hist *tmp)
 	int	i;
 
 	print_prompt(info);
+	if (info->curs_in_str == 1)
+	{
+		ft_putstr(tmp->name);
+		tputs(tgoto(tgetstr("cm", NULL), ft_strlen(info->prmpt), 0), 1, ft_putchar_err);
+		home_key(info);
+		return ;		
+	}
 	ft_putstr(tmp->name);
 	info->s_len = tmp->name ? ft_strlen(tmp->name) : 0;
 	i = info->s_len ? info->s_len + 1 : 1;
-	i -= (info->s_len + ft_strlen(info->prmpt)) % info->col_nb == 0 ? 1 : 0;
+	if ((info->s_len + ft_strlen(info->prmpt)) % info->col_nb == 0)
+	{
+		if (info->curs_y != 2)
+			tputs(tgoto(tgetstr("cm", NULL), 0, info->curs_y), 1, ft_putchar_err);
+		else
+			tputs(tgoto(tgetstr("cm", NULL), 0, info->curs_y - 1), 1, ft_putchar_err);
+		get_curs_pos(info);
+		return ;
+	}
 	get_curs_pos(info);
 	while (i > info->curs_in_str)
 	{
