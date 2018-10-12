@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/22 11:40:00 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/08 10:51:34 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/12 11:44:35 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -101,8 +101,6 @@ int				replace_in_line(t_struct *data, char **line)
 		return (1);
 	if (ft_strstr(*line, "~") == NULL && ft_strstr(*line, "$") == NULL)
 		return (0);
-	if (!(tmp = ft_strdup(*line)))
-		return (1);
 	tmp = replace_suite(data, line);
 	if (tmp != NULL)
 	{
