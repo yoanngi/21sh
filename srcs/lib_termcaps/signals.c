@@ -26,14 +26,16 @@ static void		resize(t_info *info, t_hist *tmp)
 		return ;		
 	}
 	ft_putstr(tmp->name);
+
+		get_curs_pos(info);
 	info->s_len = tmp->name ? ft_strlen(tmp->name) : 0;
 	i = info->s_len ? info->s_len + 1 : 1;
 	if ((info->s_len + ft_strlen(info->prmpt)) % info->col_nb == 0)
 	{
-		if (info->curs_y != 2)
-			tputs(tgoto(tgetstr("cm", NULL), 0, info->curs_y), 1, ft_putchar_err);
+		if (info->curs_x == 1)
+			tputs(tgoto(tgetstr("cm", NULL), 0, info->curs_y + 1), 1, ft_putchar_err);
 		else
-			tputs(tgoto(tgetstr("cm", NULL), 0, info->curs_y - 1), 1, ft_putchar_err);
+			tputs(tgoto(tgetstr("cm", NULL), 0, info->curs_y), 1, ft_putchar_err);
 		get_curs_pos(info);
 		return ;
 	}
