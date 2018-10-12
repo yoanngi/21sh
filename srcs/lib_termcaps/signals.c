@@ -13,32 +13,8 @@
 
 #include "../../includes/shell.h"
 
-static void		resize(t_info *info, t_hist *tmp)
+static void		resize2(t_info *info, int i)
 {
-	int	i;
-
-	print_prompt(info);
-	if (info->curs_in_str == 1)
-	{
-		ft_putstr(tmp->name);
-		tputs(tgoto(tgetstr("cm", NULL), ft_strlen(info->prmpt), 0), 1, ft_putchar_err);
-		home_key(info);
-		return ;		
-	}
-	ft_putstr(tmp->name);
-
-		get_curs_pos(info);
-	info->s_len = tmp->name ? ft_strlen(tmp->name) : 0;
-	i = info->s_len ? info->s_len + 1 : 1;
-	if ((info->s_len + ft_strlen(info->prmpt)) % info->col_nb == 0)
-	{
-		if (info->curs_x == 1)
-			tputs(tgoto(tgetstr("cm", NULL), 0, info->curs_y + 1), 1, ft_putchar_err);
-		else
-			tputs(tgoto(tgetstr("cm", NULL), 0, info->curs_y), 1, ft_putchar_err);
-		get_curs_pos(info);
-		return ;
-	}
 	get_curs_pos(info);
 	while (i > info->curs_in_str)
 	{
@@ -48,6 +24,33 @@ static void		resize(t_info *info, t_hist *tmp)
 		i--;
 	}
 	get_curs_pos(info);
+}
+
+static void		resize(t_info *info, t_hist *tmp)
+{
+	int	i;
+
+	print_prompt(info);
+	if (info->curs_in_str == 1)
+	{
+		ft_putstr(tmp->name);
+		tputs(tgoto(tgetstr("cm", NULL), ft_strlen(info->prmpt), 0),
+		1, ft_putchar_err);
+		home_key(info);
+		return ;
+	}
+	ft_putstr(tmp->name);
+	get_curs_pos(info);
+	info->s_len = tmp->name ? ft_strlen(tmp->name) : 0;
+	i = info->s_len ? info->s_len + 1 : 1;
+	if ((info->s_len + ft_strlen(info->prmpt)) % info->col_nb == 0)
+	{
+		tputs(tgoto(tgetstr("cm", NULL), 0, info->curs_x == 1 ?
+		info->curs_y + 1 : info->curs_y), 1, ft_putchar_err);
+		get_curs_pos(info);
+		return ;
+	}
+	resize2(info, i);
 }
 
 static void		resize_win(int sig)
@@ -81,33 +84,13 @@ static void		resize_win(int sig)
 
 static void		stop(int sig)
 {
-	t_info	*info;
-	char	s[2];
-
-	info = &g_info;
-	s[0] = info->term.c_cc[VSUSP];
-	s[1] = 0;
 	(void)sig;
-	default_term_mode(info);
-	signal(SIGTSTP, SIG_DFL);
-	ioctl(0, TIOCSTI, s);
-}
-
-static void		restart(int sig)
-{
-	t_info	*info;
-
-	info = &g_info;
-	(void)sig;
-	raw_term_mode(info);
-	resize_win(sig);
 }
 
 void			get_signals(void)
 {
 	signal(SIGWINCH, resize_win);
 	signal(SIGTSTP, stop);
-	signal(SIGCONT, restart);
 	signal(SIGINT, ctrl_c);
 	signal(SIGQUIT, SIG_IGN);
 }
