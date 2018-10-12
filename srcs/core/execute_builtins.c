@@ -6,12 +6,21 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/11 09:36:12 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 11:04:00 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/12 16:26:04 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
+
+static int	ft_dup(int *fd_in, int pipe_fd[2], t_cmd *lst)
+{
+	dup2(*fd_in, lst->stdin_cmd) == -1 ? basic_error("dup2", "failled") : 0;
+	dup2(pipe_fd[1], lst->stdout_cmd) == -1 ?
+	basic_error("dup2", "failled") : 0;
+	close(pipe_fd[0]) == -1 ? basic_error("close", "failled") : 0;
+	return (0);
+}
 
 int			execute_builtins(t_struct *mystruct, t_cmd *lst, int pipe_fd[2],
 	int *fd_in)
@@ -30,11 +39,9 @@ int			execute_builtins(t_struct *mystruct, t_cmd *lst, int pipe_fd[2],
 				clear_tab(&lst->tab_cmd);
 				return (fork_redirection(lst));
 			}
-			dup2(*fd_in, lst->stdin_cmd) == -1 ?
-	basic_error("dup2", "failled") : 0;
-			dup2(pipe_fd[1], lst->stdout_cmd) == -1 ?
-	basic_error("dup2", "failled") : 0;
-			close(pipe_fd[0]) == -1 ? basic_error("close", "failled") : 0;
+			if (lst->heredoc != NULL || lst->heredoc_str != NULL)
+				return (ft_search_func(mystruct, lst, i));
+			ft_dup(fd_in, pipe_fd, lst);
 			ret = ft_search_func(mystruct, lst, i);
 			exit(ret);
 		}

@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/28 14:42:03 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/11 14:20:18 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/12 16:33:48 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -75,7 +75,7 @@ static int		heredoc_simple_exec(t_cmd *lst, int i)
 	dup2(fd, lst->stdin_cmd);
 	close(fd);
 	status = execve(lst->rep, lst->tab_cmd, lst->env);
-	return (status);
+	exit(status);
 }
 
 static int		heredoc_exec(t_cmd *lst, char *file)
