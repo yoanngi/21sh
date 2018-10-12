@@ -19,5 +19,11 @@ A faire:
 /usr/lol/env
 cmd urandom fait des leaks ?
 
+voir slack !
+pb env:
+env << test
+test
+
+
 
 

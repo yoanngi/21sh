@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/20 11:18:28 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/30 13:19:21 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/12 16:49:54 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,6 +55,8 @@ static int			ft_cmpforhash(char *rep, char *str)
 		tmp = ft_strsub(str, len + 1, ft_strlen(str) - (len + 1));
 		if (ft_strcmp(rep, tmp) == 0)
 		{
+			// HERE
+			printf("rep = %s || tmp = %s\n", rep, tmp);
 			ft_strdel(&tmp);
 			return (0);
 		}
