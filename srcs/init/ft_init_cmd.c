@@ -28,6 +28,7 @@ t_cmd			*ft_init_cmd(void)
 	new->heredoc_str = NULL;
 	new->op_next = 0;
 	new->redir_heredoc = 0;
+	new->heredoc_activ = 0;
 	new->stdin_cmd = 0;
 	new->stdout_cmd = 1;
 	new->stderr_cmd = 2;

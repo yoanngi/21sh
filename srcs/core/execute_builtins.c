@@ -39,8 +39,8 @@ int			execute_builtins(t_struct *mystruct, t_cmd *lst, int pipe_fd[2],
 				clear_tab(&lst->tab_cmd);
 				return (fork_redirection(lst));
 			}
-			if (lst->heredoc != NULL || lst->heredoc_str != NULL)
-				return (ft_search_func(mystruct, lst, i));
+			if (lst->heredoc_activ == 1)
+				exit(ft_search_func(mystruct, lst, i));
 			ft_dup(fd_in, pipe_fd, lst);
 			ret = ft_search_func(mystruct, lst, i);
 			exit(ret);

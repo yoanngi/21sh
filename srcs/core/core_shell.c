@@ -45,7 +45,7 @@ int					parse_line(t_struct *data, char **line, int ret)
 	cpy = data->commandes;
 	while (cpy)
 	{
-		print_debug(&cpy->cmd, cpy->code);
+		//print_debug(&cpy->cmd, cpy->code);
 		if (ft_check_arg_invalid(data, cpy->cmd) == 0)
 		{
 			ret = execute_commandes(data, cpy->cmd);
@@ -104,5 +104,4 @@ void				core_shell(t_struct *data)
 		reinit_info(&g_info);
 	}
 	exit_core_shell(full_line);
-	sleep (10);
 }

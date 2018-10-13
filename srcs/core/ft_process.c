@@ -24,7 +24,8 @@ int				ft_process(t_cmd *data)
 	int		status;
 
 	status = 0;
-	if (data->heredoc != NULL || data->heredoc_str != NULL)
+	if (data->heredoc_activ == 1 || data->heredoc_str != NULL ||
+    data->heredoc != NULL)
 		return (fork_heredoc(data, 0));
 	pid = fork();
 	if (pid < 0)

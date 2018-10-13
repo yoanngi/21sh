@@ -108,6 +108,7 @@ typedef struct			s_cmd
 	char				*rep;
 	int					op_next;
 	int					redir_heredoc;
+	int					heredoc_activ;
 	int					stdin_cmd;
 	int					stdout_cmd;
 	int					stderr_cmd;
