@@ -22,7 +22,7 @@ int		wait_or_not(int *status, pid_t pid, t_cmd *start)
 	ft_strcmp(start->tab_cmd[0], "yes") != 0 &&
 	ft_strcmp(start->tab_cmd[0], "base64") != 0)
 		{
-			wait(NULL);
+			waitpid(start->pid, NULL, 0);
 		}
 		start = start->next;
 	}

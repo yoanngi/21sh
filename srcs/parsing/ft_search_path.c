@@ -38,6 +38,20 @@ static int			return_hash(char *str, int max)
 	return (hash);
 }
 
+static int			cmp_suite(char *rep, char *str)
+{
+    char    *tmp;
+    int     ret;
+
+    tmp = NULL;
+    ret = 0;
+    tmp = ft_strsub(str, 0, ft_strlen(str) - ft_strlen(rep));
+    if (ft_dir_exist(tmp) == 0)
+        ret = 1;
+    ft_strdel(&tmp);
+    return (ret);
+}
+
 static int			ft_cmpforhash(char *rep, char *str)
 {
 	char	*tmp;
@@ -55,9 +69,9 @@ static int			ft_cmpforhash(char *rep, char *str)
 		tmp = ft_strsub(str, len + 1, ft_strlen(str) - (len + 1));
 		if (ft_strcmp(rep, tmp) == 0)
 		{
-			// HERE
-			printf("rep = %s || tmp = %s\n", rep, tmp);
 			ft_strdel(&tmp);
+            if (cmp_suite(rep, str) == 1)
+                return (1);
 			return (0);
 		}
 		ft_strdel(&tmp);

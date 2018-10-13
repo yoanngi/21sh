@@ -41,6 +41,7 @@ N_SRCS = 	main.c\
 			core/heredoc.c\
 			core/heredoc2.c\
 			core/hd_exec.c\
+			core/hd_exec_suite.c\
 			core/info_init_edit.c\
 			core/kill_process.c\
 			core/cmd_suivante.c\

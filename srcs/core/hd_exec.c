@@ -32,30 +32,6 @@ int				delete_tmp(char **file)
 	return (0);
 }
 
-static char		*return_path_heredoc(char *name)
-{
-	char	*path;
-	char	*tmp;
-	char	*cpy;
-
-	path = NULL;
-	tmp = NULL;
-	if (!name)
-		return (NULL);
-	if (!(path = ft_strnew(255)))
-		return (NULL);
-	getcwd(path, 255);
-	if (!(tmp = ft_strjoin(path, "/")))
-		return (NULL);
-	ft_strdel(&path);
-	cpy = ft_strdup(name);
-	clear_line(&cpy);
-	if (!(path = ft_strjoin(tmp, cpy)))
-		return (NULL);
-	ft_strdel(&cpy);
-	return (path);
-}
-
 static int		heredoc_simple_exec(t_cmd *lst, int i)
 {
 	int		fd;

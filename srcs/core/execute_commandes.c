@@ -20,12 +20,15 @@
 static int		pipe_child_norm(t_struct *mystruct, t_cmd *data, int pipe_fd[2],
 		int *fd_in)
 {
-	if (exec_pipe_child(mystruct, data, pipe_fd, fd_in) == -1)
+    int     ret;
+
+	ret = exec_pipe_child(mystruct, data, pipe_fd, fd_in);
+    if (ret == -1)
 	{
-		basic_error(data->tab_cmd[0], ": command not found");
+		basic_error(data->tab_cmd[0], " : command not found");
 		exit(EXIT_FAILURE);
 	}
-	return (0);
+	exit(EXIT_SUCCESS);
 }
 
 static int		exec_cmd_recur(t_struct *mystruct, t_cmd *data, int fd_in,
@@ -51,8 +54,8 @@ static int		exec_cmd_recur(t_struct *mystruct, t_cmd *data, int fd_in,
 		}
 		data = data->next;
 	}
-	close(pipe_fd[0]);
-	close(pipe_fd[1]);
+	//close(pipe_fd[0]);
+	//close(pipe_fd[1]);
 	wait_or_not(&status, pid, start);
 	return (exit_status(status));
 }
