@@ -78,8 +78,10 @@ void		autocomp(t_info *info, t_hist *hist)
 	t_slct	*slct;
 	char	*line;
 
+	line = NULL;
 	info->out = 0;
-	line = ft_strdup(hist->name);
+	if (hist->name)
+		line = ft_strdup(hist->name);
 	line = get_last_word(line, info);
 	g_slct = init_slct(line, info, hist);
 	slct = g_slct;
