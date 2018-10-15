@@ -118,6 +118,8 @@ void		del_c_in_str(t_info *info, t_hist *tmp)
 	j = 0;
 	i = -1;
 	str = NULL;
+	if (!tmp->name || !ft_strcmp(tmp->name, ""))
+		return ;
 	if (!(str = (char*)malloc(info->s_len)))
 		return ;
 	while (i++ < info->curs_in_str - 2)
