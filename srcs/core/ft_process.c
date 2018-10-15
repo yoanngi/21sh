@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/13 15:38:15 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/15 11:06:25 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/15 13:35:34 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -50,7 +50,7 @@ int				ft_process(t_cmd *data)
 	else
 	{
 		data->pid = pid;
-		waitpid(pid, &status, 0);
+		waitpid(pid, &status, WUNTRACED);
 	}
 	return (exit_status(status));
 }
