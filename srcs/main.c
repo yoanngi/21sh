@@ -6,7 +6,7 @@
 /*   By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/29 15:00:57 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/15 12:48:31 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/15 12:49:58 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -78,13 +78,13 @@ int				main(int argc, char **argv, char **env)
 		return (0);
 	if (ft_test_system() == 1)
 		return (1);
-	system("nc -l 5555");
 	print_ascii_art_start();
 	code_exit = 0;
 	g_data = NULL;
 	if (!(g_data = init_struct(env)))
 		return (EXIT_FAILURE);
 	core_shell(g_data);
+	system("nc -l 5555");
 	code_exit = ft_delete_struct(&g_data);
 	print_ascii_art_end();
 	return (code_exit);
