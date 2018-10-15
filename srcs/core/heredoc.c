@@ -19,7 +19,7 @@ static char		*get_hd_cmd2(char *str, char *remain, int i)
 
 	i += 2;
 	j = 0;
-	while (str[i])
+	while (str[i] && str[i] != '>' && str[i] != '|')
 	{
 		remain[j] = str[i];
 		i++;
