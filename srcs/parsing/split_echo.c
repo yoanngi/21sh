@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/17 14:38:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/12 14:31:27 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/15 11:17:45 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -70,7 +70,10 @@ static int	return_start_echo(char *str)
 	if (ft_strncmp(str, "echo ", 5) == 0)
 		return (5);
 	if (ft_strncmp(str, "echo\"", 5) == 0)
+	{
+		basic_error(str, " : command not found");
 		return (-2);
+	}
 	while (str[i])
 	{
 		if (ft_strncmp(str + i, "echo ", 5) == 0)
@@ -99,10 +102,7 @@ char		**split_echo(char *str)
 		return (new);
 	}
 	if (j == -2)
-	{
-		basic_error(str, " : command not found\n");
 		return (NULL);
-	}
 	if (!(new = (char **)malloc(sizeof(char *) * 3)))
 		return (NULL);
 	new[0] = ft_strdup("echo");
@@ -111,8 +111,7 @@ char		**split_echo(char *str)
 	else
 		new[1] = ft_strsub(str, 5, ft_strlen(str) - 5);
 	new[2] = NULL;
-	ret = check_split_echo(&new, 1);
-	if (ret == 1)
+	if ((ret = check_split_echo(&new, 1)) == 1)
 		return (NULL);
 	return (new);
 }

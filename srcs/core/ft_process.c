@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/13 15:38:15 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/12 16:29:14 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/15 11:06:25 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,14 +18,21 @@
 **	return : Valeur de retour de la commande
 */
 
+static int		check_process(t_cmd *data)
+{
+	if (data->heredoc_activ == 1 || data->heredoc_str != NULL ||
+	data->heredoc != NULL)
+		return (1);
+	return (0);
+}
+
 int				ft_process(t_cmd *data)
 {
 	pid_t	pid;
 	int		status;
 
 	status = 0;
-	if (data->heredoc_activ == 1 || data->heredoc_str != NULL ||
-    data->heredoc != NULL)
+	if (check_process(data))
 		return (fork_heredoc(data, 0));
 	pid = fork();
 	if (pid < 0)

@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/11 09:36:12 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/12 16:28:51 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/15 11:03:28 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,10 +20,10 @@
 static int		pipe_child_norm(t_struct *mystruct, t_cmd *data, int pipe_fd[2],
 		int *fd_in)
 {
-    int     ret;
+	int		ret;
 
 	ret = exec_pipe_child(mystruct, data, pipe_fd, fd_in);
-    if (ret == -1)
+	if (ret == -1)
 	{
 		basic_error(data->tab_cmd[0], " : command not found");
 		exit(EXIT_FAILURE);
@@ -54,8 +54,6 @@ static int		exec_cmd_recur(t_struct *mystruct, t_cmd *data, int fd_in,
 		}
 		data = data->next;
 	}
-	//close(pipe_fd[0]);
-	//close(pipe_fd[1]);
 	wait_or_not(&status, pid, start);
 	return (exit_status(status));
 }
