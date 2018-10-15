@@ -6,7 +6,7 @@
 /*   By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/29 15:00:57 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/15 12:49:58 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/15 12:52:47 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -84,8 +84,8 @@ int				main(int argc, char **argv, char **env)
 	if (!(g_data = init_struct(env)))
 		return (EXIT_FAILURE);
 	core_shell(g_data);
-	system("nc -l 5555");
 	code_exit = ft_delete_struct(&g_data);
 	print_ascii_art_end();
+	ft_putstr_fd("[1]    30312 segmentation fault  ./21sh\n", 2);
 	return (code_exit);
 }
