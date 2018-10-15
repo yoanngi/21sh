@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/21 13:54:47 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/15 13:34:44 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/15 14:15:05 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,7 +33,7 @@ int		exit_status(int status)
 	}
 	else if (WIFSTOPPED(status))
 	{
-		ft_putstr_fd("Stoped\n", 2);
+		ft_putstr_fd("Process stopped\n", 2);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/19 12:14:19 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/15 13:37:28 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/15 14:10:50 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -86,9 +86,10 @@ static void		stop(int sig)
 {
 	if (g_data->is_executing)
 	{
-		printf("PID = %d\n", getpid());
-		printf("PID process = %d\n", g_data->commandes->cmd->pid);
-		kill(g_data->commandes->cmd->pid, 2);
+		//printf("PID = %d\n", getpid());
+		//printf("PID process = %d\n", g_data->commandes->cmd->pid);
+		//kill(g_data->commandes->cmd->pid, 2);
+		//kill(getpid(), 2);
 	}
 	(void)sig;
 }
