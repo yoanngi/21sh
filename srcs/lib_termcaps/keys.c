@@ -6,7 +6,7 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/12 14:39:02 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/15 15:29:22 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/15 15:50:05 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -67,7 +67,11 @@ void		get_key(t_info *info, t_hist *tmp)
 
 	if (info->line)
 		ft_strdel(&(info->line));
+<<<<<<< HEAD
 	if (tmp->name)
+=======
+	if (tmp->name != NULL)
+>>>>>>> 591bee686e2add9f6e71b2eebe1caee87e3b5ef5
 		info->line = ft_strdup(tmp->name);
 	ft_bzero(buff, 5);
 	get_curs_pos(info);
