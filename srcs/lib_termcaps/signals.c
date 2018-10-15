@@ -86,9 +86,6 @@ static void		stop(int sig)
 {
 	if (g_data->is_executing)
 	{
-		printf("PID = %d\n", getpid());
-		printf("PID process = %d\n", g_data->commandes->cmd->pid);
-		kill(g_data->commandes->cmd->pid, 2);
 	}
 	(void)sig;
 }
