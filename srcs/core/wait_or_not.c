@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/23 13:09:39 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/11 11:34:47 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/15 13:35:08 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,7 @@
 
 int		wait_or_not(int *status, pid_t pid, t_cmd *start)
 {
-	waitpid(pid, status, WNOHANG);
+	waitpid(pid, status, WUNTRACED);
 	while (start)
 	{
 		if (ft_strcmp(start->tab_cmd[0], "top") != 0 &&

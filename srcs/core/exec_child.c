@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/08 12:53:56 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/12 16:33:46 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/15 11:04:05 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,9 +15,9 @@
 
 static int		exec_pipe_child2(t_cmd *lst, int pipe_fd[2], int *fd_in)
 {
-    int     ret;
+	int		ret;
 
-    ret = 0;
+	ret = 0;
 	redirection_fd(lst);
 	if (lst->pathname != NULL)
 		return (fork_redirection(lst));
@@ -25,9 +25,9 @@ static int		exec_pipe_child2(t_cmd *lst, int pipe_fd[2], int *fd_in)
 	close(pipe_fd[1]) == -1 ? basic_error("close", " failled") : 0;
 	close(pipe_fd[0]) == -1 ? basic_error("close", " failled") : 0;
 	ret = execve(lst->rep, lst->tab_cmd, lst->env);
-    if (ret == -1)
-        exit(EXIT_FAILURE);
-    exit(EXIT_SUCCESS);
+	if (ret == -1)
+		exit(EXIT_FAILURE);
+	exit(EXIT_SUCCESS);
 }
 
 static int		redir_one(t_path *lst)
@@ -46,12 +46,12 @@ static int		redir_one(t_path *lst)
 
 static int		exec_pipe_op_1(t_cmd *lst, int pipe_fd[2], int *fd_in)
 {
-    int     ret;
+	int		ret;
 
-    ret = 0;
+	ret = 0;
 	dup2(*fd_in, lst->stdin_cmd) == -1 ? basic_error("dup2", "failled") : 0;
 	dup2(pipe_fd[1], lst->stdout_cmd) == -1 ?
-	basic_error("dup2", " failled") : 0;
+		basic_error("dup2", " failled") : 0;
 	redirection_fd(lst);
 	close(pipe_fd[0]) == -1 ? basic_error("close", " failled") : 0;
 	if (lst->pathname != NULL)
@@ -59,9 +59,9 @@ static int		exec_pipe_op_1(t_cmd *lst, int pipe_fd[2], int *fd_in)
 	if (lst->redir_heredoc == 1)
 		return (fork_heredoc(lst, 0));
 	ret = execve(lst->rep, lst->tab_cmd, lst->env);
-    if (ret == -1)
-        exit(EXIT_FAILURE);
-    exit(EXIT_SUCCESS);
+	if (ret == -1)
+		exit(EXIT_FAILURE);
+	exit(EXIT_SUCCESS);
 }
 
 int				exec_pipe_child(t_struct *mystruct, t_cmd *lst, int pipe_fd[2],

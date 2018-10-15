@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/04 14:43:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/11 15:35:02 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/15 11:28:19 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -213,6 +213,7 @@ int						redirection_fd(t_cmd *data);
 int						delete_tmp(char **file);
 int						parse_line(t_struct *data, char **line, int ret);
 char					*return_path_heredoc(char *name);
+int						check_validity_heredoc(t_cmd *lst);
 int						exec_pipe_child(t_struct *mystruct, t_cmd *lst,
 						int pipe_fd[2], int *fd_in);
 int						duplique_process(t_cmd *lst, int pipe_fd[2],

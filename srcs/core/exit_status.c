@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/21 13:54:47 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/23 14:43:27 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/15 13:34:44 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,6 +30,10 @@ int		exit_status(int status)
 		else if (code == 13)
 			ft_putstr_fd("Broken pipe: 13\n", 2);
 		return (code + 128);
+	}
+	else if (WIFSTOPPED(status))
+	{
+		ft_putstr_fd("Stoped\n", 2);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/11/24 10:04:43 by yoginet      #+#   ##    ##    #+#        #
-#    Updated: 2018/10/09 15:28:49 by volivry     ###    #+. /#+    ###.fr      #
+#    Updated: 2018/10/15 10:33:35 by yoginet     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -19,7 +19,7 @@ JAUNE=\033[33m
 
 NAME =		21sh
 CC = 		gcc
-FLAGS = 	-g -Wall -Werror -Wextra
+FLAGS = 	-Wall -Werror -Wextra
 DEL =		rm -rf
 
 SRC_PATH = ./srcs/
