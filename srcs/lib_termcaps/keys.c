@@ -67,7 +67,11 @@ void		get_key(t_info *info, t_hist *tmp)
 
 	if (info->line)
 		ft_strdel(&(info->line));
+<<<<<<< HEAD
 	if (tmp->name != NULL)
+=======
+	if (tmp->name)
+>>>>>>> 01a024bc8d5ba6e2d61ebd85e173ad3ecdf92bf3
 		info->line = ft_strdup(tmp->name);
 	ft_bzero(buff, 5);
 	get_curs_pos(info);
