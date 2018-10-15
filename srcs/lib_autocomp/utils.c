@@ -13,7 +13,7 @@
 
 #include "../../includes/shell.h"
 
-void	free_slct(t_slct *lst, t_info *info)
+void	*free_slct(t_slct *lst, t_info *info)
 {
 	t_slct	*tmp;
 	t_slct	*tmp2;
@@ -34,6 +34,7 @@ void	free_slct(t_slct *lst, t_info *info)
 	info->max_len = 0;
 	info->nb_elem = 0;
 	ft_memdel((void**)&lst);
+	return (NULL);
 }
 
 int		is_exe(char *name)

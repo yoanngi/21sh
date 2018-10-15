@@ -84,6 +84,12 @@ static void		resize_win(int sig)
 
 static void		stop(int sig)
 {
+	if (g_data->is_executing)
+	{
+		printf("PID = %d\n", getpid());
+		printf("PID process = %d\n", g_data->commandes->cmd->pid);
+		kill(g_data->commandes->cmd->pid, 2);
+	}
 	(void)sig;
 }
 
@@ -93,4 +99,7 @@ void			get_signals(void)
 	signal(SIGTSTP, stop);
 	signal(SIGINT, ctrl_c);
 	signal(SIGQUIT, SIG_IGN);
+	signal(SIGURG, SIG_IGN);
+	signal(SIGTERM, SIG_IGN);
+	signal(SIGCONT, SIG_IGN);
 }

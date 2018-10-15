@@ -499,8 +499,10 @@ t_slct					*root_slct(void);
 t_slct					*init_slct(char *line, t_info *info, t_hist *hist);
 t_slct					*ac_first_elem(t_slct *root);
 t_slct					*ac_last_elem(t_slct *root);
-void					free_slct(t_slct *lst, t_info *info);
+void					*free_slct(t_slct *lst, t_info *info);
 void					init_info(t_info *info);
+void					*init_error(t_slct *root, t_info *info, char **table,
+									char **pathes);
 void					fill_commands(t_slct *root, t_info *info);
 void					ac_right_key(t_info *info, t_slct *slct, t_hist *hist);
 void					ac_left_key(t_info *info, t_slct *slct, t_hist *hist);
