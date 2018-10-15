@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/11 09:36:12 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/11 14:20:22 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/15 12:35:22 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -47,6 +47,8 @@ int			fork_redirection(t_cmd *lst)
 
 	status = -1;
 	lst_path = lst->pathname;
+	if (check_validity_heredoc(lst) == 1)
+		exit(EXIT_FAILURE);
 	while (lst->pathname)
 	{
 		lst->pathname->fd = exec_redirection(lst->pathname,

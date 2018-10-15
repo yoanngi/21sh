@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/28 14:42:03 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/15 11:07:53 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/15 11:36:15 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -49,6 +49,7 @@ char		*return_path_heredoc(char *name)
 
 	path = NULL;
 	tmp = NULL;
+	cpy = NULL;
 	if (!name)
 		return (NULL);
 	if ((path = path_heredoc(name, 0)) != NULL)
@@ -64,5 +65,6 @@ char		*return_path_heredoc(char *name)
 	if (!(path = ft_strjoin(tmp, cpy)))
 		return (NULL);
 	ft_strdel(&cpy);
+	ft_strdel(&tmp);
 	return (path);
 }

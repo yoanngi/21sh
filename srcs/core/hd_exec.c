@@ -6,12 +6,31 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/28 14:42:03 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/15 10:59:25 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/15 12:34:51 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
+
+int				check_validity_heredoc(t_cmd *lst)
+{
+	char	*path;
+	int		ret;
+
+	path = NULL;
+	ret = 0;
+	if (lst->redir_heredoc == 0 || lst->heredoc == NULL)
+		return (0);
+	path = return_path_heredoc(lst->heredoc[0]);
+	if (open(path, O_RDONLY) < 0)
+	{
+		ret = 1;
+		basic_error(lst->heredoc[0], ": No such file or directory");
+	}
+	ft_strdel(&path);
+	return (ret);
+}
 
 int				delete_tmp(char **file)
 {
@@ -45,7 +64,7 @@ static int		heredoc_simple_exec(t_cmd *lst, int i)
 	{
 		basic_error(lst->heredoc[i], ": No such file or directory");
 		ft_strdel(&path);
-		exit(1);
+		return (1);
 	}
 	ft_strdel(&path);
 	dup2(fd, lst->stdin_cmd);
