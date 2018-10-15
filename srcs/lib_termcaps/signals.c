@@ -6,7 +6,7 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/19 12:14:19 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/15 13:37:28 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/15 14:18:16 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -86,6 +86,11 @@ static void		stop(int sig)
 {
 	if (g_data->is_executing)
 	{
+<<<<<<< HEAD
+=======
+		kill(g_data->commandes->cmd->pid, 9);
+		ft_putstr_fd("Process stopped\n", 2);
+>>>>>>> 6ba2a9d2bb880ed9d7046d0c818a8c349f4bfff6
 	}
 	(void)sig;
 }
