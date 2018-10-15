@@ -6,7 +6,7 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/19 12:14:19 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/15 14:18:16 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/15 14:24:01 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -84,10 +84,16 @@ static void		resize_win(int sig)
 
 static void		stop(int sig)
 {
+	int		pid;
+
+	pid = 0;
 	if (g_data->is_executing)
 	{
+		pid = g_data->commandes->cmd->pid;
 		kill(g_data->commandes->cmd->pid, 9);
-		ft_putstr_fd("Process stopped\n", 2);
+		ft_putstr_fd("Process stopped : [", 2);
+		ft_putnbr_fd(pid, 2);
+		ft_putstr_fd("]\n", 2);
 	}
 	(void)sig;
 }
