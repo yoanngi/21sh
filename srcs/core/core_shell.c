@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/06 10:11:53 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/15 15:05:00 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/16 11:04:01 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,6 +45,10 @@ int					parse_line(t_struct *data, char **line, int ret)
 	cpy = data->commandes;
 	while (cpy)
 	{
+<<<<<<< HEAD
+=======
+		//print_debug(&cpy->cmd, cpy->code);
+>>>>>>> 65c9769eaef5db02c27e512928a66c03db955a4c
 		if (ft_check_arg_invalid(data, cpy->cmd) == 0)
 		{
 			ret = execute_commandes(data, cpy->cmd);
