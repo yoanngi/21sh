@@ -13,6 +13,10 @@
 
 #include "../../includes/shell.h"
 
+/*
+** Inserts a char inside the command line on the screen
+*/
+
 void		insert_char(char c, t_info *info, t_hist *tmp)
 {
 	int		i;
@@ -42,6 +46,10 @@ void		insert_char(char c, t_info *info, t_hist *tmp)
 	get_curs_pos(info);
 }
 
+/*
+** Adds a char at the end of the command line
+*/
+
 void		add_char(char c, t_info *info, t_hist *tmp)
 {
 	char	chr[2];
@@ -60,6 +68,10 @@ void		add_char(char c, t_info *info, t_hist *tmp)
 	info->s_len++;
 	if_end(info, tmp);
 }
+
+/*
+** Dels a char from the command line on the screen
+*/
 
 void		del_char(t_info *info, t_hist *tmp)
 {
@@ -81,6 +93,10 @@ void		del_char(t_info *info, t_hist *tmp)
 		info->s_len--;
 	}
 }
+
+/*
+** Inserts a char inside the command line buffer
+*/
 
 void		add_c_in_str(t_info *info, char c, t_hist *tmp)
 {
