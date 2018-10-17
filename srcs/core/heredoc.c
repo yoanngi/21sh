@@ -62,6 +62,7 @@ static char		*get_hd_cmd(char *str)
 
 static int		hd_err(char *remain, char *str, int *err)
 {
+	g_info.heredoc = 1;
 	if (!g_info.h_d.trigger || !ft_strcmp(g_info.h_d.trigger, "") ||
 	(str[0] == '<' && str[1] == '<') || ft_strstr(str, "<<<"))
 	{
@@ -97,6 +98,7 @@ static char		*quit_hd(void)
 	remove_this_elem(tmp);
 	if (g_info.h_d.fill)
 		g_info.h_d.fill[ft_strlen(g_info.h_d.fill) - 1] = 0;
+	g_info.heredoc = 0;
 	return (g_info.h_d.fill);
 }
 

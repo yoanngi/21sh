@@ -34,6 +34,7 @@ void			init_info(t_info *info)
 	info->history = root_hist();
 	info->letters = NULL;
 	info->loop = 1;
+	info->heredoc = 0;
 	info->out = 0;
 	info->max_len = 0;
 	info->nb_elem = 0;

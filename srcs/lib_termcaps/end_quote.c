@@ -51,20 +51,21 @@ void		toggle_quote(t_info *info)
 		while (info->line[i])
 		{
 			if (((i == 0 && info->line[i] == '"') || (i > 0
-			&& info->line[i] == '"' && info->quoted != 4
+			&& info->line[i] == '"' && !info->heredoc
 				&& info->line[i - 1] != '\\')) && info->quoted != 1)
 				double_toggle(info);
 			if (((i == 0 && info->line[i] == 39) ||
-			(i > 0 && info->line[i] == 39 && info->quoted != 4
+			(i > 0 && info->line[i] == 39 && !info->heredoc
 			&& info->line[i - 1] != '\\')) && info->quoted != 2)
 				single_toggle(info);
 			i++;
 		}
 	if (last_char(info->line) == '\\' && info->quoted != 1 && info->quoted != 2)
 		info->quoted = 3;
-	else if (ft_strstr(info->line, "<<"))
+	else if (info->heredoc)
 		info->quoted = 4;
-	else
+	else if (info->quoted != 1 && info->quoted != 2 && info->quoted != 3 &&
+	!info->heredoc)
 		info->quoted = 0;
 	change_prompt(info, info->quoted);
 }

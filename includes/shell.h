@@ -412,6 +412,7 @@ typedef struct			s_info
 	int					loop;
 	int					out;
 	int					over;
+	int					heredoc;
 	t_here_d			h_d;
 }						t_info;
 
