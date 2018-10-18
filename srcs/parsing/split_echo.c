@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/17 14:38:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/16 14:54:08 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/18 15:57:03 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,7 +53,6 @@ static int	check_split_echo(char ***tabl, int index)
 		tmp = ft_strsub((*tabl)[index], 0, i);
 		len = ft_strlen((*tabl)[index]);
 		(*tabl)[t] = ft_strsub((*tabl)[index], i + 1, len - (i + 1));
-		clear_line(&(*tabl)[t]);
 		ft_strdel(&(*tabl)[index]);
 		(*tabl)[index] = ft_strdup(tmp);
 		ft_strdel(&tmp);

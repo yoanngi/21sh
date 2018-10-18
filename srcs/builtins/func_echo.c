@@ -6,7 +6,7 @@
 /*   By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/15 13:22:07 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/12 13:59:39 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/18 16:00:04 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,8 +14,9 @@
 #include "../../includes/shell.h"
 
 /*
-**	Func echo provisoire
-** 	reste option a gerer
+**	Func echo
+** 	Options:
+**	-n
 */
 
 static void		option_n(int n)
@@ -35,7 +36,6 @@ int				clear_tab(char ***tabl)
 	tmp = NULL;
 	while ((*tabl)[i])
 	{
-		clear_line(&(*tabl)[i]);
 		tmp = ft_strdup((*tabl)[i]);
 		if ((*tabl)[i][0] == '\"' &&
 	(*tabl)[i][ft_strlen((*tabl)[i]) - 1] == '\"')
@@ -76,7 +76,7 @@ int				func_echo(t_struct *data, t_cmd *lst)
 		}
 		else
 			ft_putstr(lst->tab_cmd[i]);
-		if (lst->tab_cmd[i + 1] != NULL)
+		if (lst->tab_cmd[i + 1] != NULL && no_return != 1)
 			ft_putstr(" ");
 		i++;
 	}
