@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/17 14:38:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/18 16:00:49 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/19 10:20:21 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,7 +26,7 @@ static int	echap_word(char *str, int i)
 	}
 	while (str[i])
 	{
-		if (str[i] == ' ' || str[i] == '\t')
+		if (str[i] == ' ' || str[i] == '\t' || str[i] == '\"' || str[i] == '\'')
 			return (i);
 		i++;
 	}
@@ -52,7 +52,7 @@ static int	check_split_echo(char ***tabl, int index)
 		increase_tab(tabl);
 		tmp = ft_strsub((*tabl)[index], 0, i);
 		len = ft_strlen((*tabl)[index]);
-		(*tabl)[t] = ft_strsub((*tabl)[index], i + 1, len - (i + 1));
+		(*tabl)[t] = ft_strsub((*tabl)[index], i, len - i);
 		ft_strdel(&(*tabl)[index]);
 		(*tabl)[index] = ft_strdup(tmp);
 		ft_strdel(&tmp);
