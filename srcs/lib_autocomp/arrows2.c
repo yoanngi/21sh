@@ -6,7 +6,7 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/28 17:50:15 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/28 17:51:09 by volivry     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/23 15:01:49 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -65,14 +65,14 @@ static void	ac_left2(t_info *info, t_slct *slct, t_hist *hist, t_slct *tmp)
 	cols = info->col_nb / (info->max_len + 2);
 	erase_prev(info, hist);
 	tmp->current = 0;
-	if (tmp->index % cols != 1 && tmp->prev != slct)
+	if (tmp->index % cols != 1)
 	{
 		tmp->prev->current = 1;
 		add_slct(tmp->prev, info);
 	}
 	else
 	{
-		if (tmp->index % rows != 0)
+		if (info->nb_elem - tmp->index > cols)
 			while (tmp->index % cols != 0 || tmp == slct)
 				tmp = tmp->next;
 		else
