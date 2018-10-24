@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/02 10:24:57 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/18 15:57:07 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/24 11:32:55 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,7 +55,7 @@ int			echap_quote(char *str, int i, int opt)
 {
 	if (!(str))
 		return (0);
-	if (str[i] == '\0')
+	if (str[i] == '\0' || str[i + 1] == '\0')
 		return (i);
 	if (str[i] == '\'')
 	{

@@ -6,7 +6,7 @@
 /*   By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/15 13:22:07 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/18 16:00:04 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/24 12:55:23 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -76,7 +76,7 @@ int				func_echo(t_struct *data, t_cmd *lst)
 		}
 		else
 			ft_putstr(lst->tab_cmd[i]);
-		if (lst->tab_cmd[i + 1] != NULL && no_return != 1)
+		if (lst->tab_cmd[i + 1] != NULL && ft_strcmp(lst->tab_cmd[i], "-n"))
 			ft_putstr(" ");
 		i++;
 	}
