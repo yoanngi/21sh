@@ -6,7 +6,7 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/26 16:51:46 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/04 18:43:10 by volivry     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/24 16:37:34 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -69,6 +69,7 @@ static int		hd_err(char *remain, char *str, int *err)
 		ft_putstr("21sh: parse error near \\n\n");
 		change_prompt(&g_info, 0);
 		g_info.quoted = 0;
+		g_info.heredoc = 0;
 		*err = 1;
 		return (1);
 	}
@@ -77,6 +78,7 @@ static int		hd_err(char *remain, char *str, int *err)
 		ft_putstr("Parse error: multiple heredocs in the same command\n");
 		change_prompt(&g_info, 0);
 		g_info.quoted = 0;
+		g_info.heredoc = 0;
 		*err = 1;
 		return (1);
 	}
