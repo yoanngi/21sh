@@ -6,7 +6,7 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/26 16:51:46 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/24 16:37:34 by volivry     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/24 16:57:18 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,7 +27,10 @@ static char		*get_hd_cmd2(char *str, char *remain, int i)
 	}
 	remain[j] = 0;
 	if (ft_strstr(remain, "<<"))
+	{
+		ft_strdel(&remain);
 		return (NULL);
+	}
 	return (remain);
 }
 
@@ -52,7 +55,7 @@ static char		*get_hd_cmd(char *str)
 	}
 	g_info.h_d.cmd[i] = 0;
 	clear_line(&g_info.h_d.cmd);
-	if (!(remain = malloc(ft_strlen(str) - len + 2)))
+	if (!(remain = ft_strnew(ft_strlen(str) - len + 1)))
 		return (NULL);
 	remain = remain ? get_hd_cmd2(str, remain, i) : NULL;
 	if (remain)
