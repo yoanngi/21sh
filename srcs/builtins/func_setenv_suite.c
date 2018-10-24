@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/28 13:44:18 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/28 14:07:35 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/24 15:49:24 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -49,8 +49,7 @@ int						check_if_path_modif(t_struct **data, t_cmd *lst)
 		(*data)->sizemax = ft_load_path(data);
 		if ((*data)->sizemax == -1)
 		{
-			ft_putstr_fd("Error creation  table de hashage\n",
-		lst->stderr_cmd);
+			ft_putstr_fd("setenv: PATH invalid\n", 2);
 			return (1);
 		}
 	}
