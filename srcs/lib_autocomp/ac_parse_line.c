@@ -6,7 +6,7 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/27 17:30:43 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/28 14:17:40 by volivry     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/24 15:47:52 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,29 +48,30 @@ static char	*get_letters(char *line, t_info *info)
 	char	*tmp;
 	int		len;
 
-	len = ft_strlen(line) - 1;
 	tmp = NULL;
 	if (line == NULL || !ft_strcmp(line, ""))
 		return (NULL);
+	len = ft_strlen(line) - 1;
 	if (!ft_strchr(line, '/'))
 	{
-		info->letters = ft_strdup(line);
+		if (line && ft_strcmp(line, ""))
+			info->letters = ft_strdup(line);
 		return (line);
 	}
 	if (last_char(line) == '/')
 		return (line);
 	while (line[len - 1] != '/')
 		len--;
-	if (!(tmp = malloc(len)))
+	if (!(tmp = malloc(len + 1)))
 		return (NULL);
-	if (!(info->letters = malloc(ft_strlen(line) - len)))
+	if (!(info->letters = ft_strnew(ft_strlen(line) - len)))
 		return (NULL);
 	return (letters(line, info, tmp, len));
 }
 
 /*
 ** Checks if there are multiple words in the commande
-** line. I fnot, frees and exits.
+** line. If not, frees and exits.
 */
 
 char		*no_table_case(char *line, char **table)

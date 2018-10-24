@@ -6,7 +6,7 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/01 17:49:20 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/28 14:26:00 by volivry     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/24 15:24:17 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -86,9 +86,8 @@ static void	restore2(t_info *info, t_hist *hist, t_slct *tmp)
 	int	i;
 
 	i = 0;
-	if (info->letters)
-		while (info->letters[i])
-			i++;
+	if (info->letters && ft_strcmp(info->letters, ""))
+		i = ft_strlen(info->letters);
 	if (!info->out)
 		while (tmp->name[i])
 		{
