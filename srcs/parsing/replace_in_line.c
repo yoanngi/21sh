@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/22 11:40:00 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/12 11:44:35 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/25 14:48:05 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -64,25 +64,25 @@ static char		*return_dol(t_struct *data, char *str, int i)
 static char		*replace_suite(t_struct *data, char **str)
 {
 	int		i;
+	int		bol;
 	char	*line;
 
 	i = 0;
+	bol = 0;
 	line = NULL;
 	if (!(line = ft_strdup(*str)))
 		return (NULL);
 	while (line[i])
 	{
 		i = echap_quote(line, i, 1);
-		if (line[i] == '~')
+		if (line[i] == '\0')
+			return (line);
+		if (line[i] == '~' || line[i] == '$')
 		{
+			bol = line[i] == '~' ? 1 : 0;
 			ft_strdel(&line);
-			line = insert_in_line(*str, i, data->home);
-			i = 0;
-		}
-		if (line[i] == '$')
-		{
-			ft_strdel(&line);
-			line = return_dol(data, *str, i);
+			line = bol == 1 ? insert_in_line(*str, i, data->home) :
+	return_dol(data, *str, i);
 			i = 0;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/15 13:21:57 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/24 13:48:35 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/25 15:16:28 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,7 +29,7 @@ static int	change_directory(t_struct *data, t_cmd *lst, char *newpath)
 			ft_putstr_fd("\n", 2);
 			return (1);
 		}
-		actualise_env(data, newpath);
+		actualise_env(data, 0);
 	}
 	else
 	{
@@ -40,7 +40,7 @@ static int	change_directory(t_struct *data, t_cmd *lst, char *newpath)
 			ft_putstr_fd("\n", 2);
 			return (1);
 		}
-		actualise_env(data, lst->tab_cmd[1]);
+		actualise_env(data, 0);
 	}
 	return (0);
 }
