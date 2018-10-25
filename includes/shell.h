@@ -466,6 +466,7 @@ void					if_end(t_info *info, t_hist *tmp);
 char					*quoted_loops(char *full_line, t_struct *data,
 								int *quit);
 void					init_info(t_info *info);
+char					*error(void);
 
 /*
 ** LIB_AUTOCOMP

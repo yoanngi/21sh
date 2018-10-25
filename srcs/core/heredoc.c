@@ -6,7 +6,7 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/26 16:51:46 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/25 11:12:12 by volivry     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/25 13:52:34 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,6 +42,7 @@ static char		*get_hd_cmd(char *str)
 
 	i = 0;
 	len = 0;
+	remain = NULL;
 	while (str[len] != '<' && str[len + 1] != '<')
 		len++;
 	if (last_char(str) == '<')
@@ -53,11 +54,9 @@ static char		*get_hd_cmd(char *str)
 		g_info.h_d.cmd[i] = str[i];
 		i++;
 	}
-	g_info.h_d.cmd[i] = 0;
-	clear_line(&g_info.h_d.cmd);
 	if (!(remain = ft_strnew(ft_strlen(str) - len + 1)))
 		return (NULL);
-	remain = remain ? get_hd_cmd2(str, remain, i) : NULL;
+	remain = get_hd_cmd2(str, remain, i);
 	if (remain)
 		remain = get_hd_trigger(remain);
 	return (remain);
@@ -117,7 +116,7 @@ char			*heredoc(char *str, int *err)
 	first_round = 1;
 	remain = get_hd_cmd(str);
 	if (hd_err(remain, str, err))
-		return (NULL);
+		return (error());
 	change_prompt(&g_info, 4);
 	g_info.h_d.fill = NULL;
 	ft_strdel(&remain);

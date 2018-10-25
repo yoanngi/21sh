@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/17 10:26:53 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/24 16:51:25 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/25 13:29:01 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,11 +48,9 @@ static void		error_parsing(char *str, int i)
 static int		test_string(char *line, char **tabl, int i)
 {
 	int		j;
-	int		x;
 	int		quit;
 
 	j = 0;
-	x = 0;
 	while (tabl[j])
 	{
 		i = 0;
@@ -60,6 +58,8 @@ static int		test_string(char *line, char **tabl, int i)
 		while (line[i] && quit == 0)
 		{
 			i = echap_quote(line, i, 0);
+			if (line[i] == '\0')
+				return (0);
 			if (ft_strlen(line) <= ft_strlen(tabl[j]) + i)
 				quit = 1;
 			else if (ft_strncmp(line + i, tabl[j], ft_strlen(tabl[j])) == 0)
