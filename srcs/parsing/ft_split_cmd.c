@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/19 11:08:13 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/16 14:51:15 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/25 10:38:11 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,6 +38,11 @@ static int			check_ft_split(char *tmp, int i)
 
 static int			split_norm(t_cmd **new, char **tmp, int i)
 {
+	if (i == -1)
+	{
+		ft_strdel(tmp);
+		return (-1);
+	}
 	verifie_op(new, *tmp, i);
 	if ((*new)->op_next == 5)
 		i = i - 1;
@@ -61,9 +66,9 @@ static int			ft_split_cmd_suite(t_cmd **new, t_struct *data,
 		{
 			good_op_next(new, tmp, i);
 			i = good_tab_cmd(data, new, tmp, i);
+			i = split_norm(new, &tmp, i);
 			if (i == -1)
 				return (1);
-			i = split_norm(new, &tmp, i);
 			if (tmp == NULL)
 				return (0);
 			(*new)->next = ft_init_cmd();
