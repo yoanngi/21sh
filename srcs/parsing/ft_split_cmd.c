@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/19 11:08:13 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/25 10:38:11 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/25 11:14:30 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,7 +46,7 @@ static int			split_norm(t_cmd **new, char **tmp, int i)
 	verifie_op(new, *tmp, i);
 	if ((*new)->op_next == 5)
 		i = i - 1;
-	i = resize_str(tmp, i) - 1;
+	i = resize_str(tmp, i);
 	return (i);
 }
 
