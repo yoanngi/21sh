@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/19 11:08:13 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/25 11:14:30 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/25 14:09:34 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,7 +31,7 @@ static int			check_split(t_struct *data, t_cmd **new, char *str)
 static int			check_ft_split(char *tmp, int i)
 {
 	if (tmp[i] == '|' || tmp[i] == '>' || tmp[i] == '<' ||
-	(tmp[i + 1] == '\0' || tmp[i] == '\0'))
+	(tmp[i] == '\0' || tmp[i + 1] == '\0'))
 		return (1);
 	return (0);
 }
@@ -96,7 +96,8 @@ t_cmd				*ft_split_cmd(char **str, t_struct *data)
 		new = clear_cmd(new);
 		return (NULL);
 	}
-	if (check_validity(&start, data) == 1)
+	new = start;
+	if (check_validity(&new, data) == 1)
 	{
 		new = clear_cmd(new);
 		return (NULL);
