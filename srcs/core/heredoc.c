@@ -6,7 +6,7 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/26 16:51:46 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/24 16:57:18 by volivry     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/25 11:12:12 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,7 +26,7 @@ static char		*get_hd_cmd2(char *str, char *remain, int i)
 		j++;
 	}
 	remain[j] = 0;
-	if (ft_strstr(remain, "<<"))
+	if (ft_strstr(remain, "<"))
 	{
 		ft_strdel(&remain);
 		return (NULL);
