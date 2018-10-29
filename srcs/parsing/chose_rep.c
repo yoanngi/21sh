@@ -121,7 +121,7 @@ int				chose_rep(t_struct *data, t_cmd **new, int provisoire)
 		ft_strdel(&tmp);
 		return (0);
 	}
-	if (data->tab_hash == NULL)
+	if (data->tab_hash == NULL && ft_stat((*new)->tab_cmd[0]) != 0)
 		return (0);
 	tmp = ft_return_path((*new)->tab_cmd[0]);
 	if (ft_strstr((*new)->tab_cmd[0], "./") != NULL)

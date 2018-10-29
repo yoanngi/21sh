@@ -86,5 +86,6 @@ int				main(int argc, char **argv, char **env)
 	core_shell(g_data);
 	code_exit = ft_delete_struct(&g_data);
 	print_ascii_art_end();
+    sleep(60);
 	return (code_exit);
 }
