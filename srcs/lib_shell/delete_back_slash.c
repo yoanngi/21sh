@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/03 12:51:18 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/03 13:50:00 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/25 14:49:47 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -60,6 +60,8 @@ static char	*delete_bs(char *line, int i)
 	while (line[i])
 	{
 		i = echap_quote(line, i, 0);
+		if (line[i] == '\0')
+			return (NULL);
 		if (check_char(line, i) == 1)
 		{
 			if (i == 0)

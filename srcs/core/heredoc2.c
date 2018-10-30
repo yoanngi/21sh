@@ -6,7 +6,7 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/04 18:43:18 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/04 18:46:00 by volivry     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/25 13:55:13 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,6 +27,12 @@ static char		*get_hd_trigger2(int i, char *tmp, char *str)
 	str[len] = 0;
 	ft_strdel(&tmp);
 	return (str);
+}
+
+char			*error(void)
+{
+	ft_strdel(&g_info.h_d.cmd);
+	return (NULL);
 }
 
 char			*get_hd_trigger(char *str)

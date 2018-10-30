@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/08 11:41:42 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/08 14:56:45 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/25 13:15:23 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -49,7 +49,7 @@ char				*return_name(t_cmd **lst, char *str, int start, int end)
 	if (ft_strlen(str) == end + 1)
 		new = ft_strsub(str, start, (end - start + 1));
 	else if (str[end] == '>' && ft_isdigit(str[end - 1]) == 1)
-		new = ft_strsub(str, start, (end - start - 2));
+		new = end - start > 2 ? ft_strsub(str, start, (end - start - 2)) : NULL;
 	else
 		new = ft_strsub(str, start, (end - start));
 	if (check_new(&new) == 1)

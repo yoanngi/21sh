@@ -6,22 +6,24 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/08 11:48:06 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/08 15:00:00 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/25 15:18:04 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-int	actualise_env(t_struct *data, char *newpath)
+int			actualise_env(t_struct *data, int i)
 {
-	int i;
+	char	*tmp;
 
-	i = 0;
+	tmp = ft_strnew(255);
+	getcwd(tmp, 255);
 	ft_strdel(&data->oldpwd);
 	data->oldpwd = ft_strdup(data->pwd);
 	ft_strdel(&data->pwd);
-	data->pwd = ft_strdup(newpath);
+	data->pwd = ft_strdup(tmp);
+	ft_strdel(&tmp);
 	while (data->env[i])
 	{
 		if (ft_strncmp(data->env[i], "PWD=", 4) == 0)

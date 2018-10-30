@@ -6,7 +6,7 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/02 13:07:19 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/22 13:53:13 by volivry     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/24 16:01:13 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -99,7 +99,7 @@ void		autocomp(t_info *info, t_hist *hist)
 
 	line = NULL;
 	info->out = 0;
-	if (hist->name)
+	if (hist->name && ft_strcmp(hist->name, ""))
 		line = ft_strdup(hist->name);
 	line = get_last_word(line, info);
 	g_slct = init_slct(line, info, hist);

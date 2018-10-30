@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/26 13:40:50 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/16 14:49:38 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/24 15:48:27 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -121,6 +121,11 @@ int				chose_rep(t_struct *data, t_cmd **new, int provisoire)
 		ft_strdel(&tmp);
 		return (0);
 	}
+    // a mettre a la norme
+	if (data->tab_hash == NULL && ft_strcmp("./21sh", (*new)->tab_cmd[0]) == 0)
+		return (0);
+	if (data->tab_hash == NULL && ft_stat((*new)->tab_cmd[0]) != 0)
+		return (0);
 	tmp = ft_return_path((*new)->tab_cmd[0]);
 	if (ft_strstr((*new)->tab_cmd[0], "./") != NULL)
 		(*new)->rep = ft_strdup((*new)->tab_cmd[0]);

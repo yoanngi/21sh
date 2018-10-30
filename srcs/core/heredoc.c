@@ -6,7 +6,11 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/26 16:51:46 by volivry      #+#   ##    ##    #+#       */
+<<<<<<< HEAD
 /*   Updated: 2018/10/24 16:35:42 by volivry     ###    #+. /#+    ###.fr     */
+=======
+/*   Updated: 2018/10/25 13:52:34 by yoginet     ###    #+. /#+    ###.fr     */
+>>>>>>> 6e172b31900f3db95156a42f69ec1c6fe7e80862
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,8 +30,11 @@ static char		*get_hd_cmd2(char *str, char *remain, int i)
 		j++;
 	}
 	remain[j] = 0;
-	if (ft_strstr(remain, "<<"))
+	if (ft_strstr(remain, "<"))
+	{
+		ft_strdel(&remain);
 		return (NULL);
+	}
 	return (remain);
 }
 
@@ -39,6 +46,7 @@ static char		*get_hd_cmd(char *str)
 
 	i = 0;
 	len = 0;
+	remain = NULL;
 	while (str[len] != '<' && str[len + 1] != '<')
 		len++;
 	if (last_char(str) == '<')
@@ -50,11 +58,9 @@ static char		*get_hd_cmd(char *str)
 		g_info.h_d.cmd[i] = str[i];
 		i++;
 	}
-	g_info.h_d.cmd[i] = 0;
-	clear_line(&g_info.h_d.cmd);
-	if (!(remain = malloc(ft_strlen(str) - len + 2)))
+	if (!(remain = ft_strnew(ft_strlen(str) - len + 1)))
 		return (NULL);
-	remain = remain ? get_hd_cmd2(str, remain, i) : NULL;
+	remain = get_hd_cmd2(str, remain, i);
 	if (remain)
 		remain = get_hd_trigger(remain);
 	return (remain);
@@ -69,6 +75,7 @@ static int		hd_err(char *remain, char *str, int *err)
 		ft_putstr("21sh: parse error near \\n\n");
 		change_prompt(&g_info, 0);
 		g_info.quoted = 0;
+		g_info.heredoc = 0;
 		*err = 1;
 		return (1);
 	}
@@ -77,6 +84,7 @@ static int		hd_err(char *remain, char *str, int *err)
 		ft_putstr("Parse error: multiple heredocs in the same command\n");
 		change_prompt(&g_info, 0);
 		g_info.quoted = 0;
+		g_info.heredoc = 0;
 		*err = 1;
 		return (1);
 	}
@@ -112,7 +120,7 @@ char			*heredoc(char *str, int *err)
 	first_round = 1;
 	remain = get_hd_cmd(str);
 	if (hd_err(remain, str, err))
-		return (NULL);
+		return (error());
 	change_prompt(&g_info, 4);
 	g_info.h_d.fill = NULL;
 	ft_strdel(&remain);

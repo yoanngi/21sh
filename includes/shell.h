@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/04 14:43:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/18 11:28:41 by volivry     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/25 15:15:35 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -284,7 +284,7 @@ int						execute_var_modif(t_struct *data, t_cmd **lst, int i,
 	int opt);
 int						func_echo(t_struct *data, t_cmd *lst);
 int						func_cd(t_struct *data, t_cmd *lst);
-int						actualise_env(t_struct *data, char *newpath);
+int						actualise_env(t_struct *data, int i);
 int						func_history(t_struct *data, t_cmd *lst);
 int						func_setenv(t_struct **data, t_cmd *lst);
 int						modifie_env(t_struct **data, t_cmd *lst, int i);
@@ -466,6 +466,7 @@ void					if_end(t_info *info, t_hist *tmp);
 char					*quoted_loops(char *full_line, t_struct *data,
 								int *quit);
 void					init_info(t_info *info);
+char					*error(void);
 
 /*
 ** LIB_AUTOCOMP

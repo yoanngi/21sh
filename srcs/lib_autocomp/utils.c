@@ -6,7 +6,7 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/29 13:55:04 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/04 11:17:49 by volivry     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/24 15:57:41 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -52,7 +52,8 @@ int		is_exe(char *name)
 	if (stat(name, &st) == -1)
 		return (0);
 	if (!S_ISDIR(st.st_mode) &&
-	(st.st_mode & S_IXUSR || st.st_mode & S_IXGRP || st.st_mode & S_IXOTH))
+			(st.st_mode & S_IXUSR || st.st_mode & S_IXGRP ||
+			st.st_mode & S_IXOTH))
 		return (1);
 	else
 		return (0);
