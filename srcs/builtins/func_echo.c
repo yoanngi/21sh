@@ -36,6 +36,7 @@ int				clear_tab(char ***tabl)
 	tmp = NULL;
 	while ((*tabl)[i])
 	{
+        clear_line(&(*tabl)[i]);
 		tmp = ft_strdup((*tabl)[i]);
 		if ((*tabl)[i][0] == '\"' &&
 	(*tabl)[i][ft_strlen((*tabl)[i]) - 1] == '\"')
