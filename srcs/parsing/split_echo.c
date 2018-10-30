@@ -77,12 +77,11 @@ static int	return_start_echo(char *str)
 		basic_error(str, " : command not found");
 		return (-2);
 	}
-	while (str[i])
-	{
-		if (ft_strncmp(str + i, "echo ", 5) == 0)
-			return (i + 5);
-		i++;
-	}
+	while (str[i] == ' ')
+        i++;
+	if (ft_strncmp(str + i, "echo ", 5) == 0)
+		return (i + 5);
+	basic_error(str, " : command not found");
 	return (-2);
 }
 
