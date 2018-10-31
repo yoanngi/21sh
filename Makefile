@@ -6,7 +6,7 @@
 #    By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/11/24 10:04:43 by yoginet      #+#   ##    ##    #+#        #
-#    Updated: 2018/10/24 16:47:09 by volivry     ###    #+. /#+    ###.fr      #
+#    Updated: 2018/10/31 14:54:11 by yoginet     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -19,7 +19,7 @@ JAUNE=\033[33m
 
 NAME =		21sh
 CC = 		gcc
-FLAGS = 	-Wall -Werror -Wextra -g
+FLAGS = 	-Wall -Werror -Wextra
 DEL =		rm -rf
 
 SRC_PATH = ./srcs/
@@ -96,6 +96,7 @@ N_SRCS = 	main.c\
 			lib_shell/ft_dir_exist.c\
 			lib_shell/ft_duplicate_tab.c\
 			lib_shell/ft_error.c\
+			lib_shell/ft_error_suite.c\
 			lib_shell/ft_existe_in_path.c\
 			lib_shell/ft_good_path.c\
 			lib_shell/ft_insert_dollar.c\

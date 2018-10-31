@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/04 14:43:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/25 15:15:35 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/31 14:53:57 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -368,6 +368,7 @@ int						echap_quote(char *str, int i, int opt);
 int						increase_tab(char ***tabl);
 int						clear_echo(char ***tabl);
 int						delete_back_slash(char **line);
+void					error_parsing(char *str, int i);
 /*
 **	LIB_TERMCAPS
 */

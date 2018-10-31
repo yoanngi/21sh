@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/14 14:38:25 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 09:55:39 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/31 14:42:21 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -44,9 +44,9 @@ static int		ft_split_pvir_suite(char **line, int i, t_ins **lst)
 	}
 	tmp = ft_strdup(*line);
 	(*lst)->str = ft_strsub(*line, 0, i);
-	while (tmp[i] == '&')
+	while (tmp[i] && tmp[i] == '&')
 		i++;
-	while (tmp[i] == '|')
+	while (tmp[i] && tmp[i] == '|')
 		i++;
 	ft_strdel(&tmp);
 	resize_line(line, i, lst);
