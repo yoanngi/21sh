@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/17 14:38:34 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/31 09:53:04 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/31 15:06:44 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -81,7 +81,6 @@ static int	return_start_echo(char *str)
 		i++;
 	if (ft_strncmp(str + i, "echo ", 5) == 0)
 		return (i + 5);
-	basic_error(str, " : command not found");
 	return (-2);
 }
 
