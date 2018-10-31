@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/17 10:26:53 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/31 15:04:39 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/31 15:51:13 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -69,56 +69,20 @@ static int		test_string(char *line, char **tabl, int i)
 	return (0);
 }
 
-static int		check_two(char *line, int i, int save)
+static int		check_three(char *line, int i, int save, char c)
 {
 	while (line[i])
 	{
 		if ((i = echap_quote(line, i, 0)) == ft_strlen(line))
 			return (0);
-		if (line[i] == '>')
+		if (line[i] == c)
 		{
 			save = i;
-			while (line[i] && (line[i] == '>' || line[i] == ' '))
+			while (line[i] && line[i] == c)
 				i++;
-			if (line[i] == '<' || line[i] == '|')
-				return (1);
-			i = save;
-		}
-		else if (line[i] == '<')
-		{
-			save = i;
-			while (line[i] && (line[i] == '<' || line[i] == ' '))
+			while (line[i] && line[i] == ' ')
 				i++;
-			if (line[i] == '>' || line[i] == '|')
-				return (1);
-			i = save;
-		}
-		i++;
-	}
-	return (0);
-}
-
-static int		check_three(char *line, int i, int save)
-{
-	while (line[i])
-	{
-		if ((i = echap_quote(line, i, 0)) == ft_strlen(line))
-			return (0);
-		if (line[i] == '&')
-		{
-			save = i;
-			while (line[i] && (line[i] == '&' || line[i] == ' '))
-				i++;
-			if (line[i] == '<' || line[i] == '|')
-				return (1);
-			i = save;
-		}
-		else if (line[i] == '|')
-		{
-			save = i;
-			while (line[i] && (line[i] == '|' || line[i] == ' '))
-				i++;
-			if (line[i] == '>' || line[i] == '&')
+			if (line[i] == '<' || line[i] == '|' || line[i] == '&')
 				return (1);
 			i = save;
 		}
@@ -144,7 +108,8 @@ int				search_regex_invalid(char *line)
 		return (1);
 	}
 	tab_error = ft_del_tab(tab_error);
-	if (check_two(line, 0, 0) == 1 || check_three(line, 0, 0) == 1)
+	if (check_three(line, 0, 0, '>') == 1 || check_three(line, 0, 0, '<') ||
+	check_three(line, 0, 0, '|') == 1 || check_three(line, 0, 0, '&'))
 	{
 		basic_error("invalid command: ", line);
 		return (1);
