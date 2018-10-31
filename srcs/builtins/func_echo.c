@@ -6,7 +6,7 @@
 /*   By: yoginet <yoginet@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/15 13:22:07 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/24 12:55:23 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/31 09:53:34 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,7 +36,7 @@ int				clear_tab(char ***tabl)
 	tmp = NULL;
 	while ((*tabl)[i])
 	{
-        clear_line(&(*tabl)[i]);
+		clear_line(&(*tabl)[i]);
 		tmp = ft_strdup((*tabl)[i]);
 		if ((*tabl)[i][0] == '\"' &&
 	(*tabl)[i][ft_strlen((*tabl)[i]) - 1] == '\"')
