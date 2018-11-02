@@ -6,7 +6,7 @@
 /*   By: volivry <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/02 13:07:19 by volivry      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/24 16:01:13 by volivry     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/02 13:35:32 by volivry     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,7 +22,11 @@ static int	win_big_enough(t_info *info, t_hist *hist)
 {
 	int		rows;
 	int		line;
+	int		cols;
 
+	cols = info->col_nb / (info->max_len + 2);
+	if (!cols)
+		return (0);
 	line = (ft_strlen(info->prmpt) + ft_strlen(hist->name)) / info->col_nb;
 	line += (ft_strlen(info->prmpt) + ft_strlen(hist->name)) % info->col_nb ?
 		1 : 0;
