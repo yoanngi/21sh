@@ -6,7 +6,7 @@
 /*   By: yoginet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/17 10:26:53 by yoginet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/31 15:51:13 by yoginet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/06 11:29:56 by yoginet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -82,7 +82,8 @@ static int		check_three(char *line, int i, int save, char c)
 				i++;
 			while (line[i] && line[i] == ' ')
 				i++;
-			if (line[i] == '<' || line[i] == '|' || line[i] == '&')
+			if (line[i] == '<' || line[i] == '|' || line[i] == '&' ||
+	line[i] == ';')
 				return (1);
 			i = save;
 		}
